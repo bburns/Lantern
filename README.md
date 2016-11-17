@@ -83,6 +83,10 @@ Then we can convert this Lisp to JSON and use [d3][d3] to try
 click on a room to add its neighboring rooms. Note though that you're stuck with
 a limited number of rooms for now, and the rooms need more repulsion force.
 
+(Unfortunately, I'm having trouble hosting the files properly on GitHub or
+rawgit - will keep working on it).
+
+
 ## A Graphviz Map
 
 We can also convert them to a [Graphviz][graphviz] file to get a look at the

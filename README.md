@@ -1,7 +1,8 @@
 
 # Lantern
 
-Lantern is an exploration of Zork: The Great Underground Empire, or at least as it existed in 1978 in the original Muddle code.
+Lantern is an exploration of **Zork: The Great Underground Empire**, or at least as
+it existed in 1978 in the original Muddle code.
 
 The game looked like this -
 
@@ -22,7 +23,9 @@ Opening the small mailbox reveals a leaflet.
 (Taken)
 
 "WELCOME TO ZORK!
-ZORK is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortals. No computer should be without one!"
+ZORK is a game of adventure, danger, and low cunning. In it you will explore
+some of the most amazing territory ever seen by mortals. No computer should be
+without one!"
 ```
 
 ## Muddle Source Code
@@ -83,8 +86,8 @@ rooms need more repulsion force.
 ## A Graphviz Map
 
 We can also convert them to a [Graphviz][graphviz] file to get a look at the
-whole thing - there are 149 rooms. Note that the locations of the exit
-arrows do not correspond to the actual exit directions.
+whole thing - there are 149 rooms. Note that the locations of the exit arrows do
+not correspond to the actual exit directions.
 
 <!-- <img src="images/zork2200_crop700.png" /> -->
 <img src="images/zork3000_crop560.png" />
@@ -103,8 +106,23 @@ much with the different settings.
 The original Muddle Zork source code is available at an archive of interesting
 old programs, located [here][source].
 
+
+## Issues
+
+The code needs to be organized to transform the MDL code to Lisp and then JSON and Graphviz step-by-step - it was done a bit interactively so the code is not quite in place yet - it could possibly be done with a Makefile.
+
+
+## Contributing
+
+Contributions are welcome!
+
+This is a kind of low-priority project that I'll work on from time to time - I've been interested in Zork since I was 12 - it's what got me interested in artificial intelligence, because I thought the parser was so great. I hacked into the code but didn't understand that what I was looking at was a byte-code interpreter and the source code, though I *was* able to decipher the text, which was encoded with 3 characters in 2 bytes to save space.
+
+
 [source]: http://simh.trailing-edge.com/software.html
 [zork]: http://en.wikipedia.org/wiki/Zork/
 [muddle]: http://en.wikipedia.org/wiki/MDL_programming_language
 [graphviz]: http://www.graphviz.org/
 [d3]: https://d3js.org/
+
+

@@ -79,9 +79,9 @@ So we get some room structures like so -
 ## Wandering Around the Map
 
 Then we can convert this Lisp to JSON and use [d3][d3] to try
-[wandering around the map]() - click on a room to add its neighboring rooms.
-Note though that you're stuck with a limited number of rooms for now, and the
-rooms need more repulsion force.
+[wandering around the map](https://rawgit.com/bburns/Lantern/master/data/json/index.htm) -
+click on a room to add its neighboring rooms. Note though that you're stuck with
+a limited number of rooms for now, and the rooms need more repulsion force.
 
 ## A Graphviz Map
 

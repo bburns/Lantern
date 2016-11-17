@@ -1,0 +1,1202 @@
+{
+"rooms": [
+{
+  "key": "WHOUS", 
+  "name": "West of House", 
+  "desc": "This is an open field west of a white house, with a boarded front door."
+}, 
+{
+  "key": "NHOUS", 
+  "name": "North of House", 
+  "desc": "You are facing the north side of a white house.  There is no door here,\nand all the windows are barred."
+}, 
+{
+  "key": "SHOUS", 
+  "name": "South of House", 
+  "desc": "You are facing the south side of a white house. There is no door here,\nand all the windows are barred."
+}, 
+{
+  "key": "EHOUS", 
+  "name": "Behind House", 
+  "desc": ""
+}, 
+{
+  "key": "KITCH", 
+  "name": "Kitchen", 
+  "desc": ""
+}, 
+{
+  "key": "ATTIC", 
+  "name": "Attic", 
+  "desc": "This is the attic.  The only exit is stairs that lead down."
+}, 
+{
+  "key": "LROOM", 
+  "name": "Living Room", 
+  "desc": ""
+}, 
+{
+  "key": "FORE1", 
+  "name": "forest", 
+  "desc": "stfore"
+}, 
+{
+  "key": "FORE2", 
+  "name": "forest", 
+  "desc": "fordes"
+}, 
+{
+  "key": "FORE3", 
+  "name": "forest", 
+  "desc": "fortree"
+}, 
+{
+  "key": "TREE", 
+  "name": "Up a Tree", 
+  "desc": ""
+}, 
+{
+  "key": "FORE4", 
+  "name": "forest", 
+  "desc": "This is a large forest, with trees obstructing all views except\nto the east, where a small clearing may be seen through the trees."
+}, 
+{
+  "key": "FORE5", 
+  "name": "forest", 
+  "desc": "stfore"
+}, 
+{
+  "key": "CLEAR", 
+  "name": "Clearing", 
+  "desc": ""
+}, 
+{
+  "key": "CELLA", 
+  "name": "Cellar", 
+  "desc": ""
+}, 
+{
+  "key": "MTROL", 
+  "name": "The Troll Room", 
+  "desc": "This is a small room with passages off in all directions. \nBloodstains and deep scratches (perhaps made by an axe) mar the\nwalls."
+}, 
+{
+  "key": "STUDI", 
+  "name": "Studio", 
+  "desc": "This is what appears to have been an artist's studio.  The walls\nand floors are splattered with paints of 69 different colors. \nStrangely enough, nothing of value is hanging here.  At the north and\nnorthwest of the room are open doors (also covered with paint).  An\nextremely dark and narrow chimney leads up from a fireplace; although\nyou might be able to get up it, it seems unlikely you could get back\ndown."
+}, 
+{
+  "key": "GALLE", 
+  "name": "Gallery", 
+  "desc": "This is an art gallery.  Most of the paintings which were here\nhave been stolen by vandals with exceptional taste.  The vandals\nleft through either the north, south, or west exits."
+}, 
+{
+  "key": "MAZE1", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZE2", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZE3", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZE4", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "DEAD1", 
+  "name": "sdeadend", 
+  "desc": "deadend"
+}, 
+{
+  "key": "MAZE5", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "DEAD2", 
+  "name": "sdeadend", 
+  "desc": "deadend"
+}, 
+{
+  "key": "MAZE6", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZE7", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZE8", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "DEAD3", 
+  "name": "deadend", 
+  "desc": "deadend"
+}, 
+{
+  "key": "MAZE9", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZ10", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZ11", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MGRAT", 
+  "name": "Grating Room", 
+  "desc": ""
+}, 
+{
+  "key": "MAZ12", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "DEAD4", 
+  "name": "deadend", 
+  "desc": "deadend"
+}, 
+{
+  "key": "MAZ13", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZ14", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "MAZ15", 
+  "name": "smazedesc", 
+  "desc": "mazedesc"
+}, 
+{
+  "key": "CYCLO", 
+  "name": "Cyclops Room", 
+  "desc": ""
+}, 
+{
+  "key": "BLROO", 
+  "name": "Strange Passage", 
+  "desc": "This is a long passage.  To the south is one entrance.  On the\neast there is an old wooden door, with a large hole in it (about\ncyclops sized)."
+}, 
+{
+  "key": "TREAS", 
+  "name": "Treasure Room", 
+  "desc": "This is a large room, whose north wall is solid granite.  A number\nof discarded bags, which crumble at your touch, are scattered about\non the floor.  There is an exit down and what appears to be a newly\ncreated passage to the east."
+}, 
+{
+  "key": "RAVI1", 
+  "name": "Deep Ravine", 
+  "desc": "This is a deep ravine at a crossing with an east-west crawlway. \nSome stone steps are at the south of the ravine and a steep staircase\ndescends."
+}, 
+{
+  "key": "CRAW1", 
+  "name": "Rocky Crawl", 
+  "desc": "This is a crawlway with a three-foot high ceiling.  Your footing\nis very unsure here due to the assortment of rocks underfoot. \nPassages can be seen in the east, west, and northwest corners of the\npassage."
+}, 
+{
+  "key": "RESES", 
+  "name": "Reservoir South", 
+  "desc": ""
+}, 
+{
+  "key": "RESER", 
+  "name": "Reservoir", 
+  "desc": ""
+}, 
+{
+  "key": "RESEN", 
+  "name": "Reservoir North", 
+  "desc": ""
+}, 
+{
+  "key": "STREA", 
+  "name": "Stream View", 
+  "desc": "You are standing on a path beside a gently flowing stream.  The path\ntravels to the north and the east."
+}, 
+{
+  "key": "INSTR", 
+  "name": "Stream", 
+  "desc": "You are on the gently flowing stream.  The upstream route is too narrow\nto  navigate and the downstream route is invisible due to twisting\nwalls.  There is a narrow beach to land on."
+}, 
+{
+  "key": "EGYPT", 
+  "name": "Egyptian Room", 
+  "desc": "This is a room which looks like an Egyptian tomb.  There is an\nascending staircase in the room as well as doors, east and south."
+}, 
+{
+  "key": "ICY", 
+  "name": "Glacier Room", 
+  "desc": ""
+}, 
+{
+  "key": "RUBYR", 
+  "name": "Ruby Room", 
+  "desc": "This is a small chamber behind the remains of the Great Glacier.\nTo the south and west are small passageways."
+}, 
+{
+  "key": "ATLAN", 
+  "name": "Atlantis Room", 
+  "desc": "This is an ancient room, long under water.  There are exits here\nto the southeast and upward."
+}, 
+{
+  "key": "CANY1", 
+  "name": "Deep Canyon", 
+  "desc": "You are on the south edge of a deep canyon.  Passages lead off\nto the east, south, and northwest.  You can hear the sound of\nflowing water below."
+}, 
+{
+  "key": "ECHO", 
+  "name": "Loud Room", 
+  "desc": "This is a large room with a ceiling which cannot be detected from\nthe ground. There is a narrow passage from east to west and a stone\nstairway leading upward.  The room is extremely noisy.  In fact, it is\ndifficult to hear yourself think."
+}, 
+{
+  "key": "MIRR1", 
+  "name": "Mirror Room", 
+  "desc": ""
+}, 
+{
+  "key": "MIRR2", 
+  "name": "Mirror Room", 
+  "desc": ""
+}, 
+{
+  "key": "CAVE1", 
+  "name": "Cave", 
+  "desc": "This is a small cave with an entrance to the north and a stairway\nleading down."
+}, 
+{
+  "key": "CAVE2", 
+  "name": "Cave", 
+  "desc": "This is a tiny cave with entrances west and north, and a dark,\nforbidding staircase leading down."
+}, 
+{
+  "key": "CRAW2", 
+  "name": "Steep Crawlway", 
+  "desc": "This is a steep and narrow crawlway.  There are two exits nearby to\nthe south and southwest."
+}, 
+{
+  "key": "CRAW3", 
+  "name": "Narrow Crawlway", 
+  "desc": "This is a narrow crawlway.  The crawlway leads from north to south.\nHowever the south passage divides to the south and southwest."
+}, 
+{
+  "key": "PASS3", 
+  "name": "Cold Passage", 
+  "desc": "This is a cold and damp corridor where a long east-west passageway\nintersects with a northward path."
+}, 
+{
+  "key": "PASS4", 
+  "name": "Winding Passage", 
+  "desc": "This is a winding passage.  It seems that there is only an exit\non the east end although the whirring from the round room can be\nheard faintly to the north."
+}, 
+{
+  "key": "ENTRA", 
+  "name": "Mine Entrance", 
+  "desc": "You are standing at the entrance of what might have been a coal\nmine. To the northeast and the northwest are entrances to the mine,\nand there is another exit on the south end of the room."
+}, 
+{
+  "key": "SQUEE", 
+  "name": "Squeaky Room", 
+  "desc": "You are a small room.  Strange squeaky sounds may be heard coming from\nthe passage at the west end.  You may also escape to the south."
+}, 
+{
+  "key": "TSHAF", 
+  "name": "Shaft Room", 
+  "desc": "This is a large room, in the middle of which is a small shaft\ndescending through the floor into darkness below.  To the west and\nthe north are exits from this room.  Constructed over the top of the\nshaft is a metal framework to which a heavy iron chain is attached."
+}, 
+{
+  "key": "TUNNE", 
+  "name": "Wooden Tunnel", 
+  "desc": "This is a narrow tunnel with large wooden beams running across\nthe ceiling and around the walls.  A path from the south splits into\npaths running west and northeast."
+}, 
+{
+  "key": "SMELL", 
+  "name": "Smelly Room", 
+  "desc": "This is a small non-descript room.  However, from the direction\nof a small descending staircase a foul odor can be detected.  To the\neast is a narrow path."
+}, 
+{
+  "key": "BOOM", 
+  "name": "Gas Room", 
+  "desc": "This is a small room which smells strongly of coal gas."
+}, 
+{
+  "key": "TLADD", 
+  "name": "Ladder Top", 
+  "desc": "This is a very small room.  In the corner is a rickety wooden\nladder, leading downward.  It might be safe to descend.  There is\nalso a staircase leading upward."
+}, 
+{
+  "key": "BLADD", 
+  "name": "Ladder Bottom", 
+  "desc": "This is a rather wide room.  On one side is the bottom of a\nnarrow wooden ladder.  To the northeast and the south are passages\nleaving the room."
+}, 
+{
+  "key": "DEAD7", 
+  "name": "deadend", 
+  "desc": "deadend"
+}, 
+{
+  "key": "TIMBE", 
+  "name": "Timber Room", 
+  "desc": "This is a long and narrow passage, which is cluttered with broken\ntimbers.  A wide passage comes from the north and turns at the \nsouthwest corner of the room into a very narrow passageway."
+}, 
+{
+  "key": "BSHAF", 
+  "name": "Lower Shaft", 
+  "desc": "This is a small square room which is at the bottom of a long\nshaft. To the east is a passageway and to the northeast a very narrow\npassage. In the shaft can be seen a heavy iron chain."
+}, 
+{
+  "key": "MACHI", 
+  "name": "Machine Room", 
+  "desc": ""
+}, 
+{
+  "key": "BATS", 
+  "name": "Bat Room", 
+  "desc": ""
+}, 
+{
+  "key": "MINE1", 
+  "name": "smindesc", 
+  "desc": "mindesc"
+}, 
+{
+  "key": "MINE2", 
+  "name": "smindesc", 
+  "desc": "mindesc"
+}, 
+{
+  "key": "MINE3", 
+  "name": "smindesc", 
+  "desc": "mindesc"
+}, 
+{
+  "key": "MINE4", 
+  "name": "smindesc", 
+  "desc": "mindesc"
+}, 
+{
+  "key": "MINE5", 
+  "name": "smindesc", 
+  "desc": "mindesc"
+}, 
+{
+  "key": "MINE6", 
+  "name": "smindesc", 
+  "desc": "mindesc"
+}, 
+{
+  "key": "MINE7", 
+  "name": "smindesc", 
+  "desc": "mindesc"
+}, 
+{
+  "key": "DOME", 
+  "name": "Dome Room", 
+  "desc": ""
+}, 
+{
+  "key": "MTORC", 
+  "name": "Torch Room", 
+  "desc": ""
+}, 
+{
+  "key": "CRAW4", 
+  "name": "North-South Crawlway", 
+  "desc": "This is a north-south crawlway; a passage goes to the east also.\nThere is a hole above, but it provides no opportunities for climbing."
+}, 
+{
+  "key": "CHAS2", 
+  "name": "West of Chasm", 
+  "desc": "You are on the west edge of a chasm, the bottom of which cannot be\nseen. The east side is sheer rock, providing no exits.  A narrow\npassage goes west, and the path you are on continues to the north and\nsouth."
+}, 
+{
+  "key": "PASS1", 
+  "name": "East-West Passage", 
+  "desc": "This is a narrow east-west passageway.  There is a narrow stairway\nleading down at the north end of the room."
+}, 
+{
+  "key": "CAROU", 
+  "name": "Round room", 
+  "desc": ""
+}, 
+{
+  "key": "PASS5", 
+  "name": "North-South Passage", 
+  "desc": "This is a high north-south passage, which forks to the northeast."
+}, 
+{
+  "key": "CHAS1", 
+  "name": "Chasm", 
+  "desc": "A chasm runs southwest to northeast.  You are on the south edge; the\npath exits to the south and to the east."
+}, 
+{
+  "key": "CAVE3", 
+  "name": "Damp Cave", 
+  "desc": "This is a cave.  Passages exit to the south and to the east, but\nthe cave narrows to a crack to the west.  The earth is particularly\ndamp here."
+}, 
+{
+  "key": "CHAS3", 
+  "name": "Ancient Chasm", 
+  "desc": "A chasm, evidently produced by an ancient river, runs through the\ncave here.  Passages lead off in all directions."
+}, 
+{
+  "key": "DEAD5", 
+  "name": "deadend", 
+  "desc": "deadend"
+}, 
+{
+  "key": "DEAD6", 
+  "name": "deadend", 
+  "desc": "deadend"
+}, 
+{
+  "key": "CAVE4", 
+  "name": "Engravings Cave", 
+  "desc": "You have entered a cave with passages leading north and southeast."
+}, 
+{
+  "key": "RIDDL", 
+  "name": "Riddle Room", 
+  "desc": "This is a room which is bare on all sides.  There is an exit down. \nTo the east is a great door made of stone.  Above the stone, the\nfollowing words are written: 'No man shall enter this room without\nsolving this riddle:\n\n  What is tall as a house,\n\t  round as a cup, \n\t  and all the king's horses can't draw it up?'\n\n(Reply via 'ANSWER \"answer\"')"
+}, 
+{
+  "key": "MPEAR", 
+  "name": "Pearl Room", 
+  "desc": "This is a former broom closet.  The exits are to the east and west."
+}, 
+{
+  "key": "LLD1", 
+  "name": "Entrance to Hades", 
+  "desc": ""
+}, 
+{
+  "key": "LLD2", 
+  "name": "Land of the Living Dead", 
+  "desc": ""
+}, 
+{
+  "key": "MGRAI", 
+  "name": "Grail Room", 
+  "desc": "You are standing in a small circular room with a pedestal.  A set of\nstairs leads up, and passages leave to the east and west."
+}, 
+{
+  "key": "TEMP1", 
+  "name": "Temple", 
+  "desc": "This is the west end of a large temple.  On the south wall is an \nancient inscription, probably a prayer in a long-forgotten language. \nThe north wall is solid granite.  The entrance at the west end of the\nroom is through huge marble pillars."
+}, 
+{
+  "key": "TEMP2", 
+  "name": "Altar", 
+  "desc": "This is the east end of a large temple.  In front of you is what\nappears to be an altar."
+}, 
+{
+  "key": "DAM", 
+  "name": "Dam", 
+  "desc": ""
+}, 
+{
+  "key": "LOBBY", 
+  "name": "Dam Lobby", 
+  "desc": "This room appears to have been the waiting room for groups touring\nthe dam.  There are exits here to the north and east marked\n'Private', though the doors are open, and an exit to the south."
+}, 
+{
+  "key": "MAINT", 
+  "name": "Maintenance Room", 
+  "desc": "This is what appears to have been the maintenance room for Flood\nControl Dam #3, judging by the assortment of tool chests around the\nroom.  Apparently, this room has been ransacked recently, for most of\nthe valuable equipment is gone. On the wall in front of you is a\ngroup of buttons, which are labelled in EBCDIC. However, they are of\ndifferent colors:  Blue, Yellow, Brown, and Red. The doors to this\nroom are in the west and south ends."
+}, 
+{
+  "key": "DOCK", 
+  "name": "Dam Base", 
+  "desc": "You are at the base of Flood Control Dam #3, which looms above you\nand to the north.  The river Frigid is flowing by here.  Across the\nriver are the White Cliffs which seem to form a giant wall stretching\nfrom north to south along the east shore of the river as it winds its\nway downstream."
+}, 
+{
+  "key": "RIVR1", 
+  "name": "riverdesc", 
+  "desc": "You are on the River Frigid in the vicinity of the Dam.  The river\nflows quietly here.  There is a landing on the west shore."
+}, 
+{
+  "key": "RIVR2", 
+  "name": "riverdesc", 
+  "desc": "The River turns a corner here making it impossible to see the\nDam.  The White Cliffs loom on the east bank and large rocks prevent\nlanding on the west."
+}, 
+{
+  "key": "RIVR3", 
+  "name": "riverdesc", 
+  "desc": "The river descends here into a valley.  There is a narrow beach on\nthe east below the cliffs and there is some shore on the west which\nmay be suitable.  In the distance a faint rumbling can be heard."
+}, 
+{
+  "key": "WCLF1", 
+  "name": "White Cliffs Beach", 
+  "desc": "You are on a narrow strip of beach which runs along the base of the\nWhite Cliffs. The only path here is a narrow one, heading south\nalong the Cliffs."
+}, 
+{
+  "key": "WCLF2", 
+  "name": "White Cliffs Beach", 
+  "desc": "You are on a rocky, narrow strip of beach beside the Cliffs.  A\nnarrow path leads north along the shore."
+}, 
+{
+  "key": "RIVR4", 
+  "name": "riverdesc", 
+  "desc": "The river is running faster here and the sound ahead appears to be\nthat of rushing water.  On the west shore is a sandy beach.  A small\narea of beach can also be seen below the Cliffs."
+}, 
+{
+  "key": "RIVR5", 
+  "name": "riverdesc", 
+  "desc": "The sound of rushing water is nearly unbearable here.  On the west\nshore is a large landing area."
+}, 
+{
+  "key": "FCHMP", 
+  "name": "Moby lossage", 
+  "desc": ""
+}, 
+{
+  "key": "FANTE", 
+  "name": "Shore", 
+  "desc": "You are on the shore of the River.  The river here seems somewhat\ntreacherous.  A path travels from north to south here, the south end\nquickly turning around a sharp corner."
+}, 
+{
+  "key": "BEACH", 
+  "name": "Sandy Beach", 
+  "desc": "You are on a large sandy beach at the shore of the river, which is\nflowing quickly by.  A path runs beside the river to the south here."
+}, 
+{
+  "key": "RCAVE", 
+  "name": "Rocky Shore", 
+  "desc": "You are on the west shore of the river.  An entrance to a cave is\nto the northwest.  The shore is very rocky here."
+}, 
+{
+  "key": "TCAVE", 
+  "name": "Small Cave", 
+  "desc": "This is a small cave whose exits are on the south and northwest."
+}, 
+{
+  "key": "FALLS", 
+  "name": "Aragain Falls", 
+  "desc": ""
+}, 
+{
+  "key": "RAINB", 
+  "name": "Rainbow Room", 
+  "desc": "You are on top of a rainbow (I bet you never thought you would walk\non a rainbow), with a magnificent view of the Falls.  The rainbow\ntravels east-west here.  There is an NBC Commissary here."
+}, 
+{
+  "key": "POG", 
+  "name": "End of Rainbow", 
+  "desc": "You are on a small, rocky beach on the continuation of the Frigid\nRiver past the Falls.  The beach is narrow due to the presence of the\nWhite Cliffs.  The river canyon opens here and sunlight shines in\nfrom above. A rainbow crosses over the falls to the west and a narrow\npath continues to the southeast."
+}, 
+{
+  "key": "CLBOT", 
+  "name": "Canyon Bottom", 
+  "desc": "You are beneath the walls of the river canyon which may be climbable\nhere.  There is a small stream here, which is the lesser part of the\nrunoff of Aragain Falls. To the north is a narrow path."
+}, 
+{
+  "key": "CLMID", 
+  "name": "Rocky Ledge", 
+  "desc": "You are on a ledge about halfway up the wall of the river canyon.\nYou can see from here that the main flow from Aragain Falls twists\nalong a passage which it is impossible to enter.  Below you is the\ncanyon bottom.  Above you is more cliff, which still appears\nclimbable."
+}, 
+{
+  "key": "CLTOP", 
+  "name": "Canyon View", 
+  "desc": "You are at the top of the Great Canyon on its south wall.  From here\nthere is a marvelous view of the Canyon and parts of the Frigid River\nupstream.  Across the canyon, the walls of the White Cliffs still\nappear to loom far above.  Following the Canyon upstream (north and\nnorthwest), Aragain Falls may be seen, complete with rainbow. \nFortunately, my vision is better than average and I can discern the\ntop of the Flood Control Dam #3 far to the distant north.  To the\nwest and south can be seen an immense forest, stretching for miles\naround.  It is possible to climb down into the canyon from here."
+}, 
+{
+  "key": "VLBOT", 
+  "name": "Volcano Bottom", 
+  "desc": "You are at the bottom of a large dormant volcano.  High above you\nlight may be seen entering from the cone of the volcano.  The only\nexit here is to the north."
+}, 
+{
+  "key": "VAIR2", 
+  "name": "Volcano near small ledge", 
+  "desc": "You are about two hundred feet above the volcano floor.  Looming\nabove is the rim of the volcano.  There is a small ledge on the west\nside."
+}, 
+{
+  "key": "VAIR4", 
+  "name": "Volcano near wide ledge", 
+  "desc": "You are near the rim of the volcano which is only about 15 feet\nacross.  To the west, there is a place to land on a wide ledge."
+}, 
+{
+  "key": "LEDG2", 
+  "name": "Narrow Ledge", 
+  "desc": "You are on a narrow ledge overlooking the inside of an old dormant\nvolcano.  This ledge appears to be about in the middle between the\nfloor below and the rim above. There is an exit here to the south."
+}, 
+{
+  "key": "LIBRA", 
+  "name": "Library", 
+  "desc": "This is a room which must have been a large library, probably\nfor the royal family.  All of the shelves appear to have been gnawed\nto pieces by unfriendly gnomes.  To the north is an exit."
+}, 
+{
+  "key": "LEDG3", 
+  "name": "Volcano View", 
+  "desc": "You are on a ledge in the middle of a large volcano.  Below you\nthe volcano bottom can be seen and above is the rim of the volcano.\nA couple of ledges can be seen on the other side of the volcano;\nit appears that this ledge is intermediate in elevation between\nthose on the other side.  The exit from this room is to the east."
+}, 
+{
+  "key": "LEDG4", 
+  "name": "Wide Ledge", 
+  "desc": ""
+}, 
+{
+  "key": "SAFE", 
+  "name": "Dusty Room", 
+  "desc": ""
+}, 
+{
+  "key": "LAVA", 
+  "name": "Lava Room", 
+  "desc": "This is a small room, whose walls are formed by an old lava flow.\nThere are exits here to the west and the south."
+}, 
+{
+  "key": "MAGNE", 
+  "name": "Low Room", 
+  "desc": ""
+}, 
+{
+  "key": "CMACH", 
+  "name": "Machine Room", 
+  "desc": ""
+}, 
+{
+  "key": "CAGER", 
+  "name": "Dingy Closet", 
+  "desc": "This is a dingy closet adjacent to the machine room.  On one wall\nis a small sticker which says\n\t\tProtected by\n\t\t  FROBOZZ\n\t     Magic Alarm Company\n\t      (Hello, footpad!)\n"
+}, 
+{
+  "key": "CAGED", 
+  "name": "Cage", 
+  "desc": "You are trapped inside a steel cage."
+}, 
+{
+  "key": "TWELL", 
+  "name": "Top of Well", 
+  "desc": "You are at the top of the well.  Well done.  There are etchings on\nthe side of the well. There is a small crack across the floor at the\nentrance to a room on the east, but it can be crossed easily."
+}, 
+{
+  "key": "BWELL", 
+  "name": "Circular Room", 
+  "desc": "This is a damp circular room, whose walls are made of brick and\nmortar.  The roof of this room is not visible, but there appear to be\nsome etchings on the walls.  There is a passageway to the west."
+}, 
+{
+  "key": "ALICE", 
+  "name": "Tea Room", 
+  "desc": "This is a small square room, in the center of which is a large\noblong table, no doubt set for afternoon tea.  It is clear from the\nobjects on the table that the users were indeed mad.  In the eastern\ncorner of the room is a small hole (no more than four inches high). \nThere are passageways leading away to the west and the northwest."
+}, 
+{
+  "key": "ALISM", 
+  "name": "Posts Room", 
+  "desc": "This is an enormous room, in the center of which are four wooden\nposts delineating a rectangular area, above which is what appears to\nbe a wooden roof.  In fact, all objects in this room appear to be\nabnormally large. To the east is a passageway.  There is a large\nchasm on the west and the northwest."
+}, 
+{
+  "key": "ALITR", 
+  "name": "Pool Room", 
+  "desc": "This is a large room, one half of which is depressed.  There is a\nlarge leak in the ceiling through which brown colored goop is\nfalling.  The only exit to this room is to the west."
+}, 
+{
+  "key": "BKENT", 
+  "name": "Bank Entrance", 
+  "desc": "This is the large entrance hall of the Bank of Zork, the largest\nbanking institution of the Great Underground Empire. A partial\naccount of its history is in 'The Lives of the Twelve Flatheads' with\nthe chapter on J. Pierpont Flathead.  A more detailed history (albeit\nless objective) may be found in Flathead's outrageous autobiography\n'I'm Rich and You Aren't - So There!'.\nMost of the furniture has been ravaged by passing scavengers.  All\nthat remains are two signs at the Northwest and Northeast corners of\nthe room, which say\n  \n      (--  WEST VIEWING ROOM        EAST VIEWING ROOM  --)  \n"
+}, 
+{
+  "key": "BKTW", 
+  "name": "West Teller's Room", 
+  "desc": ""
+}, 
+{
+  "key": "BKTE", 
+  "name": "East Teller's Room", 
+  "desc": ""
+}, 
+{
+  "key": "BKVW", 
+  "name": "Viewing Room", 
+  "desc": "view-room"
+}, 
+{
+  "key": "BKVE", 
+  "name": "Viewing Room", 
+  "desc": "view-room"
+}, 
+{
+  "key": "BKBOX", 
+  "name": "Safety Depository", 
+  "desc": "This is a large rectangular room.  The east and west walls here\nwere used for storing safety deposit boxes.  As might be expected,\nall have been carefully removed by evil persons.  To the east, west,\nand south of the room are large doorways. The northern 'wall'\nof the room is a shimmering curtain of light.  In the center of the\nroom is a large stone cube, about 10 feet on a side.  Engraved on \nthe side of the cube is some lettering."
+}, 
+{
+  "key": "BKEXE", 
+  "name": "Chairman's Office", 
+  "desc": "This room was the office of the Chairman of the Bank of Zork.\nLike the other rooms here, it has been extensively vandalized.\nThe lone exit is to the north."
+}
+],
+"exits": [
+{"source":"WHOUS", "dir":"NORTH", "target":"NHOUS"}, 
+{"source":"WHOUS", "dir":"SOUTH", "target":"SHOUS"}, 
+{"source":"WHOUS", "dir":"WEST", "target":"FORE1"}, 
+{"source":"WHOUS", "dir":"EAST", "target":"The door is locked, and there is evidently no key."}, 
+{"source":"NHOUS", "dir":"WEST", "target":"WHOUS"}, 
+{"source":"NHOUS", "dir":"EAST", "target":"EHOUS"}, 
+{"source":"NHOUS", "dir":"NORTH", "target":"FORE3"}, 
+{"source":"NHOUS", "dir":"SOUTH", "target":"The windows are all barred."}, 
+{"source":"SHOUS", "dir":"WEST", "target":"WHOUS"}, 
+{"source":"SHOUS", "dir":"EAST", "target":"EHOUS"}, 
+{"source":"SHOUS", "dir":"SOUTH", "target":"FORE2"}, 
+{"source":"SHOUS", "dir":"NORTH", "target":"The windows are all barred."}, 
+{"source":"EHOUS", "dir":"NORTH", "target":"NHOUS"}, 
+{"source":"EHOUS", "dir":"SOUTH", "target":"SHOUS"}, 
+{"source":"EHOUS", "dir":"EAST", "target":"CLEAR"}, 
+{"source":"EHOUS", "dir":"WEST", "target":"closet"}, 
+{"source":"EHOUS", "dir":"ENTER", "target":"closet"}, 
+{"source":"KITCH", "dir":"EAST", "target":"closet"}, 
+{"source":"KITCH", "dir":"WEST", "target":"LROOM"}, 
+{"source":"KITCH", "dir":"EXIT", "target":"closet"}, 
+{"source":"KITCH", "dir":"UP", "target":"ATTIC"}, 
+{"source":"KITCH", "dir":"DOWN", "target":"Only Santa Claus climbs down chimneys."}, 
+{"source":"ATTIC", "dir":"DOWN", "target":"KITCH"}, 
+{"source":"LROOM", "dir":"EAST", "target":"KITCH"}, 
+{"source":"LROOM", "dir":"WEST", "target":"closet"}, 
+{"source":"LROOM", "dir":"DOWN", "target":"closet"}, 
+{"source":"FORE1", "dir":"UP", "target":"closet"}, 
+{"source":"FORE1", "dir":"NORTH", "target":"FORE1"}, 
+{"source":"FORE1", "dir":"EAST", "target":"FORE3"}, 
+{"source":"FORE1", "dir":"SOUTH", "target":"FORE2"}, 
+{"source":"FORE1", "dir":"WEST", "target":"FORE1"}, 
+{"source":"FORE2", "dir":"UP", "target":"closet"}, 
+{"source":"FORE2", "dir":"NORTH", "target":"SHOUS"}, 
+{"source":"FORE2", "dir":"EAST", "target":"CLEAR"}, 
+{"source":"FORE2", "dir":"SOUTH", "target":"FORE4"}, 
+{"source":"FORE2", "dir":"WEST", "target":"FORE1"}, 
+{"source":"FORE3", "dir":"UP", "target":"TREE"}, 
+{"source":"FORE3", "dir":"NORTH", "target":"FORE2"}, 
+{"source":"FORE3", "dir":"EAST", "target":"CLEAR"}, 
+{"source":"FORE3", "dir":"SOUTH", "target":"CLEAR"}, 
+{"source":"FORE3", "dir":"WEST", "target":"NHOUS"}, 
+{"source":"TREE", "dir":"DOWN", "target":"FORE3"}, 
+{"source":"TREE", "dir":"UP", "target":"You cannot climb any higher."}, 
+{"source":"FORE4", "dir":"UP", "target":"closet"}, 
+{"source":"FORE4", "dir":"EAST", "target":"CLTOP"}, 
+{"source":"FORE4", "dir":"NORTH", "target":"FORE5"}, 
+{"source":"FORE4", "dir":"SOUTH", "target":"FORE4"}, 
+{"source":"FORE4", "dir":"WEST", "target":"FORE2"}, 
+{"source":"FORE5", "dir":"UP", "target":"closet"}, 
+{"source":"FORE5", "dir":"NORTH", "target":"FORE5"}, 
+{"source":"FORE5", "dir":"SE", "target":"CLTOP"}, 
+{"source":"FORE5", "dir":"SOUTH", "target":"FORE4"}, 
+{"source":"FORE5", "dir":"WEST", "target":"FORE2"}, 
+{"source":"CLEAR", "dir":"SW", "target":"EHOUS"}, 
+{"source":"CLEAR", "dir":"SE", "target":"FORE5"}, 
+{"source":"CLEAR", "dir":"NORTH", "target":"CLEAR"}, 
+{"source":"CLEAR", "dir":"EAST", "target":"CLEAR"}, 
+{"source":"CLEAR", "dir":"WEST", "target":"FORE3"}, 
+{"source":"CLEAR", "dir":"SOUTH", "target":"FORE2"}, 
+{"source":"CLEAR", "dir":"DOWN", "target":"closet"}, 
+{"source":"CELLA", "dir":"EAST", "target":"MTROL"}, 
+{"source":"CELLA", "dir":"SOUTH", "target":"CHAS2"}, 
+{"source":"CELLA", "dir":"UP", "target":"closet"}, 
+{"source":"CELLA", "dir":"WEST", "target":"You try to ascend the ramp, but it is impossible, and you slide back down."}, 
+{"source":"MTROL", "dir":"WEST", "target":"CELLA"}, 
+{"source":"MTROL", "dir":"EAST", "target":"closet"}, 
+{"source":"MTROL", "dir":"NORTH", "target":"closet"}, 
+{"source":"MTROL", "dir":"SOUTH", "target":"closet"}, 
+{"source":"STUDI", "dir":"NORTH", "target":"CRAW4"}, 
+{"source":"STUDI", "dir":"NW", "target":"GALLE"}, 
+{"source":"STUDI", "dir":"UP", "target":"closet"}, 
+{"source":"GALLE", "dir":"NORTH", "target":"CHAS2"}, 
+{"source":"GALLE", "dir":"SOUTH", "target":"STUDI"}, 
+{"source":"GALLE", "dir":"WEST", "target":"BKENT"}, 
+{"source":"MAZE1", "dir":"WEST", "target":"MTROL"}, 
+{"source":"MAZE1", "dir":"NORTH", "target":"MAZE1"}, 
+{"source":"MAZE1", "dir":"SOUTH", "target":"MAZE2"}, 
+{"source":"MAZE1", "dir":"EAST", "target":"MAZE4"}, 
+{"source":"MAZE2", "dir":"SOUTH", "target":"MAZE1"}, 
+{"source":"MAZE2", "dir":"NORTH", "target":"MAZE4"}, 
+{"source":"MAZE2", "dir":"EAST", "target":"MAZE3"}, 
+{"source":"MAZE3", "dir":"WEST", "target":"MAZE2"}, 
+{"source":"MAZE3", "dir":"NORTH", "target":"MAZE4"}, 
+{"source":"MAZE3", "dir":"UP", "target":"MAZE5"}, 
+{"source":"MAZE4", "dir":"WEST", "target":"MAZE3"}, 
+{"source":"MAZE4", "dir":"NORTH", "target":"MAZE1"}, 
+{"source":"MAZE4", "dir":"EAST", "target":"DEAD1"}, 
+{"source":"DEAD1", "dir":"SOUTH", "target":"MAZE4"}, 
+{"source":"MAZE5", "dir":"EAST", "target":"DEAD2"}, 
+{"source":"MAZE5", "dir":"NORTH", "target":"MAZE3"}, 
+{"source":"MAZE5", "dir":"SW", "target":"MAZE6"}, 
+{"source":"DEAD2", "dir":"WEST", "target":"MAZE5"}, 
+{"source":"MAZE6", "dir":"DOWN", "target":"MAZE5"}, 
+{"source":"MAZE6", "dir":"EAST", "target":"MAZE7"}, 
+{"source":"MAZE6", "dir":"WEST", "target":"MAZE6"}, 
+{"source":"MAZE6", "dir":"UP", "target":"MAZE9"}, 
+{"source":"MAZE7", "dir":"UP", "target":"MAZ14"}, 
+{"source":"MAZE7", "dir":"WEST", "target":"MAZE6"}, 
+{"source":"MAZE7", "dir":"NE", "target":"DEAD1"}, 
+{"source":"MAZE7", "dir":"EAST", "target":"MAZE8"}, 
+{"source":"MAZE7", "dir":"SOUTH", "target":"MAZ15"}, 
+{"source":"MAZE8", "dir":"NE", "target":"MAZE7"}, 
+{"source":"MAZE8", "dir":"WEST", "target":"MAZE8"}, 
+{"source":"MAZE8", "dir":"SE", "target":"DEAD3"}, 
+{"source":"DEAD3", "dir":"NORTH", "target":"MAZE8"}, 
+{"source":"MAZE9", "dir":"NORTH", "target":"MAZE6"}, 
+{"source":"MAZE9", "dir":"EAST", "target":"MAZ11"}, 
+{"source":"MAZE9", "dir":"DOWN", "target":"MAZ10"}, 
+{"source":"MAZE9", "dir":"SOUTH", "target":"MAZ13"}, 
+{"source":"MAZE9", "dir":"WEST", "target":"MAZ12"}, 
+{"source":"MAZE9", "dir":"NW", "target":"MAZE9"}, 
+{"source":"MAZ10", "dir":"EAST", "target":"MAZE9"}, 
+{"source":"MAZ10", "dir":"WEST", "target":"MAZ13"}, 
+{"source":"MAZ10", "dir":"UP", "target":"MAZ11"}, 
+{"source":"MAZ11", "dir":"NE", "target":"MGRAT"}, 
+{"source":"MAZ11", "dir":"DOWN", "target":"MAZ10"}, 
+{"source":"MAZ11", "dir":"NW", "target":"MAZ13"}, 
+{"source":"MAZ11", "dir":"SW", "target":"MAZ12"}, 
+{"source":"MGRAT", "dir":"SW", "target":"MAZ11"}, 
+{"source":"MGRAT", "dir":"UP", "target":"closet"}, 
+{"source":"MAZ12", "dir":"WEST", "target":"MAZE5"}, 
+{"source":"MAZ12", "dir":"SW", "target":"MAZ11"}, 
+{"source":"MAZ12", "dir":"EAST", "target":"MAZ13"}, 
+{"source":"MAZ12", "dir":"UP", "target":"MAZE9"}, 
+{"source":"MAZ12", "dir":"NORTH", "target":"DEAD4"}, 
+{"source":"DEAD4", "dir":"SOUTH", "target":"MAZ12"}, 
+{"source":"MAZ13", "dir":"EAST", "target":"MAZE9"}, 
+{"source":"MAZ13", "dir":"DOWN", "target":"MAZ12"}, 
+{"source":"MAZ13", "dir":"SOUTH", "target":"MAZ10"}, 
+{"source":"MAZ13", "dir":"WEST", "target":"MAZ11"}, 
+{"source":"MAZ14", "dir":"WEST", "target":"MAZ15"}, 
+{"source":"MAZ14", "dir":"NW", "target":"MAZ14"}, 
+{"source":"MAZ14", "dir":"NE", "target":"MAZE7"}, 
+{"source":"MAZ14", "dir":"SOUTH", "target":"MAZE7"}, 
+{"source":"MAZ15", "dir":"WEST", "target":"MAZ14"}, 
+{"source":"MAZ15", "dir":"SOUTH", "target":"MAZE7"}, 
+{"source":"MAZ15", "dir":"NE", "target":"CYCLO"}, 
+{"source":"CYCLO", "dir":"WEST", "target":"MAZ15"}, 
+{"source":"CYCLO", "dir":"NORTH", "target":"closet"}, 
+{"source":"CYCLO", "dir":"UP", "target":"closet"}, 
+{"source":"BLROO", "dir":"SOUTH", "target":"CYCLO"}, 
+{"source":"BLROO", "dir":"EAST", "target":"LROOM"}, 
+{"source":"TREAS", "dir":"DOWN", "target":"CYCLO"}, 
+{"source":"TREAS", "dir":"EAST", "target":"CPANT"}, 
+{"source":"RAVI1", "dir":"SOUTH", "target":"PASS1"}, 
+{"source":"RAVI1", "dir":"DOWN", "target":"closet"}, 
+{"source":"RAVI1", "dir":"EAST", "target":"CHAS1"}, 
+{"source":"RAVI1", "dir":"WEST", "target":"CRAW1"}, 
+{"source":"CRAW1", "dir":"WEST", "target":"RAVI1"}, 
+{"source":"CRAW1", "dir":"EAST", "target":"DOME"}, 
+{"source":"CRAW1", "dir":"NW", "target":"closet"}, 
+{"source":"RESES", "dir":"SOUTH", "target":"closet"}, 
+{"source":"RESES", "dir":"WEST", "target":"STREA"}, 
+{"source":"RESES", "dir":"CROSS", "target":"closet"}, 
+{"source":"RESES", "dir":"NORTH", "target":"closet"}, 
+{"source":"RESES", "dir":"LAUNC", "target":"RESER"}, 
+{"source":"RESES", "dir":"UP", "target":"closet"}, 
+{"source":"RESER", "dir":"NORTH", "target":"RESEN"}, 
+{"source":"RESER", "dir":"SOUTH", "target":"RESES"}, 
+{"source":"RESER", "dir":"UP", "target":"INSTR"}, 
+{"source":"RESER", "dir":"DOWN", "target":"The dam blocks your way."}, 
+{"source":"RESER", "dir":"LAND", "target":"You must specify direction."}, 
+{"source":"RESEN", "dir":"NORTH", "target":"ATLAN"}, 
+{"source":"RESEN", "dir":"LAUNC", "target":"RESER"}, 
+{"source":"RESEN", "dir":"CROSS", "target":"closet"}, 
+{"source":"RESEN", "dir":"SOUTH", "target":"closet"}, 
+{"source":"STREA", "dir":"LAUNC", "target":"INSTR"}, 
+{"source":"STREA", "dir":"EAST", "target":"RESES"}, 
+{"source":"STREA", "dir":"NORTH", "target":"ICY"}, 
+{"source":"INSTR", "dir":"UP", "target":"The way is too narrow."}, 
+{"source":"INSTR", "dir":"LAND", "target":"STREA"}, 
+{"source":"INSTR", "dir":"DOWN", "target":"RESER"}, 
+{"source":"EGYPT", "dir":"UP", "target":"ICY"}, 
+{"source":"EGYPT", "dir":"SOUTH", "target":"LEDG3"}, 
+{"source":"EGYPT", "dir":"EAST", "target":"closet"}, 
+{"source":"ICY", "dir":"NORTH", "target":"STREA"}, 
+{"source":"ICY", "dir":"EAST", "target":"EGYPT"}, 
+{"source":"ICY", "dir":"WEST", "target":"closet"}, 
+{"source":"RUBYR", "dir":"WEST", "target":"LAVA"}, 
+{"source":"RUBYR", "dir":"SOUTH", "target":"ICY"}, 
+{"source":"ATLAN", "dir":"SE", "target":"RESEN"}, 
+{"source":"ATLAN", "dir":"UP", "target":"CAVE1"}, 
+{"source":"CANY1", "dir":"NW", "target":"closet"}, 
+{"source":"CANY1", "dir":"EAST", "target":"DAM"}, 
+{"source":"CANY1", "dir":"SOUTH", "target":"CAROU"}, 
+{"source":"ECHO", "dir":"EAST", "target":"CHAS3"}, 
+{"source":"ECHO", "dir":"WEST", "target":"PASS5"}, 
+{"source":"ECHO", "dir":"UP", "target":"CAVE3"}, 
+{"source":"MIRR1", "dir":"WEST", "target":"PASS3"}, 
+{"source":"MIRR1", "dir":"NORTH", "target":"CRAW2"}, 
+{"source":"MIRR1", "dir":"EAST", "target":"CAVE1"}, 
+{"source":"MIRR2", "dir":"WEST", "target":"PASS4"}, 
+{"source":"MIRR2", "dir":"NORTH", "target":"CRAW3"}, 
+{"source":"MIRR2", "dir":"EAST", "target":"CAVE2"}, 
+{"source":"CAVE1", "dir":"NORTH", "target":"MIRR1"}, 
+{"source":"CAVE1", "dir":"DOWN", "target":"ATLAN"}, 
+{"source":"CAVE2", "dir":"NORTH", "target":"CRAW3"}, 
+{"source":"CAVE2", "dir":"WEST", "target":"MIRR2"}, 
+{"source":"CAVE2", "dir":"DOWN", "target":"LLD1"}, 
+{"source":"CRAW2", "dir":"SOUTH", "target":"MIRR1"}, 
+{"source":"CRAW2", "dir":"SW", "target":"PASS3"}, 
+{"source":"CRAW3", "dir":"SOUTH", "target":"CAVE2"}, 
+{"source":"CRAW3", "dir":"SW", "target":"MIRR2"}, 
+{"source":"CRAW3", "dir":"NORTH", "target":"MGRAI"}, 
+{"source":"PASS3", "dir":"EAST", "target":"MIRR1"}, 
+{"source":"PASS3", "dir":"WEST", "target":"SLIDE"}, 
+{"source":"PASS3", "dir":"NORTH", "target":"CRAW2"}, 
+{"source":"PASS4", "dir":"EAST", "target":"MIRR2"}, 
+{"source":"PASS4", "dir":"NORTH", "target":"You hear the whir from the round room but can find no entrance."}, 
+{"source":"ENTRA", "dir":"SOUTH", "target":"SLIDE"}, 
+{"source":"ENTRA", "dir":"NW", "target":"SQUEE"}, 
+{"source":"ENTRA", "dir":"NE", "target":"TSHAF"}, 
+{"source":"SQUEE", "dir":"WEST", "target":"BATS"}, 
+{"source":"SQUEE", "dir":"SOUTH", "target":"ENTRA"}, 
+{"source":"TSHAF", "dir":"DOWN", "target":"You wouldn't fit and would die if you could."}, 
+{"source":"TSHAF", "dir":"WEST", "target":"ENTRA"}, 
+{"source":"TSHAF", "dir":"NORTH", "target":"TUNNE"}, 
+{"source":"TUNNE", "dir":"SOUTH", "target":"TSHAF"}, 
+{"source":"TUNNE", "dir":"WEST", "target":"SMELL"}, 
+{"source":"TUNNE", "dir":"NE", "target":"MINE1"}, 
+{"source":"SMELL", "dir":"DOWN", "target":"BOOM"}, 
+{"source":"SMELL", "dir":"EAST", "target":"TUNNE"}, 
+{"source":"BOOM", "dir":"UP", "target":"SMELL"}, 
+{"source":"TLADD", "dir":"DOWN", "target":"BLADD"}, 
+{"source":"TLADD", "dir":"UP", "target":"MINE7"}, 
+{"source":"BLADD", "dir":"NE", "target":"DEAD7"}, 
+{"source":"BLADD", "dir":"SOUTH", "target":"TIMBE"}, 
+{"source":"BLADD", "dir":"UP", "target":"TLADD"}, 
+{"source":"DEAD7", "dir":"SOUTH", "target":"BLADD"}, 
+{"source":"TIMBE", "dir":"NORTH", "target":"BLADD"}, 
+{"source":"TIMBE", "dir":"SW", "target":"closet"}, 
+{"source":"BSHAF", "dir":"EAST", "target":"MACHI"}, 
+{"source":"BSHAF", "dir":"OUT", "target":"closet"}, 
+{"source":"BSHAF", "dir":"NE", "target":"closet"}, 
+{"source":"BSHAF", "dir":"UP", "target":"The chain is not climbable."}, 
+{"source":"MACHI", "dir":"NW", "target":"BSHAF"}, 
+{"source":"BATS", "dir":"EAST", "target":"SQUEE"}, 
+{"source":"MINE1", "dir":"NORTH", "target":"MINE4"}, 
+{"source":"MINE1", "dir":"SW", "target":"MINE2"}, 
+{"source":"MINE1", "dir":"EAST", "target":"TUNNE"}, 
+{"source":"MINE2", "dir":"SOUTH", "target":"MINE1"}, 
+{"source":"MINE2", "dir":"WEST", "target":"MINE5"}, 
+{"source":"MINE2", "dir":"UP", "target":"MINE3"}, 
+{"source":"MINE2", "dir":"NE", "target":"MINE4"}, 
+{"source":"MINE3", "dir":"WEST", "target":"MINE2"}, 
+{"source":"MINE3", "dir":"NE", "target":"MINE5"}, 
+{"source":"MINE3", "dir":"EAST", "target":"MINE5"}, 
+{"source":"MINE4", "dir":"UP", "target":"MINE5"}, 
+{"source":"MINE4", "dir":"NE", "target":"MINE6"}, 
+{"source":"MINE4", "dir":"SOUTH", "target":"MINE1"}, 
+{"source":"MINE4", "dir":"WEST", "target":"MINE2"}, 
+{"source":"MINE5", "dir":"DOWN", "target":"MINE6"}, 
+{"source":"MINE5", "dir":"NORTH", "target":"MINE7"}, 
+{"source":"MINE5", "dir":"WEST", "target":"MINE2"}, 
+{"source":"MINE5", "dir":"SOUTH", "target":"MINE3"}, 
+{"source":"MINE5", "dir":"UP", "target":"MINE3"}, 
+{"source":"MINE5", "dir":"EAST", "target":"MINE4"}, 
+{"source":"MINE6", "dir":"SE", "target":"MINE4"}, 
+{"source":"MINE6", "dir":"UP", "target":"MINE5"}, 
+{"source":"MINE6", "dir":"NW", "target":"MINE7"}, 
+{"source":"MINE7", "dir":"EAST", "target":"MINE1"}, 
+{"source":"MINE7", "dir":"WEST", "target":"MINE5"}, 
+{"source":"MINE7", "dir":"DOWN", "target":"TLADD"}, 
+{"source":"MINE7", "dir":"SOUTH", "target":"MINE6"}, 
+{"source":"DOME", "dir":"EAST", "target":"CRAW1"}, 
+{"source":"DOME", "dir":"DOWN", "target":"closet"}, 
+{"source":"MTORC", "dir":"UP", "target":"You cannot reach the rope."}, 
+{"source":"MTORC", "dir":"WEST", "target":"PRM"}, 
+{"source":"MTORC", "dir":"DOWN", "target":"CRAW4"}, 
+{"source":"CRAW4", "dir":"NORTH", "target":"CHAS2"}, 
+{"source":"CRAW4", "dir":"SOUTH", "target":"STUDI"}, 
+{"source":"CRAW4", "dir":"EAST", "target":"MTROL"}, 
+{"source":"CRAW4", "dir":"UP", "target":"Not even a human fly could get up it."}, 
+{"source":"CHAS2", "dir":"WEST", "target":"CELLA"}, 
+{"source":"CHAS2", "dir":"NORTH", "target":"CRAW4"}, 
+{"source":"CHAS2", "dir":"SOUTH", "target":"GALLE"}, 
+{"source":"CHAS2", "dir":"DOWN", "target":"The chasm probably leads straight to the infernal regions."}, 
+{"source":"PASS1", "dir":"EAST", "target":"CAROU"}, 
+{"source":"PASS1", "dir":"WEST", "target":"MTROL"}, 
+{"source":"PASS1", "dir":"DOWN", "target":"RAVI1"}, 
+{"source":"PASS1", "dir":"NORTH", "target":"RAVI1"}, 
+{"source":"CAROU", "dir":"NORTH", "target":"closet"}, 
+{"source":"CAROU", "dir":"SOUTH", "target":"closet"}, 
+{"source":"CAROU", "dir":"EAST", "target":"closet"}, 
+{"source":"CAROU", "dir":"WEST", "target":"closet"}, 
+{"source":"CAROU", "dir":"NW", "target":"closet"}, 
+{"source":"CAROU", "dir":"NE", "target":"closet"}, 
+{"source":"CAROU", "dir":"SE", "target":"closet"}, 
+{"source":"CAROU", "dir":"SW", "target":"closet"}, 
+{"source":"CAROU", "dir":"EXIT", "target":"closet"}, 
+{"source":"PASS5", "dir":"NORTH", "target":"CHAS1"}, 
+{"source":"PASS5", "dir":"NE", "target":"ECHO"}, 
+{"source":"PASS5", "dir":"SOUTH", "target":"CAROU"}, 
+{"source":"CHAS1", "dir":"SOUTH", "target":"RAVI1"}, 
+{"source":"CHAS1", "dir":"EAST", "target":"PASS5"}, 
+{"source":"CHAS1", "dir":"DOWN", "target":"Are you out of your mind?"}, 
+{"source":"CAVE3", "dir":"SOUTH", "target":"ECHO"}, 
+{"source":"CAVE3", "dir":"EAST", "target":"DAM"}, 
+{"source":"CAVE3", "dir":"WEST", "target":"It is too narrow for most insects."}, 
+{"source":"CHAS3", "dir":"SOUTH", "target":"ECHO"}, 
+{"source":"CHAS3", "dir":"EAST", "target":"TCAVE"}, 
+{"source":"CHAS3", "dir":"NORTH", "target":"DEAD5"}, 
+{"source":"CHAS3", "dir":"WEST", "target":"DEAD6"}, 
+{"source":"DEAD5", "dir":"SW", "target":"CHAS3"}, 
+{"source":"DEAD6", "dir":"EAST", "target":"CHAS3"}, 
+{"source":"CAVE4", "dir":"NORTH", "target":"CAROU"}, 
+{"source":"CAVE4", "dir":"SE", "target":"RIDDL"}, 
+{"source":"RIDDL", "dir":"DOWN", "target":"CAVE4"}, 
+{"source":"RIDDL", "dir":"EAST", "target":"closet"}, 
+{"source":"MPEAR", "dir":"EAST", "target":"BWELL"}, 
+{"source":"MPEAR", "dir":"WEST", "target":"RIDDL"}, 
+{"source":"LLD1", "dir":"EAST", "target":"closet"}, 
+{"source":"LLD1", "dir":"UP", "target":"CAVE2"}, 
+{"source":"LLD1", "dir":"ENTER", "target":"closet"}, 
+{"source":"LLD2", "dir":"EAST", "target":"TOMB"}, 
+{"source":"LLD2", "dir":"EXIT", "target":"LLD1"}, 
+{"source":"LLD2", "dir":"WEST", "target":"LLD1"}, 
+{"source":"MGRAI", "dir":"WEST", "target":"CAROU"}, 
+{"source":"MGRAI", "dir":"EAST", "target":"CRAW3"}, 
+{"source":"MGRAI", "dir":"UP", "target":"TEMP1"}, 
+{"source":"TEMP1", "dir":"WEST", "target":"MGRAI"}, 
+{"source":"TEMP1", "dir":"EAST", "target":"TEMP2"}, 
+{"source":"TEMP2", "dir":"WEST", "target":"TEMP1"}, 
+{"source":"DAM", "dir":"SOUTH", "target":"CANY1"}, 
+{"source":"DAM", "dir":"DOWN", "target":"DOCK"}, 
+{"source":"DAM", "dir":"EAST", "target":"CAVE3"}, 
+{"source":"DAM", "dir":"NORTH", "target":"LOBBY"}, 
+{"source":"LOBBY", "dir":"SOUTH", "target":"DAM"}, 
+{"source":"LOBBY", "dir":"NORTH", "target":"MAINT"}, 
+{"source":"LOBBY", "dir":"EAST", "target":"MAINT"}, 
+{"source":"MAINT", "dir":"SOUTH", "target":"LOBBY"}, 
+{"source":"MAINT", "dir":"WEST", "target":"LOBBY"}, 
+{"source":"DOCK", "dir":"NORTH", "target":"DAM"}, 
+{"source":"DOCK", "dir":"UP", "target":"DAM"}, 
+{"source":"DOCK", "dir":"LAUNC", "target":"RIVR1"}, 
+{"source":"RIVR1", "dir":"UP", "target":"closet"}, 
+{"source":"RIVR1", "dir":"WEST", "target":"DOCK"}, 
+{"source":"RIVR1", "dir":"LAND", "target":"DOCK"}, 
+{"source":"RIVR1", "dir":"DOWN", "target":"RIVR2"}, 
+{"source":"RIVR1", "dir":"EAST", "target":"closet"}, 
+{"source":"RIVR2", "dir":"UP", "target":"closet"}, 
+{"source":"RIVR2", "dir":"DOWN", "target":"RIVR3"}, 
+{"source":"RIVR2", "dir":"EAST", "target":"closet"}, 
+{"source":"RIVR3", "dir":"UP", "target":"closet"}, 
+{"source":"RIVR3", "dir":"DOWN", "target":"RIVR4"}, 
+{"source":"RIVR3", "dir":"EAST", "target":"WCLF1"}, 
+{"source":"RIVR3", "dir":"WEST", "target":"RCAVE"}, 
+{"source":"RIVR3", "dir":"LAND", "target":"You must specify which direction here."}, 
+{"source":"WCLF1", "dir":"SOUTH", "target":"closet"}, 
+{"source":"WCLF1", "dir":"LAUNC", "target":"RIVR3"}, 
+{"source":"WCLF2", "dir":"NORTH", "target":"closet"}, 
+{"source":"WCLF2", "dir":"LAUNC", "target":"RIVR4"}, 
+{"source":"RIVR4", "dir":"UP", "target":"closet"}, 
+{"source":"RIVR4", "dir":"DOWN", "target":"RIVR5"}, 
+{"source":"RIVR4", "dir":"EAST", "target":"WCLF2"}, 
+{"source":"RIVR4", "dir":"WEST", "target":"BEACH"}, 
+{"source":"RIVR4", "dir":"LAND", "target":"Specify the direction to land."}, 
+{"source":"RIVR5", "dir":"UP", "target":"closet"}, 
+{"source":"RIVR5", "dir":"DOWN", "target":"FCHMP"}, 
+{"source":"RIVR5", "dir":"LAND", "target":"FANTE"}, 
+{"source":"FCHMP", "dir":"NORTH", "target":""}, 
+{"source":"FANTE", "dir":"LAUNC", "target":"RIVR5"}, 
+{"source":"FANTE", "dir":"NORTH", "target":"BEACH"}, 
+{"source":"FANTE", "dir":"SOUTH", "target":"FALLS"}, 
+{"source":"BEACH", "dir":"LAUNC", "target":"RIVR4"}, 
+{"source":"BEACH", "dir":"SOUTH", "target":"FANTE"}, 
+{"source":"RCAVE", "dir":"LAUNC", "target":"RIVR3"}, 
+{"source":"RCAVE", "dir":"NW", "target":"TCAVE"}, 
+{"source":"TCAVE", "dir":"SOUTH", "target":"RCAVE"}, 
+{"source":"TCAVE", "dir":"NW", "target":"CHAS3"}, 
+{"source":"FALLS", "dir":"EAST", "target":"closet"}, 
+{"source":"FALLS", "dir":"DOWN", "target":"It's a long way..."}, 
+{"source":"FALLS", "dir":"NORTH", "target":"FANTE"}, 
+{"source":"FALLS", "dir":"UP", "target":"closet"}, 
+{"source":"RAINB", "dir":"EAST", "target":"POG"}, 
+{"source":"RAINB", "dir":"WEST", "target":"FALLS"}, 
+{"source":"POG", "dir":"UP", "target":"closet"}, 
+{"source":"POG", "dir":"NW", "target":"closet"}, 
+{"source":"POG", "dir":"WEST", "target":"closet"}, 
+{"source":"POG", "dir":"SE", "target":"CLBOT"}, 
+{"source":"POG", "dir":"LAUNC", "target":"The sharp rocks endanger your boat."}, 
+{"source":"CLBOT", "dir":"UP", "target":"CLMID"}, 
+{"source":"CLBOT", "dir":"NORTH", "target":"POG"}, 
+{"source":"CLMID", "dir":"UP", "target":"CLTOP"}, 
+{"source":"CLMID", "dir":"DOWN", "target":"CLBOT"}, 
+{"source":"CLTOP", "dir":"DOWN", "target":"CLMID"}, 
+{"source":"CLTOP", "dir":"SOUTH", "target":"FORE4"}, 
+{"source":"CLTOP", "dir":"WEST", "target":"FORE5"}, 
+{"source":"VLBOT", "dir":"NORTH", "target":"LAVA"}, 
+{"source":"VAIR2", "dir":"WEST", "target":"LEDG2"}, 
+{"source":"VAIR2", "dir":"LAND", "target":"LEDG2"}, 
+{"source":"VAIR4", "dir":"LAND", "target":"LEDG4"}, 
+{"source":"VAIR4", "dir":"EAST", "target":"LEDG4"}, 
+{"source":"LEDG2", "dir":"DOWN", "target":"I wouldn't jump from here."}, 
+{"source":"LEDG2", "dir":"LAUNC", "target":"VAIR2"}, 
+{"source":"LEDG2", "dir":"WEST", "target":"closet"}, 
+{"source":"LEDG2", "dir":"SOUTH", "target":"LIBRA"}, 
+{"source":"LIBRA", "dir":"NORTH", "target":"LEDG2"}, 
+{"source":"LIBRA", "dir":"OUT", "target":"LEDG2"}, 
+{"source":"LEDG3", "dir":"DOWN", "target":"I wouldn't try that."}, 
+{"source":"LEDG3", "dir":"CROSS", "target":"It is impossible to cross this distance."}, 
+{"source":"LEDG3", "dir":"EAST", "target":"EGYPT"}, 
+{"source":"LEDG4", "dir":"DOWN", "target":"It's a long way down."}, 
+{"source":"LEDG4", "dir":"LAUNC", "target":"VAIR4"}, 
+{"source":"LEDG4", "dir":"WEST", "target":"closet"}, 
+{"source":"LEDG4", "dir":"SOUTH", "target":"SAFE"}, 
+{"source":"SAFE", "dir":"NORTH", "target":"LEDG4"}, 
+{"source":"LAVA", "dir":"SOUTH", "target":"VLBOT"}, 
+{"source":"LAVA", "dir":"WEST", "target":"RUBYR"}, 
+{"source":"MAGNE", "dir":"NORTH", "target":"closet"}, 
+{"source":"MAGNE", "dir":"SOUTH", "target":"closet"}, 
+{"source":"MAGNE", "dir":"WEST", "target":"closet"}, 
+{"source":"MAGNE", "dir":"NE", "target":"closet"}, 
+{"source":"MAGNE", "dir":"NW", "target":"closet"}, 
+{"source":"MAGNE", "dir":"SW", "target":"closet"}, 
+{"source":"MAGNE", "dir":"SE", "target":"closet"}, 
+{"source":"MAGNE", "dir":"EAST", "target":"closet"}, 
+{"source":"MAGNE", "dir":"OUT", "target":"closet"}, 
+{"source":"CMACH", "dir":"WEST", "target":"MAGNE"}, 
+{"source":"CMACH", "dir":"SOUTH", "target":"CAGER"}, 
+{"source":"CAGER", "dir":"NORTH", "target":"CMACH"}, 
+{"source":"CAGED", "dir":"NORTH", "target":""}, 
+{"source":"TWELL", "dir":"EAST", "target":"ALICE"}, 
+{"source":"TWELL", "dir":"DOWN", "target":"It's a long way down!"}, 
+{"source":"BWELL", "dir":"WEST", "target":"MPEAR"}, 
+{"source":"BWELL", "dir":"UP", "target":"The walls cannot be climbed."}, 
+{"source":"ALICE", "dir":"EAST", "target":"Only a mouse could get in there."}, 
+{"source":"ALICE", "dir":"WEST", "target":"TWELL"}, 
+{"source":"ALICE", "dir":"NW", "target":"MAGNE"}, 
+{"source":"ALISM", "dir":"NW", "target":"closet"}, 
+{"source":"ALISM", "dir":"EAST", "target":"ALITR"}, 
+{"source":"ALISM", "dir":"WEST", "target":"closet"}, 
+{"source":"ALISM", "dir":"DOWN", "target":"closet"}, 
+{"source":"ALITR", "dir":"EXIT", "target":"ALISM"}, 
+{"source":"ALITR", "dir":"WEST", "target":"ALISM"}, 
+{"source":"BKENT", "dir":"NW", "target":"BKTW"}, 
+{"source":"BKENT", "dir":"NE", "target":"BKTE"}, 
+{"source":"BKENT", "dir":"SOUTH", "target":"GALLE"}, 
+{"source":"BKTW", "dir":"NORTH", "target":"BKVW"}, 
+{"source":"BKTW", "dir":"SOUTH", "target":"BKENT"}, 
+{"source":"BKTW", "dir":"WEST", "target":"BKBOX"}, 
+{"source":"BKTE", "dir":"NORTH", "target":"BKVE"}, 
+{"source":"BKTE", "dir":"SOUTH", "target":"BKENT"}, 
+{"source":"BKTE", "dir":"EAST", "target":"BKBOX"}, 
+{"source":"BKVW", "dir":"SOUTH", "target":"BKENT"}, 
+{"source":"BKVE", "dir":"SOUTH", "target":"BKENT"}, 
+{"source":"BKBOX", "dir":"NORTH", "target":"There is a curtain of light there."}, 
+{"source":"BKBOX", "dir":"WEST", "target":"closet"}, 
+{"source":"BKBOX", "dir":"EAST", "target":"closet"}, 
+{"source":"BKBOX", "dir":"SOUTH", "target":"BKEXE"}, 
+{"source":"BKEXE", "dir":"NORTH", "target":"BKBOX"}
+]
+}

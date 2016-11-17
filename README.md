@@ -1,7 +1,7 @@
 
 # Lantern
 
-Lantern is an exploration of **Zork: The Great Underground Empire**, or at least as
+Lantern is an exploration of **[Zork: The Great Underground Empire][zork]**, or at least as
 it existed in 1978 in the original Muddle code.
 
 The game looked like this -
@@ -101,6 +101,7 @@ The full map is located [here](images/zork2200.png).
 These are just one of an infinite number of layouts - I haven't experimented
 much with the different settings.
 
+
 ## The Source of the Source
 
 The original Muddle Zork source code is available at an archive of interesting
@@ -109,7 +110,7 @@ old programs, located [here][source].
 
 ## Issues
 
-The code needs to be organized to transform the MDL code to Lisp and then JSON and Graphviz step-by-step - it was done a bit interactively so the code is not quite in place yet - it could possibly be done with a Makefile.
+The code needs to be organized to transform the MDL code to Lisp and then JSON and Graphviz step-by-step - it was done a bit interactively so the code is not really in place yet - it could possibly be done with a Makefile.
 
 
 ## Contributing
@@ -119,10 +120,10 @@ Contributions are welcome!
 This is a kind of low-priority project that I'll work on from time to time - I've been interested in Zork since I was 12 - it's what got me interested in artificial intelligence, because I thought the parser was so great. I hacked into the code but didn't understand that what I was looking at was a byte-code interpreter and the source code, though I *was* able to decipher the text, which was encoded with 3 characters in 2 bytes to save space.
 
 
-[source]: http://simh.trailing-edge.com/software.html
 [zork]: http://en.wikipedia.org/wiki/Zork/
 [muddle]: http://en.wikipedia.org/wiki/MDL_programming_language
 [graphviz]: http://www.graphviz.org/
 [d3]: https://d3js.org/
+[source]: http://simh.trailing-edge.com/software.html
 
 

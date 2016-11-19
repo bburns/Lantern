@@ -1,0 +1,170 @@
+{
+"rooms": [
+{
+  "key": "WHOUS", 
+  "name": "West of House", 
+  "desc": "This is an open field west of a white house, with a boarded front door."
+}, 
+{
+  "key": "NHOUS", 
+  "name": "North of House", 
+  "desc": "You are facing the north side of a white house.  There is no door here,\nand all the windows are barred."
+}, 
+{
+  "key": "SHOUS", 
+  "name": "South of House", 
+  "desc": "You are facing the south side of a white house. There is no door here,\nand all the windows are barred."
+}, 
+{
+  "key": "EHOUS", 
+  "name": "Behind House", 
+  "desc": ""
+}, 
+{
+  "key": "KITCH", 
+  "name": "Kitchen", 
+  "desc": ""
+}, 
+{
+  "key": "ATTIC", 
+  "name": "Attic", 
+  "desc": "This is the attic.  The only exit is stairs that lead down."
+}, 
+{
+  "key": "LROOM", 
+  "name": "Living Room", 
+  "desc": ""
+}, 
+{
+  "key": "FORE1", 
+  "name": "forest", 
+  "desc": "stfore"
+}, 
+{
+  "key": "FORE2", 
+  "name": "forest", 
+  "desc": "fordes"
+}, 
+{
+  "key": "FORE3", 
+  "name": "forest", 
+  "desc": "fortree"
+}, 
+{
+  "key": "TREE", 
+  "name": "Up a Tree", 
+  "desc": ""
+}, 
+{
+  "key": "FORE4", 
+  "name": "forest", 
+  "desc": "This is a large forest, with trees obstructing all views except\nto the east, where a small clearing may be seen through the trees."
+}, 
+{
+  "key": "FORE5", 
+  "name": "forest", 
+  "desc": "stfore"
+}, 
+{
+  "key": "CLEAR", 
+  "name": "Clearing", 
+  "desc": ""
+}, 
+{
+  "key": "CELLA", 
+  "name": "Cellar", 
+  "desc": ""
+}, 
+{
+  "key": "MTROL", 
+  "name": "The Troll Room", 
+  "desc": "This is a small room with passages off in all directions. \nBloodstains and deep scratches (perhaps made by an axe) mar the\nwalls."
+}, 
+{
+  "key": "STUDI", 
+  "name": "Studio", 
+  "desc": "This is what appears to have been an artist's studio.  The walls\nand floors are splattered with paints of 69 different colors. \nStrangely enough, nothing of value is hanging here.  At the north and\nnorthwest of the room are open doors (also covered with paint).  An\nextremely dark and narrow chimney leads up from a fireplace; although\nyou might be able to get up it, it seems unlikely you could get back\ndown."
+}, 
+{
+  "key": "GALLE", 
+  "name": "Gallery", 
+  "desc": "This is an art gallery.  Most of the paintings which were here\nhave been stolen by vandals with exceptional taste.  The vandals\nleft through either the north, south, or west exits."
+}
+],
+"exits": [
+{"source":"WHOUS", "dir":"NORTH", "target":"NHOUS"}, 
+{"source":"WHOUS", "dir":"SOUTH", "target":"SHOUS"}, 
+{"source":"WHOUS", "dir":"WEST", "target":"FORE1"}, 
+{"source":"WHOUS", "dir":"EAST", "target":"The door is locked, and there is evidently no key."}, 
+{"source":"NHOUS", "dir":"WEST", "target":"WHOUS"}, 
+{"source":"NHOUS", "dir":"EAST", "target":"EHOUS"}, 
+{"source":"NHOUS", "dir":"NORTH", "target":"FORE3"}, 
+{"source":"NHOUS", "dir":"SOUTH", "target":"The windows are all barred."}, 
+{"source":"SHOUS", "dir":"WEST", "target":"WHOUS"}, 
+{"source":"SHOUS", "dir":"EAST", "target":"EHOUS"}, 
+{"source":"SHOUS", "dir":"SOUTH", "target":"FORE2"}, 
+{"source":"SHOUS", "dir":"NORTH", "target":"The windows are all barred."}, 
+{"source":"EHOUS", "dir":"NORTH", "target":"NHOUS"}, 
+{"source":"EHOUS", "dir":"SOUTH", "target":"SHOUS"}, 
+{"source":"EHOUS", "dir":"EAST", "target":"CLEAR"}, 
+{"source":"EHOUS", "dir":"WEST", "target":"closet"}, 
+{"source":"EHOUS", "dir":"ENTER", "target":"closet"}, 
+{"source":"KITCH", "dir":"EAST", "target":"closet"}, 
+{"source":"KITCH", "dir":"WEST", "target":"LROOM"}, 
+{"source":"KITCH", "dir":"EXIT", "target":"closet"}, 
+{"source":"KITCH", "dir":"UP", "target":"ATTIC"}, 
+{"source":"KITCH", "dir":"DOWN", "target":"Only Santa Claus climbs down chimneys."}, 
+{"source":"ATTIC", "dir":"DOWN", "target":"KITCH"}, 
+{"source":"LROOM", "dir":"EAST", "target":"KITCH"}, 
+{"source":"LROOM", "dir":"WEST", "target":"closet"}, 
+{"source":"LROOM", "dir":"DOWN", "target":"closet"}, 
+{"source":"FORE1", "dir":"UP", "target":"closet"}, 
+{"source":"FORE1", "dir":"NORTH", "target":"FORE1"}, 
+{"source":"FORE1", "dir":"EAST", "target":"FORE3"}, 
+{"source":"FORE1", "dir":"SOUTH", "target":"FORE2"}, 
+{"source":"FORE1", "dir":"WEST", "target":"FORE1"}, 
+{"source":"FORE2", "dir":"UP", "target":"closet"}, 
+{"source":"FORE2", "dir":"NORTH", "target":"SHOUS"}, 
+{"source":"FORE2", "dir":"EAST", "target":"CLEAR"}, 
+{"source":"FORE2", "dir":"SOUTH", "target":"FORE4"}, 
+{"source":"FORE2", "dir":"WEST", "target":"FORE1"}, 
+{"source":"FORE3", "dir":"UP", "target":"TREE"}, 
+{"source":"FORE3", "dir":"NORTH", "target":"FORE2"}, 
+{"source":"FORE3", "dir":"EAST", "target":"CLEAR"}, 
+{"source":"FORE3", "dir":"SOUTH", "target":"CLEAR"}, 
+{"source":"FORE3", "dir":"WEST", "target":"NHOUS"}, 
+{"source":"TREE", "dir":"DOWN", "target":"FORE3"}, 
+{"source":"TREE", "dir":"UP", "target":"You cannot climb any higher."}, 
+{"source":"FORE4", "dir":"UP", "target":"closet"}, 
+{"source":"FORE4", "dir":"EAST", "target":"CLTOP"}, 
+{"source":"FORE4", "dir":"NORTH", "target":"FORE5"}, 
+{"source":"FORE4", "dir":"SOUTH", "target":"FORE4"}, 
+{"source":"FORE4", "dir":"WEST", "target":"FORE2"}, 
+{"source":"FORE5", "dir":"UP", "target":"closet"}, 
+{"source":"FORE5", "dir":"NORTH", "target":"FORE5"}, 
+{"source":"FORE5", "dir":"SE", "target":"CLTOP"}, 
+{"source":"FORE5", "dir":"SOUTH", "target":"FORE4"}, 
+{"source":"FORE5", "dir":"WEST", "target":"FORE2"}, 
+{"source":"CLEAR", "dir":"SW", "target":"EHOUS"}, 
+{"source":"CLEAR", "dir":"SE", "target":"FORE5"}, 
+{"source":"CLEAR", "dir":"NORTH", "target":"CLEAR"}, 
+{"source":"CLEAR", "dir":"EAST", "target":"CLEAR"}, 
+{"source":"CLEAR", "dir":"WEST", "target":"FORE3"}, 
+{"source":"CLEAR", "dir":"SOUTH", "target":"FORE2"}, 
+{"source":"CLEAR", "dir":"DOWN", "target":"closet"}, 
+{"source":"CELLA", "dir":"EAST", "target":"MTROL"}, 
+{"source":"CELLA", "dir":"SOUTH", "target":"CHAS2"}, 
+{"source":"CELLA", "dir":"UP", "target":"closet"}, 
+{"source":"CELLA", "dir":"WEST", "target":"You try to ascend the ramp, but it is impossible, and you slide back down."}, 
+{"source":"MTROL", "dir":"WEST", "target":"CELLA"}, 
+{"source":"MTROL", "dir":"EAST", "target":"closet"}, 
+{"source":"MTROL", "dir":"NORTH", "target":"closet"}, 
+{"source":"MTROL", "dir":"SOUTH", "target":"closet"}, 
+{"source":"STUDI", "dir":"NORTH", "target":"CRAW4"}, 
+{"source":"STUDI", "dir":"NW", "target":"GALLE"}, 
+{"source":"STUDI", "dir":"UP", "target":"closet"}, 
+{"source":"GALLE", "dir":"NORTH", "target":"CHAS2"}, 
+{"source":"GALLE", "dir":"SOUTH", "target":"STUDI"}, 
+{"source":"GALLE", "dir":"WEST", "target":"BKENT"}
+]
+}

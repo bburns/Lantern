@@ -6,6 +6,8 @@ it existed in 1978 in the original Muddle code.
 
 The game looked like this -
 
+----
+
 ```
 ZORK I: The Great Underground Empire
 Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.
@@ -27,6 +29,8 @@ ZORK is a game of adventure, danger, and low cunning. In it you will explore
 some of the most amazing territory ever seen by mortals. No computer should be
 without one!"
 ```
+
+----
 
 ## Muddle Source Code
 
@@ -76,15 +80,13 @@ So we get some room structures like so -
     (exit "NORTH" "NHOUS" "SOUTH" "SHOUS" "WEST" "FORE1"))
 ```
 
+
 ## Wandering Around the Map
 
 Then we can convert this Lisp to JSON and use [d3][d3] to try
-[wandering around the map](https://rawgit.com/bburns/Lantern/master/data/json/index.htm) -
+[wandering around the map](http://bburns.github.io/Lantern) -
 click on a room to add its neighboring rooms. Note though that you're stuck with
 a limited number of rooms for now, and the rooms need more repulsion force.
-
-(Unfortunately, I'm having trouble hosting the files properly on GitHub or
-rawgit - will keep working on it).
 
 
 ## A Graphviz Map

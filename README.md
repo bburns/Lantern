@@ -7,7 +7,7 @@ at least as it existed in 1978 in the original Muddle code.
 
 ## The Game
 
-Here's the game intro -
+Here's the game intro from 1983 -
 
 ----
 
@@ -66,6 +66,8 @@ and south.">
 
 ## Goals
 
+What I'd like to do is:
+
 - Convert the original Muddle code to Lisp data structures
 - Convert the Lisp to a Graphviz file to make a static map
 - Convert the Lisp to JSON to explore the map interactively with d3
@@ -74,7 +76,9 @@ and south.">
 ## Lisp Data
 
 With a little text manipulation the original Muddle code can be converted to a
-more parsable Lisp. There are some constructs like `#NEXIT` and the `#DECL` type
+more parsable Lisp - I'm using Emacs Lisp to do this at the moment.
+
+There are some constructs like `#NEXIT` and the `#DECL` type
 declarations which would need special handling, but we can filter them out for
 now.
 
@@ -122,32 +126,40 @@ These are just one of an infinite number of layouts - I haven't experimented
 much with the different settings.
 
 
+## Issues
+
+Some things to improve:
+
+* The code needs to be organized to transform the MDL code to Lisp and then JSON
+and Graphviz step-by-step - it was done a bit interactively so the code is not
+really in place yet. Could possibly be done with a Makefile?
+
+* The d3 map rooms need more repulsion and less spring tension
+
+* The d3 map doesn't yet handle special doorways - would like to get that working
+
+This is a kind of low-priority project that I'll work on from time to time. I've
+been interested in Zork since I was 12 - I hacked into the code but didn't
+understand that what I was looking at was a byte-code interpreter and machine
+language compiled down from Lisp, though I *was* able to decipher the text,
+which was encoded with 3 characters in 2 bytes to save space.
+
+
+## Contributing
+
+Want to work on this project? Feel free to pitch in on any part you find interesting!
+
+
 ## The Source of the Source
 
 The original Muddle Zork source code is available at an archive of interesting
 old programs, located [here][source].
 
 
-## Issues
+## License
 
-The code needs to be organized to transform the MDL code to Lisp and then JSON
-and Graphviz step-by-step - it was done a bit interactively so the code is not
-really in place yet - it could possibly be done with a Makefile.
+GPL
 
-The d3 map rooms need more repulsion and less spring tension.
-
-The d3 map doesn't yet handle special doorways - would like to get that working eventually.
-
-
-## Contributing
-
-Contributions are welcome!
-
-This is a kind of low-priority project that I'll work on from time to time. I've
-been interested in Zork since I was 12 - I hacked into the code but didn't
-understand that what I was looking at was a byte-code interpreter and machine
-language compiled from Lisp, though I *was* able to decipher the text, which was
-encoded with 3 characters in 2 bytes to save space.
 
 
 [zork]: http://en.wikipedia.org/wiki/Zork/

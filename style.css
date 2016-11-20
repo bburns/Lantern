@@ -1,0 +1,83 @@
+
+/* Lantern stylesheet */
+
+
+/* show svg in center, filling available space */
+/* nowork! */
+/* from http://stackoverflow.com/questions/18665171/how-to-make-the-main-content-div-fill-height-of-screen-with-css */
+/* but see this fiddle, seems to work - http://jsfiddle.net/j5s8fbdk/ */
+/* original fiddle - http://jsfiddle.net/AzLQY/ */
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: #ddd;
+  font-family: Garamond, "Baskerville Old Face", "Book Antiqua", Palatino, serif;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  position: absolute;
+  top: 1em; left: 1em; right: 1em; bottom: 1em;
+  /* background-color: #ccc; */
+}
+
+svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+header {
+  margin: 0 0 1em;
+}
+
+p {
+  margin: 0;
+}
+
+h1,h2,h3 {
+  margin: 0;
+}
+
+
+
+/* Aesthetics */
+
+svg {
+  /* font-size: 8px;  */
+  display: block;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+circle {
+  fill: #eeeeee;
+  stroke: #444;
+  stroke-width: 1px;
+}
+
+rect {
+  fill: #eee;
+  stroke: #333;
+  stroke-width: 1px;
+}
+
+text {
+  /* font: 10px; */
+  pointer-events: none;
+}
+
+.link {
+  fill: none;
+  stroke: #999;
+  stroke-width: 1.5px;
+}
+

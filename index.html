@@ -10,92 +10,8 @@ See https://github.com/bburns/Lantern/
 <head>
 <title>Lantern: Exploring Zork</title>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<style>
-
-//--------------------------------------------------------------------------------
-// * Styles
-//--------------------------------------------------------------------------------
-
-/* show svg in center, filling available space */
-/* nowork! */
-/* from http://stackoverflow.com/questions/18665171/how-to-make-the-main-content-div-fill-height-of-screen-with-css */
-/* but see this fiddle, seems to work - http://jsfiddle.net/j5s8fbdk/ */
-/* original fiddle - http://jsfiddle.net/AzLQY/ */
-
-
-html {
-margin: 0;
-padding: 0;
-height: 100%;
-}
-
-body {
-background: #ddd;
-font-family: Garamond, "Baskerville Old Face", "Book Antiqua", Palatino, serif;
-font-size: 100%;
-margin: 0;
-padding: 0;
-height: 100%;
-}
-
-.container {
-position: absolute;
-top: 1em; left: 1em; right: 1em; bottom: 1em;
-/* background-color: #ccc; */
-}
-
-svg {
-position: absolute;
-width: 100%;
-height: 100%;
-}
-
-header {
-margin: 0 0 1em;
-}
-
-
-/* aesthetics */
-
-p {
-margin: 0;
-}
-
-h1,h2,h3 {
-  margin: 0;
-}
-
-svg {
-    /* font-size: 8px;  */
-    display: block;
-    border: 1px solid #ccc;
-    background: #fff;
-}
-
-circle {
-  fill: #eeeeee;
-  stroke: #444;
-  stroke-width: 1px;
-}
-
-rect {
-  fill: #eee;
-  stroke: #333;
-  stroke-width: 1px;
-}
-
-text {
-  /* font: 10px sans-serif; */
-  pointer-events: none;
-}
-
-.link {
-  fill: none;
-  stroke: #999;
-  stroke-width: 1.5px;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="library.js"></script>
 </head>
 
 
@@ -104,68 +20,20 @@ text {
     <div class="container">
         <header>
             <h3>Zork: The Great Underground Empire</h3>
-            <p>Explore the map by clicking on a room to see where its exits lead...
-    see the <a href="https://github.com/bburns/Lantern">project page</a> for more information.</p>
+            <p>
+                Explore the map by clicking on a room to see where its exits lead...
+                see the <a href="https://github.com/bburns/Lantern">project page</a> for more information.
+            </p>
         </header>
         <div class="map">
             <!-- svg will attach here -->
         </div>
         <footer>
-            this is a footer
         </footer>
     </div>
 
 
 <script>
-
-
-//--------------------------------------------------------------------------------
-// * Library
-//--------------------------------------------------------------------------------
-
-// define some useful functions
-
-function assert(condition, message) {
-    if (!condition)
-        throw message || "Assertion failed";
-    else
-        console.log("Assertion passed");
-}
-
-// convert object to JSON string
-function j(o) {
-    if (o==undefined)
-        return 'undefined'; // otherwise would be blank
-    else
-        return JSON.stringify(o, null, 2);
-}
-
-// shortcuts for debugging
-function a(o) {alert(o)}
-function aj(o) {alert(j(o))}
-function p(o) {console.log(o)}
-function pj(o) {console.log(j(o))}
-function h(o) {d3.select("body").append("p").text(o)}
-function hj(o) {d3.select("body").append("p").text(j(o))}
-
-// define a Set class
-function Set() {
-    var o = {};
-    this.add = function(key) {o[key] = true;};
-    this.has = function(key) {return o[key] !== undefined;};
-}
-
-// define a Hash class
-function Hash() {
-    var o = {};
-    this.set = function(key, value) {o[key]=value;};
-    this.get = function(key) {return o[key];};
-    this.has = function(key) {return o[key] !== undefined;};
-}
-
-// convenience functions
-function findElement(array, fn) { return array.filter(fn)[0]; } // first match
-function findObject(objs, prop, value) { return findElement(objs, function(o){ return o[prop]===value;})}
 
 
 //--------------------------------------------------------------------------------

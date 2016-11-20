@@ -48,3 +48,12 @@ function findElement(array, fn) { return array.filter(fn)[0]; } // first match
 function findObject(objs, prop, value) { return findElement(objs, function(o){ return o[prop]===value;}); }
 
 
+function getWindowSize() {
+    // cross browser function to get dimensions of window, ie the area usable on the page
+    // in firefox, all 3 methods work and give same result
+    var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName('body')[0];
+    var width = w.innerWidth || e.clientWidth || g.clientWidth;
+    var height = w.innerHeight|| e.clientHeight|| g.clientHeight;
+    var size = [width,height];
+    return size;
+}

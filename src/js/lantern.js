@@ -1,4 +1,5 @@
 
+// --------------------------------------------------------------------------------
 // Lantern
 // Explore Zork map interactively with d3
 // --------------------------------------------------------------------------------
@@ -9,31 +10,30 @@
 
 // The data structures read in look like this - 
 // var rooms = [
-//     {"key": "WHOUS", "name": "West of House", "desc": "This is an open field west of a white house, with a boarded front door."},
-//     {"key": "ATTIC", "name": "Attic", "desc": "This is the attic.  The only exit is stairs that lead down."}];
+//     {"key": "WHOUS", "name": "West of House", "desc": "This is an open field west of a white house...."},
+//     {"key": "ATTIC", "name": "Attic", "desc": "This is the attic. The only exit is stairs that lead down."}];
 // var exits = [
 //     {"source": "WHOUS", "dir": "NORTH", "target": "NHOUS"},
 //     {"source": "WHOUS", "dir": "EAST", "target": "The door is locked, and there is evidently no key."}];
 
 
-// this code needs major cleanup - very hard to read/understand
-// several undefined globals
+// this code needs cleanup - hard to read/understand!
 
 
 // globals from other files
 var d3;
 var p, pj;
 var Hash, Set, getWindowSize, findObject;
-var g;
 
 
 //--------------------------------------------------------------------------------
 // * Graph
 //--------------------------------------------------------------------------------
 
-//> this module defines a Graph g which...
+// this defines a closure g which...
+// is overkill - makes it hard to read...
 
-(function () {
+var graph = (function () {
     
     // initialize the graph object
 
@@ -49,7 +49,8 @@ var g;
 
     var nodeData, nodeGroup;
     var nodeCircle, nodeRect;
-    var linkData, linkLine;
+    // var linkData, linkLine;
+    var links, nodes;
 
     // we need to store a hash to added objects, so we can avoid duplicates.
     // this could just be a set, but we also need the objects in adding links -
@@ -61,53 +62,13 @@ var g;
     // since we won't be duplicating links very much
     // var linkkeys = new Set();
 
-    
     // create svg canvas
     var svg = d3.select("#map").append("svg");
     
-    // note that the size of the svg rectangle is INDEPENDENT of the svg size -
-    // just want it to match it somehow
-
     // set size of svg
     var size = getWindowSize();
-    size[1]-=100; //> arbitrary
+    size[1] -= 100; //> arbitrary
     svg.append("rect").attr("width", size[0]).attr("height", size[1]);
-
-    //> can you read the width and height of the map div instead of whole window?
-    // nowork
-    // var map = document.getElementById('map');
-    // var size = [map.offsetWidth, map.offsetHeight];
-    // pj(size);
-
-    // // set force size to svg size
-    // // var width2 = svg.offsetWidth;
-    // var height2 = svg.offsetHeight;
-    // var width2 = svg.style.pixelHeight;
-    // var width2 = svg.style.height;
-    // // var width2 = svg.width;
-    // // p('wh ' + width2 + ' ' + height2);
-    // p(d3);
-    // p(svg);
-    // p(svg[0]);
-    // p(document);
-    // // svg = document.getElementsByClassName('svg')[0];
-    // var e = document.getElementsByTagName('svg')[0];
-    // p(e.clientWidth);
-    // // svg.load(function() {
-    // // p(svg.localName);
-    // // p(svg.border);
-    // // p(svg.width);
-    // // p(svg.offsetWidth);
-    // // p(svg.style.width);
-    // // p(svg.style.pixelHeight);
-    // // p(svg.getBBox); //().width);
-    // // p(svg.getBoundingClientRect);
-    // // });
-
-    // scale contents with browser window resizing.
-    // svg.attr("viewBox", "0 0 " + width + " " + height ).attr("preserveAspectRatio", "xMidYMid meet");
-    // svg.call(d3.behavior.zoom().on("zoom", redraw));
-
 
     var force = d3.layout.force()
         .size(size)
@@ -116,45 +77,41 @@ var g;
         .gravity(gravity)
         .on("tick", tick);
     
-
     // this function is called on each time tick to animate the graph
     function tick() {
         nodeData
             .attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")";});
             // .attr("cx", function(d) { return d.x; })
             // .attr("cy", function(d) { return d.y; });
-        linkData
+        // linkData
+        links
             .attr("x1", function(d) { return d.source.x; })
             .attr("y1", function(d) { return d.source.y; })
             .attr("x2", function(d) { return d.target.x; })
             .attr("y2", function(d) { return d.target.y; });
     };
-
+    
     
     // add/update/delete svg elements for current nodes and links
     function updateSvg() {
         
         // links
-        
-        // select all line elements with class 'link'
-        linkData = svg.selectAll("line.link")
+        links = svg.selectAll("line.link") // select all line elements with class 'link'
             .data(force.links(), function(d) { return d.source.key + "-" + d.target.key; }); // eg "whous-shous"
-        linkLine = linkData.enter()
+        links.enter()
             .append("line")
             .attr("class", "link"); // add new elements
-        linkData.exit()
+        links.exit()
             .remove(); // remove old elements
 
-        
         // nodes
+        // nodes are groups with circles or rectangles and labels.
         
-        // groups with circles or rectangles and labels
-        // select all g elements with class 'node'
-        nodeData = svg.selectAll("g.node")
+        nodeData = svg.selectAll("g.node") // select all group elements with class 'node'
             .data(force.nodes(), function(d) { return d.key;});
         nodeGroup = nodeData.enter()
-            .append("g")
-            .attr("class", "node"); // add new elements
+            .append("g") // g is an svg group element
+            .attr("class", "node"); // add new elements and set class to 'node'
         nodeGroup.call(force.drag); // make nodes draggable
         nodeGroup.on("click", onclick); // callback fn for user to set
         nodeGroup.append("svg:title")
@@ -162,14 +119,16 @@ var g;
         nodeData.exit()
             .remove(); // remove old elements
 
-        if (shape=="circle")
+        if (shape=="circle") {
             nodeCircle = nodeGroup.append("circle")
-            .attr("r", radius);
+                .attr("r", radius);
+        }
         
-        if (shape=="rect")
+        if (shape=="rect") {
             nodeRect = nodeGroup.append("rect")
-            .attr("width", rect_width)
-            .attr("height", rect_height);
+                .attr("width", rect_width)
+                .attr("height", rect_height);
+        }
 
         var nodeLabel = nodeGroup.append("text")
             .attr("class", "nodetext")
@@ -185,7 +144,7 @@ var g;
 
     
     // export a global variable/module/namespace
-    g = {
+    return {
 
         // add a node to the graph. a node is just an object with a .key property.
         addnode: function (node) {
@@ -224,8 +183,14 @@ var g;
 //--------------------------------------------------------------------------------
 
 //> what is this?
+// this is just a namespace with some functions
+// should be a closure though, eh?
+
+
+var rooms, exits;
 
 var data = {
+    // read json from the given filename into the rooms and exits variables
     init: function(filename, fn) {
         d3.json(filename, function(error, json) {
             if (error) return console.warn(error);
@@ -240,6 +205,7 @@ var data = {
     //     var room = findObject(rooms, 'key', roomkey);
     //     return room;
     // },
+    //> what is this?
     get: function(roomkey, fn) {
         var room = findObject(rooms, 'key', roomkey);
         fn(room);
@@ -276,13 +242,13 @@ function addRoomExits(room) {
 
         //. get objs all at once
         // var target = d.getroom(targetkey);
-        // g.addnode(target);
-        // g.addlink(sourcekey, targetkey, dir);
+        // graph.addnode(target);
+        // graph.addlink(sourcekey, targetkey, dir);
 
         data.get(targetkey, function (target) {
             if (target) {
-                g.addnode(target);
-                g.addlink(sourcekey, targetkey, dir);
+                graph.addnode(target);
+                graph.addlink(sourcekey, targetkey, dir);
             }
         });
     });
@@ -293,30 +259,28 @@ function addRoomExits(room) {
 // * Start
 //--------------------------------------------------------------------------------
 
-// nowork - why? can only do child dirs?
-//// var filename = '../../data/json/zork_rooms.json';
-//var filename = '../../data/json/zork_rooms_small.json';
+// startup is complex looking because file i/o is asynchronous,
+// so have to do things in callbacks.
+
 
 // var filename = 'zork_rooms.json';
 var filename = 'data/json/zork_rooms_small.json';
 var startkey = 'WHOUS';
 
-
 // arrays
 data.init(filename, function() {
     data.get(startkey, function(room) {
-        g.addnode(room);
+        graph.addnode(room);
     });
 });
 
-
 // var whous = data.getroom(startkey);
-// g.addnode(whous);
+// graph.addnode(whous);
 
-// g.addnode(rooms[0]);
-// g.addnode(rooms[1]);
-// g.addlink(rooms[0].key, rooms[1].key, 'north');
-// g.addnode(rooms[1]); // re-add room, and note we still have only 2 circles
+// graph.addnode(rooms[0]);
+// graph.addnode(rooms[1]);
+// graph.addlink(rooms[0].key, rooms[1].key, 'north');
+// graph.addnode(rooms[1]); // re-add room, and note we still have only 2 circles
 
 // addRoomExits(whous);
 

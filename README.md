@@ -66,7 +66,7 @@ and south.">
 
 ## Goals
 
-What I'd like to do:
+Some goals for Lantern:
 
 - Convert the original Muddle code to Lisp data structures
 - Convert the Lisp data to JSON to explore the map interactively with d3
@@ -104,7 +104,7 @@ Then we can convert this Lisp to JSON and use [d3][d3] to
 add its neighboring rooms. Note though that you're stuck with a limited number
 of rooms for now.
 
-<!-- add screenshot -->
+<img src="images/lantern_800.png" />
 
 
 ## A Graphviz Map
@@ -128,15 +128,29 @@ much with the different settings.
 
 ## Issues
 
-Some things to improve:
-
-* The code needs to be organized to transform the MDL code to Lisp and then JSON
+The code needs to be organized to transform the MDL code to Lisp and then JSON
 and Graphviz step-by-step - it was done a bit interactively so the code is not
-really in place yet. Could possibly be done with a Makefile?
+really in place yet.
 
-* The d3 map rooms need more repulsion and less spring tension
+Things to do for the d3 map:
 
-* The d3 map doesn't yet handle special doorways - would like to get that working
+- [ ] handle special doorways (eg a locked door) - need so can explore house, rest of map
+- [ ] fix height of svg - currently arbitrarily set to 85% - need to read size of parent element
+- [ ] indicate current room with color or outline
+- [ ] indicate somehow if a room still has exits - eg color green?
+- [ ] color nodes light gray on hover?
+- [ ] explain that the forest is a bit of a maze, so can tangle up the map
+- [ ] for rooms like 'forest' w/o proper names, wrap in parens, or get proper names somehow, or use key
+- [ ] handle page resize event
+- [ ] allow zoom in/out - ie catch zoom event, redraw svg etc
+- [ ] single click to go to room and show description at bottom of screen?
+- [ ] show objects in current room at bottom
+- [ ] show exits from current room at bottom
+- [ ] dbl click to open exits?
+- [ ] add arrows at end of links http://stackoverflow.com/questions/36579339/how-to-draw-line-with-arrow-using-d3-js http://vanseodesign.com/web-design/svg-markers/
+- [ ] make links stretchable
+- [ ] labels should be clearer - clear a background rectangle first http://stackoverflow.com/questions/15500894/background-color-of-text-in-svg
+- [ ] add button to automatically explore the map, depth first, slowly
 
 This is a kind of low-priority project that I'll work on from time to time. I've
 been interested in Zork since I was 12 - I hacked into the code but didn't

@@ -149,6 +149,7 @@ Things to do for the d3 map:
 - make links stretchable
 - labels should be clearer - clear a background rectangle first http://stackoverflow.com/questions/15500894/background-color-of-text-in-svg
 - add button to automatically explore the map, depth first, slowly
+- draw white outline around nodes, as here http://jsfiddle.net/4sq4F/
 
 This is a kind of low-priority project that I'll work on from time to time. I've
 been interested in Zork since I was 12 - I hacked into the code but didn't

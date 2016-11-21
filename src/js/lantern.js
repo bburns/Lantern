@@ -7,7 +7,6 @@
 // For reference, see
 // http://bl.ocks.org/mbostock/3750558
 
-
 // The data structures read in look like this - 
 // var rooms = [
 //     {"key": "WHOUS", "name": "West of House", "desc": "This is an open field west of a white house...."},
@@ -15,10 +14,6 @@
 // var exits = [
 //     {"source": "WHOUS", "dir": "NORTH", "target": "NHOUS"},
 //     {"source": "WHOUS", "dir": "EAST", "target": "The door is locked, and there is evidently no key."}];
-
-
-// this code needs cleanup - hard to read/understand!
-
 
 // globals from other files
 var d3;
@@ -30,46 +25,43 @@ var Hash, Set, getWindowSize, findObject;
 // * Graph
 //--------------------------------------------------------------------------------
 
-// this defines a closure g which...
-// is overkill - makes it hard to read...
+// make a graph object that encapsulates a d3 force layout object,
+// and provides access functions addNode and addLink.
+// nodes are any javascript object with a 'key' property,
+// and links are just pairs of node keys. 
+
+//> make a class, pass in html element to add svg to, and graph properties 
 
 var graph = (function () {
     
-    // initialize the graph object
-
-    var distance = 90; // fixed distance between nodes
     var charge = -5000; // attractive/repulsive force
     var gravity = 0.5; // force drawing nodes to the center
+    var distance = 90; // fixed distance between nodes
 
-    var shape = "circle";
-    // var shape = "rect";
-    var radius = 20;
-    var rect_width = 60, rect_height = 50;
-    var labelx = 8, labely = 18;
+    var nodeRadius = 20; // pixels
+    var labelx = nodeRadius + 4; // pixels
+    var labely = nodeRadius / 4; // pixels
 
-    // var nodeData, nodeGroup;
-    // var nodeCircle, nodeRect;
-    // var linkData, linkLine;
-    var links, nodes;
+    var nodes, links; // arrays of nodes (rooms) and links
 
-    // we need to store a hash to added objects, so we can avoid duplicates.
-    // this could just be a set, but we also need the objects in adding links -
-    // which we could let the user take care of, but let's just try doing it here
+    // need to store a hash of added objects, so can avoid duplicate rooms.
+    // could just use a Set, but also need to be able to find the room objects.
     var nodehash = new Hash();
 
-    // similarly we could store a set of link keys, to avoid duplicates.
-    // for at the moment that would be more wasteful than useful,
-    // since we won't be duplicating links very much
+    //> could store a set of link keys to avoid duplicate links also,
+    // but we won't be duplicating them very often.
     // var linkkeys = new Set();
 
     // create svg canvas
     var svg = d3.select("#map").append("svg");
     
-    // set size of svg
+    // add a rectangle filling the canvas
+    //> get size of svg, if possible 
     var size = getWindowSize();
     size[1] -= 100; //> arbitrary
     svg.append("rect").attr("width", size[0]).attr("height", size[1]);
 
+    // create a d3 force layout object and set some properties
     var force = d3.layout.force()
         .size(size)
         .distance(distance)
@@ -77,13 +69,14 @@ var graph = (function () {
         .gravity(gravity)
         .on("tick", tick);
     
-    // this function is called on each time tick to animate the graph
+    // this function is called on each time tick to animate the graph.
+    //> why is this needed if it's assigning fns to these attributes?
+    // couldn't you just do that once?
     function tick() {
         nodes
-            .attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")";});
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
             // .attr("cx", function(d) { return d.x; })
             // .attr("cy", function(d) { return d.y; });
-        // linkData
         links
             .attr("x1", function(d) { return d.source.x; })
             .attr("y1", function(d) { return d.source.y; })
@@ -92,61 +85,71 @@ var graph = (function () {
     };
     
     
-    // add/update/delete svg elements for current nodes and links
+    // update svg elements for current nodes and links,
+    // and restart the d3 force layout object.
     function updateSvg() {
         
-        // links
-        links = svg.selectAll("line.link") // select all line elements with class 'link'
-            .data(force.links(), function(d) { return d.source.key + "-" + d.target.key; }); // eg "whous-shous"
-        links.enter()
-            .append("line")
-            .attr("class", "link"); // add new elements
-        links.exit()
-            .remove(); // remove old elements
-
-        // nodes
-        // nodes are groups with circles or rectangles and labels.
+        // update nodes
+        // nodes are svg group objects with circle and text children
         
-        nodes = svg.selectAll("g.node") // select all group elements with class 'node'
-            .data(force.nodes(), function(d) { return d.key;});
+        // select all svg group elements with class 'node'
+        nodes = svg.selectAll("g.node") 
+            .data(force.nodes(), function(d) { return d.key;}); //> ?
+        
+        // add new group elements
         nodes.enter()
             .append("g") // g is an svg group element
-            .attr("class", "node") // add new elements and set class to 'node'
-            .call(force.drag) // make nodes draggable
-            .on("click", onClick) // callback fn for user to set
-            .append("svg:title")
-            .text(function(d) { return d.desc || "(No description)"; }); // tooltips
-        nodes.exit()
-            .remove(); // remove old elements
-
-        if (shape=="circle") {
-            nodes.append("circle")
-                .attr("r", radius);
-        }
+            .attr("class", "node"); // set class to 'node'
         
-        if (shape=="rect") {
-            nodes.append("rect")
-                .attr("width", rect_width)
-                .attr("height", rect_height);
-        }
-
+        // add some properties for the group element
+        nodes.call(force.drag) // make nodes draggable
+            .on("click", onClickNode) // callback fn to handle clicks
+            .append("svg:title") // add a tooltip for each node showing the value of .desc
+            .text(function(d) { return d.desc || "(No description)"; });
+        
+        // remove any old elements
+        nodes.exit()
+            .remove(); 
+        
+        // add circle elements to groups
+        nodes.append("circle")
+            .attr("r", nodeRadius);
+        
+        // add text elements to groups
         nodes.append("text")
             .attr("class", "nodetext")
             .attr("x", labelx)
             .attr("y", labely)
-            // .attr("dx", radius + 3)
-            // .attr("dy", ".35em")
             .text(function(d) {return d.name;});
 
-        // restart the force layout
+        
+        // update links
+        // links are just lines between nodes
+        
+        // select all svg line elements with class 'link'
+        links = svg.selectAll("line.link") 
+            .data(force.links(), function(d) { return d.source.key + "-" + d.target.key; }); // eg "whous-shous"
+        
+        // add new link elements
+        links.enter()
+            .append("line")
+            .attr("class", "link");
+        
+        // remove old elements
+        links.exit()
+            .remove(); 
+
+        
+        // restart the d3 force layout object
         force.start();
     };
 
     
-    // export a global variable/module/namespace
+    // return access functions
     return {
 
-        // add a node to the graph. a node is just an object with a .key property.
+        // add a node to the graph, update the svg elements, and restart the layout.
+        // a node can be any javascript object with a .key property.
         addNode: function (node) {
             if (node && !nodehash.has(node.key)) {
                 force.nodes().push(node);
@@ -155,22 +158,23 @@ var graph = (function () {
             }
         },
 
-        // add a link to the graph. the source and target keys refer to node keys
-        //. dir is a direction. should just be extra info?
-        addLink: function (sourcekey, targetkey, dir) {
-            // don't add if already there
-            // var linkkey = sourcekey + '-' + targetkey;
-            // if (! linkkeys.has(linkkey)) {
-                // linkkeys.add(linkkey)
-            var nodeSource = nodehash.get(sourcekey);
-            var nodeTarget = nodehash.get(targetkey);
-            if (nodeSource && nodeTarget) {
-                // d3 expects links to have source and target properties linking to the full node objects. dir is extra.
-                var link = {"source": nodeSource, "target": nodeTarget, "dir": dir};
+        // add a link to the graph, update the svg elements, and restart the layout.
+        // a link is just a pair of node keys.
+        // dir is a direction - not used yet.
+        addLink: function (sourceKey, targetKey, dir) {
+            //> don't add if already there
+            // var linkKey = sourceKey + '-' + targetKey;
+            // if (! linkKeys.has(linkKey)) {
+                // linkKeys.add(linkKey) etc
+            var sourceNode = nodehash.get(sourceKey);
+            var targetNode = nodehash.get(targetKey);
+            if (sourceNode && targetNode) {
+                // d3 expects links to have 'source' and 'target' properties linking
+                // to the full node objects. dir is extra.
+                var link = {"source": sourceNode, "target": targetNode, "dir": dir};
                 force.links().push(link);
                 updateSvg();
             }
-            // }
         }
     };
 
@@ -179,13 +183,13 @@ var graph = (function () {
 
 
 //--------------------------------------------------------------------------------
-// * Data
+// * Map
 //--------------------------------------------------------------------------------
 
-// make a data object that encapsulates the room and exit arrays,
+// make a map object that encapsulates the room and exit arrays,
 // and provides the access functions init, getRoom, and getExits.
 
-var data = (function () {
+var map = (function () {
     
     var rooms, exits; // arrays of all rooms and exits
 
@@ -225,7 +229,7 @@ var data = (function () {
 //--------------------------------------------------------------------------------
 
 // onclick handler for nodes - adds room exits
-function onClick(d,i) { addRoomExits(d); }
+function onClickNode(d,i) { addRoomExits(d); }
 
 // given a room, find all its exits, then add those rooms
 // and the links to them.
@@ -233,13 +237,13 @@ function addRoomExits(room) {
 
     // find all exits from this room
     var sourceKey = room.key;
-    var roomExits = data.getExits(sourceKey);
+    var roomExits = map.getExits(sourceKey);
 
     // for each exit, add the room it points to and a link between them
     roomExits.map(function (exit) {
         var dir = exit.dir;
         var targetKey = exit.target;
-        var targetRoom = data.getRoom(targetKey);
+        var targetRoom = map.getRoom(targetKey);
         if (targetRoom) {
             graph.addNode(targetRoom);
             graph.addLink(sourceKey, targetKey, dir);
@@ -260,8 +264,8 @@ var filename = 'data/json/zork_rooms_small.json';
 // file i/o is asynchronous, so have to do things in callbacks.
 // this just opens the file, finds the room with the given startkey,
 // and adds it to the graph.
-data.init(filename, function() {
-    var room = data.getRoom(startKey);
+map.init(filename, function() {
+    var room = map.getRoom(startKey);
     graph.addNode(room);
 });
 

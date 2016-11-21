@@ -25,20 +25,17 @@ var p, pj, Hash, Set, getWindowSize, findObject; // library.js
 // * Graph
 //--------------------------------------------------------------------------------
 
-// this makes a generic graph object that encapsulates a d3 force layout object,
+//> keep in separate graph.js file
+
+// This makes a generic graph object that encapsulates a d3 force layout object,
 // and provides some access functions.
-// nodes can be any javascript object with 'key', 'name', and optional 'desc' properties.
-// links are just pairs of node keys. 
 
-//> usage:
+// Nodes can be any javascript object with 'key', 'name', and optional 'desc' properties.
+// Links are just pairs of node keys. 
 
-//> make a Graph class, eg
+// Usage:
 // graph = Graph('#map', {charge: -5000, gravity: 0.5, distance: 90, nodeRadius: 20});
 
-//> keep in separate graph.js file?
-
-
-// var graph = (function () {
 var Graph = function (parentElement, options={}) {
     
     // set graph options
@@ -187,8 +184,6 @@ var Graph = function (parentElement, options={}) {
             }
         }
     };
-
-// })();
 };
 
 
@@ -198,28 +193,25 @@ var Graph = function (parentElement, options={}) {
 // * Map
 //--------------------------------------------------------------------------------
 
-// make a map object that encapsulates the room and exit arrays,
+// This makes a map object that encapsulates the room and exit arrays,
 // and provides some access functions.
 
-//> make a Map class
-
-
-var map = (function () {
+var Map = function (filename, startKey) {
     
     var rooms, exits; // arrays of all rooms and exits
+    
+    // file i/o is asynchronous, so have to do things in callbacks.
+    // this just opens the file, finds the room with the given startkey,
+    // and adds it to the graph.
+    // d3 provides a convenience fn 'json' to read from a json file
+    d3.json(filename, function(error, json) {
+        rooms = json['rooms'];
+        exits = json['exits'];
+        var room = map.getRoom(startKey);
+        graph.addNode(room);
+    });
 
     return {
-        
-        // open the given file and read into room and exit variables
-        init: function(filename, fn) {
-            // d3 provides a convenience fn to read from a json file
-            d3.json(filename, function(error, json) {
-                if (error) return console.warn(error);
-                rooms = json['rooms'];
-                exits = json['exits'];
-                return fn();
-            });
-        },
         
         // find the given room object
         getRoom: function(roomKey) {
@@ -236,17 +228,10 @@ var map = (function () {
         }
     };
 
-})();
+};
 
 
-//--------------------------------------------------------------------------------
-// * Click Handler
-//--------------------------------------------------------------------------------
-
-//> move into Map class/object
-
-//> not sure how to handle the click callback yet
-
+//> add to map class
 
 // onclick handler for nodes - adds room exits
 function onClickNode(d,i) { addRoomExits(d); }
@@ -276,28 +261,11 @@ function addRoomExits(room) {
 // * Start
 //--------------------------------------------------------------------------------
 
+// create a new generic d3 graph object
+var graph = new Graph('#map', {nodeRadius:25});
 
-var graph = new Graph('#map',{nodeRadius:25});
+// create a Zork map object -
+// read rooms and exits from file, and add initial room.
+// WHOUS is west of house
+var map = new Map('data/json/zork_small.json', 'WHOUS'); 
 
-
-//> move into Map object
-
-
-var startKey = 'WHOUS'; // map starting point - west of the house
-
-// var filename = 'data/json/zork.json';
-var filename = 'data/json/zork_small.json';
-
-// file i/o is asynchronous, so have to do things in callbacks.
-// this just opens the file, finds the room with the given startkey,
-// and adds it to the graph.
-map.init(filename, function() {
-    var room = map.getRoom(startKey);
-    graph.addNode(room);
-});
-
-
-
-// var graph = Graph('#map', {charge: -5000, gravity: 0.5, distance: 90, nodeRadius: 20});
-// var map = Map('data/json/zork.json', 'WHOUS', graph);
-// 

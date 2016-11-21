@@ -66,11 +66,11 @@ and south.">
 
 ## Goals
 
-What I'd like to do is:
+What I'd like to do:
 
 - Convert the original Muddle code to Lisp data structures
-- Convert the Lisp to a Graphviz file to make a static map
-- Convert the Lisp to JSON to explore the map interactively with d3
+- Convert the Lisp data to JSON to explore the map interactively with d3
+- Convert the Lisp data to a Graphviz file to make a static map
 
 
 ## Lisp Data
@@ -99,10 +99,10 @@ So we get some room structures like so -
 
 ## Exploring the Map
 
-Then we can convert this Lisp to JSON and use [d3][d3] to try
-[wandering around the map](http://bburns.github.io/Lantern) -
-click on a room to add its neighboring rooms. Note though that you're stuck with
-a limited number of rooms for now, and the rooms need more repulsion force.
+Then we can convert this Lisp to JSON and use [d3][d3] to
+[wander around the map](http://bburns.github.io/Lantern) - click on a room to
+add its neighboring rooms. Note though that you're stuck with a limited number
+of rooms for now.
 
 <!-- add screenshot -->
 

@@ -47,8 +47,8 @@ var graph = (function () {
     var rect_width = 60, rect_height = 50;
     var labelx = 8, labely = 18;
 
-    var nodeData, nodeGroup;
-    var nodeCircle, nodeRect;
+    // var nodeData, nodeGroup;
+    // var nodeCircle, nodeRect;
     // var linkData, linkLine;
     var links, nodes;
 
@@ -79,7 +79,7 @@ var graph = (function () {
     
     // this function is called on each time tick to animate the graph
     function tick() {
-        nodeData
+        nodes
             .attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")";});
             // .attr("cx", function(d) { return d.x; })
             // .attr("cy", function(d) { return d.y; });
@@ -107,30 +107,30 @@ var graph = (function () {
         // nodes
         // nodes are groups with circles or rectangles and labels.
         
-        nodeData = svg.selectAll("g.node") // select all group elements with class 'node'
+        nodes = svg.selectAll("g.node") // select all group elements with class 'node'
             .data(force.nodes(), function(d) { return d.key;});
-        nodeGroup = nodeData.enter()
+        nodes.enter()
             .append("g") // g is an svg group element
-            .attr("class", "node"); // add new elements and set class to 'node'
-        nodeGroup.call(force.drag); // make nodes draggable
-        nodeGroup.on("click", onclick); // callback fn for user to set
-        nodeGroup.append("svg:title")
+            .attr("class", "node") // add new elements and set class to 'node'
+            .call(force.drag) // make nodes draggable
+            .on("click", onClick) // callback fn for user to set
+            .append("svg:title")
             .text(function(d) { return d.desc || "(No description)"; }); // tooltips
-        nodeData.exit()
+        nodes.exit()
             .remove(); // remove old elements
 
         if (shape=="circle") {
-            nodeCircle = nodeGroup.append("circle")
+            nodes.append("circle")
                 .attr("r", radius);
         }
         
         if (shape=="rect") {
-            nodeRect = nodeGroup.append("rect")
+            nodes.append("rect")
                 .attr("width", rect_width)
                 .attr("height", rect_height);
         }
 
-        var nodeLabel = nodeGroup.append("text")
+        nodes.append("text")
             .attr("class", "nodetext")
             .attr("x", labelx)
             .attr("y", labely)
@@ -147,7 +147,7 @@ var graph = (function () {
     return {
 
         // add a node to the graph. a node is just an object with a .key property.
-        addnode: function (node) {
+        addNode: function (node) {
             if (node && !nodehash.has(node.key)) {
                 force.nodes().push(node);
                 nodehash.set(node.key, node);
@@ -157,7 +157,7 @@ var graph = (function () {
 
         // add a link to the graph. the source and target keys refer to node keys
         //. dir is a direction. should just be extra info?
-        addlink: function (sourcekey, targetkey, dir) {
+        addLink: function (sourcekey, targetkey, dir) {
             // don't add if already there
             // var linkkey = sourcekey + '-' + targetkey;
             // if (! linkkeys.has(linkkey)) {
@@ -182,75 +182,68 @@ var graph = (function () {
 // * Data
 //--------------------------------------------------------------------------------
 
-//> what is this?
-// this is just a namespace with some functions
-// should be a closure though, eh?
+// make a data object that encapsulates the room and exit arrays,
+// and provides the access functions init, getRoom, and getExits.
 
+var data = (function () {
+    
+    var rooms, exits; // arrays of all rooms and exits
 
-var rooms, exits;
+    return {
+        
+        // open the given file and read into room and exit variables
+        init: function(filename, fn) {
+            // d3 provides a convenience fn to read from a json file
+            d3.json(filename, function(error, json) {
+                if (error) return console.warn(error);
+                rooms = json['rooms'];
+                exits = json['exits'];
+                return fn();
+            });
+        },
+        
+        // find the given room object
+        getRoom: function(roomKey) {
+            // linear search in lieu of a hash for now
+            var room = findObject(rooms, 'key', roomKey);
+            return room;
+        },
+        
+        // find all exits from the given room and return in a list.
+        // each exit object looks like this -
+        //   {source:'whous', target:'shous', dir:'east'}
+        getExits: function(roomKey) {
+            return exits.filter(function (exit) {return exit.source===roomKey;});
+        }
+    };
 
-var data = {
-    // read json from the given filename into the rooms and exits variables
-    init: function(filename, fn) {
-        d3.json(filename, function(error, json) {
-            if (error) return console.warn(error);
-            rooms = json['rooms'];
-            exits = json['exits'];
-            return fn();
-        });
-    },
-    // find the given room object.
-    // linear search in lieu of a hash for now
-    // getroom: function(roomkey) {
-    //     var room = findObject(rooms, 'key', roomkey);
-    //     return room;
-    // },
-    //> what is this?
-    get: function(roomkey, fn) {
-        var room = findObject(rooms, 'key', roomkey);
-        fn(room);
-    },
-    // find all of the exits from the given room - each exit object looks like this
-    // {source:'whous', target:'shous', dir:'east'}
-    // return in a list
-    getexits: function(roomkey) {
-        return exits.filter(function (exit) {return exit.source===roomkey;});
-    }
-};
-
+})();
 
 
 //--------------------------------------------------------------------------------
-// * UI
+// * Click Handler
 //--------------------------------------------------------------------------------
 
-// click on room callback
-function onclick(d,i) { addRoomExits(d); }
+// onclick handler for nodes - adds room exits
+function onClick(d,i) { addRoomExits(d); }
 
-// given a room, find all its exits.
-// then add those rooms and the links to them called by onclick handler.
+// given a room, find all its exits, then add those rooms
+// and the links to them.
 function addRoomExits(room) {
 
     // find all exits from this room
-    var sourcekey = room.key;
-    var roomexits = data.getexits(sourcekey);
+    var sourceKey = room.key;
+    var roomExits = data.getExits(sourceKey);
 
-    // add (possibly) new rooms and links
-    roomexits.map(function (exit) {
+    // for each exit, add the room it points to and a link between them
+    roomExits.map(function (exit) {
         var dir = exit.dir;
-        var targetkey = exit.target;
-
-        //. get objs all at once
-        // var target = d.getroom(targetkey);
-        // graph.addnode(target);
-        // graph.addlink(sourcekey, targetkey, dir);
-
-        data.get(targetkey, function (target) {
-            if (target) {
-                graph.addnode(target);
-                graph.addlink(sourcekey, targetkey, dir);
-            }
-        });
+        var targetKey = exit.target;
+        var targetRoom = data.getRoom(targetKey);
+        if (targetRoom) {
+            graph.addNode(targetRoom);
+            graph.addLink(sourceKey, targetKey, dir);
+        }
     });
 }
 
@@ -259,30 +252,18 @@ function addRoomExits(room) {
 // * Start
 //--------------------------------------------------------------------------------
 
-// startup is complex looking because file i/o is asynchronous,
-// so have to do things in callbacks.
+var startKey = 'WHOUS'; // map starting point - west of the house
 
-
-// var filename = 'zork_rooms.json';
+// var filename = 'data/json/zork_rooms.json';
 var filename = 'data/json/zork_rooms_small.json';
-var startkey = 'WHOUS';
 
-// arrays
+// file i/o is asynchronous, so have to do things in callbacks.
+// this just opens the file, finds the room with the given startkey,
+// and adds it to the graph.
 data.init(filename, function() {
-    data.get(startkey, function(room) {
-        graph.addnode(room);
-    });
+    var room = data.getRoom(startKey);
+    graph.addNode(room);
 });
-
-// var whous = data.getroom(startkey);
-// graph.addnode(whous);
-
-// graph.addnode(rooms[0]);
-// graph.addnode(rooms[1]);
-// graph.addlink(rooms[0].key, rooms[1].key, 'north');
-// graph.addnode(rooms[1]); // re-add room, and note we still have only 2 circles
-
-// addRoomExits(whous);
 
 
 

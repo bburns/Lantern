@@ -23,15 +23,24 @@ body {
   height: 100%;
 }
 
+
+/* sizes */
+
 .container {
   position: absolute;
   top: 1em; left: 1em; right: 1em; bottom: 1em;
   /* background-color: #ccc; */
 }
 
+/* need this so el.clientHeight will work */
+#map {
+  height: 100%;
+}
+
 svg {
   position: absolute;
   width: 100%;
+  /*> arbitrary */
   height: 85%;
   /* height: 100%; */
 }

@@ -17,12 +17,13 @@
 
 // For reference, see
 // http://bl.ocks.org/mbostock/3750558
+// http://stackoverflow.com/questions/9539294/adding-new-nodes-to-force-directed-layout
 
 // --------------------------------------------------------------------------------
 
 // globals defined elsewhere - basically 'imported' by index.html
 var d3; // index.html
-var Hash, getWindowSize; // library.js
+var Hash; //, getWindowSize; // library.js
 
 
 //> get rid of global 'onClickNode' reference
@@ -31,17 +32,14 @@ var Hash, getWindowSize; // library.js
 var Graph = function (parentElement, options={}) {
 
     // set graph options
-    var charge = options.charge || -5000; // attractive/repulsive force
-    var gravity = options.gravity || 0.5; // force drawing nodes to the center
-    var distance = options.distance || 90; // fixed distance between nodes
+    var charge     = options.charge     || -5000; // attractive/repulsive force
+    var gravity    = options.gravity    || 0.5; // force drawing nodes to the center
+    var distance   = options.distance   || 90; // fixed distance between nodes
     var nodeRadius = options.nodeRadius || 20; // pixels
 
     // set label positions
     var labelx = nodeRadius + 4; // pixels
     var labely = nodeRadius / 4; // pixels
-
-    // arrays of nodes (rooms) and links
-    var nodes, links;
 
     // need to store a hash of added objects, so can avoid duplicate rooms.
     // could just use a Set, but also need to be able to find the room objects.
@@ -55,77 +53,65 @@ var Graph = function (parentElement, options={}) {
     var svg = d3.select(parentElement).append("svg");
 
     // add a rectangle filling the canvas
-    //> get size of parent element, if possible
-    var size = getWindowSize();
-    size[1] -= 100; //> arbitrary
-    svg.append("rect").attr("width", size[0]).attr("height", size[1]);
+    //> make a getElementSize() fn
+    // var size = getWindowSize();
+    var el = document.getElementById(parentElement.slice(1)); // remove leading '#'
+    var w = el.clientWidth,
+        h = el.clientHeight; // this is coming out too big...
+    h -= 95; // arbitrary
+    //> what's the point of this rectangle?
+    svg.append("rect").attr("width", w).attr("height", h);
 
     // create a d3 force layout object and set some properties
     var force = d3.layout.force()
-        .size(size)
+        .size([w,h])
         .distance(distance)
         .charge(charge)
         .gravity(gravity)
         .on("tick", tick);
 
+    // create some groups where we'll add the elements
+    svg.append("g").attr("class","lines");
+    svg.append("g").attr("class","circles");
+    svg.append("g").attr("class","labels");
+
+
+    // arrays of nodes (rooms) and links
+    // var nodes, links;
+    var lines, circles, labels;
+
     // update svg elements for current nodes and links,
     // and restart the d3 force layout object.
     function updateSvg() {
 
-        // update links
-        // links are just lines between nodes
-
-        // select all svg line elements with class 'link'
-        links = svg.selectAll("line.link")
-            // assign a link key to each element, eg "whous-shous"
-            .data(force.links(), function(d) { return d.source.key + "-" + d.target.key; });
-            // .data(force.links());
-
-        // add new link elements
-        links.enter()
-            .append("line")
+        // add lines
+        lines = svg.select("g.lines").selectAll("line")
+            .data(force.links());
+        lines
+            .enter().append("line")
             .attr("class", "link");
 
-        // remove old elements
-        links.exit()
-            .remove();
-
-        // force.start();
-
-        // update nodes
-        // nodes are svg group objects with circle and text children
-
-        // select all svg group elements with class 'node'
-        nodes = svg.selectAll("g.node")
-            .data(force.nodes(), function(d) { return d.key;}); // assign a key to each element
-            // .data(force.nodes()); // assign a key to each element
-
-        // add new group elements
-        nodes.enter()
-            .append("g") // g is an svg group element
-            .attr("class", "node"); // set class to 'node'
-
-        // add some properties for the group element
-        nodes.call(force.drag) // make nodes draggable
-            .on("click", onClickNode) // callback fn to handle clicks
-            .append("svg:title") // add a tooltip for each node showing the value of .desc
+        // add circles
+        circles = svg.select("g.circles").selectAll("circle")
+            .data(force.nodes());
+        circles
+            .enter().append("circle")
+            .attr("class", "node")
+            .attr("r", nodeRadius)
+            .append("svg:title") // add a tooltip for each circle showing the value of .desc
             .text(function(d) { return d.desc || "(No description)"; });
+        circles
+            .call(force.drag) // make nodes draggable
+            .on("click", onClickNode); // callback fn to handle clicks
 
-        // remove any old elements
-        nodes.exit()
-            .remove();
-
-        // add circle elements to groups
-        nodes.append("circle")
-            .attr("r", nodeRadius);
-
-        // add text elements to groups
-        nodes.append("text")
-            .attr("class", "nodetext")
+        // add labels
+        labels = svg.select("g.labels").selectAll("text")
+            .data(force.nodes());
+        labels
+            .enter().append("text")
             .attr("x", labelx)
             .attr("y", labely)
-            .text(function(d) {return d.name;});
-
+            .text(function(d) { return d.name; });
 
         // restart the d3 force layout object
         force.start();
@@ -135,15 +121,15 @@ var Graph = function (parentElement, options={}) {
     //> why is this needed if it's assigning fns to these attributes?
     // couldn't you just do that once?
     function tick() {
-        nodes
-            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-            // .attr("cx", function(d) { return d.x; })
-            // .attr("cy", function(d) { return d.y; });
-        links
+        lines
             .attr("x1", function(d) { return d.source.x; })
             .attr("y1", function(d) { return d.source.y; })
             .attr("x2", function(d) { return d.target.x; })
             .attr("y2", function(d) { return d.target.y; });
+        circles
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        labels
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     };
 
 
@@ -162,7 +148,7 @@ var Graph = function (parentElement, options={}) {
 
         // add a link to the graph, update the svg elements, and restart the layout.
         // a link is just a pair of node keys.
-        // dir is a direction - not used yet.
+        //> dir is a direction - not used yet.
         addLink: function (sourceKey, targetKey, dir) {
             //> don't add if already there
             // var linkKey = sourceKey + '-' + targetKey;
@@ -177,6 +163,10 @@ var Graph = function (parentElement, options={}) {
                 force.links().push(link);
                 updateSvg();
             }
+        },
+
+        update: function() {
+            // updateSvg();
         }
     };
 };

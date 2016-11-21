@@ -15,24 +15,30 @@
 //     {"source": "WHOUS", "dir": "NORTH", "target": "NHOUS"},
 //     {"source": "WHOUS", "dir": "EAST", "target": "The door is locked, and there is evidently no key."}];
 
+
 // globals from other files
 var d3;
-var p, pj;
-var Hash, Set, getWindowSize, findObject;
+var p, pj, Hash, Set, getWindowSize, findObject;
 
 
 //--------------------------------------------------------------------------------
 // * Graph
 //--------------------------------------------------------------------------------
 
-// make a graph object that encapsulates a d3 force layout object,
-// and provides access functions addNode and addLink.
-// nodes are any javascript object with a 'key' property,
-// and links are just pairs of node keys. 
+// this makes a generic graph object that encapsulates a d3 force layout object,
+// and provides some access functions.
+// nodes are any javascript object with 'key', 'name', and optional 'desc' properties.
+// links are just pairs of node keys. 
 
-//> make a class, pass in html element to add svg to, and graph properties 
+//> make a Graph class, eg
+// graph = Graph('#map', {charge: -5000, gravity: 0.5, distance: 90, nodeRadius: 20});
+
+//> keep in separate graph.js file?
+
 
 var graph = (function () {
+    
+    var parentElement = "#map";
     
     var charge = -5000; // attractive/repulsive force
     var gravity = 0.5; // force drawing nodes to the center
@@ -53,7 +59,7 @@ var graph = (function () {
     // var linkkeys = new Set();
 
     // create svg canvas
-    var svg = d3.select("#map").append("svg");
+    var svg = d3.select(parentElement).append("svg");
     
     // add a rectangle filling the canvas
     //> get size of svg, if possible 
@@ -187,7 +193,10 @@ var graph = (function () {
 //--------------------------------------------------------------------------------
 
 // make a map object that encapsulates the room and exit arrays,
-// and provides the access functions init, getRoom, and getExits.
+// and provides some access functions.
+
+//> make a Map class
+
 
 var map = (function () {
     
@@ -228,6 +237,11 @@ var map = (function () {
 // * Click Handler
 //--------------------------------------------------------------------------------
 
+//> move into Map class/object
+
+//> not sure how to handle the click callback yet
+
+
 // onclick handler for nodes - adds room exits
 function onClickNode(d,i) { addRoomExits(d); }
 
@@ -256,10 +270,14 @@ function addRoomExits(room) {
 // * Start
 //--------------------------------------------------------------------------------
 
+//> move into Map object -
+// eg say map = Map('data/json/zork.json', 'WHOUS') ?
+
+
 var startKey = 'WHOUS'; // map starting point - west of the house
 
-// var filename = 'data/json/zork_rooms.json';
-var filename = 'data/json/zork_rooms_small.json';
+// var filename = 'data/json/zork.json';
+var filename = 'data/json/zork_small.json';
 
 // file i/o is asynchronous, so have to do things in callbacks.
 // this just opens the file, finds the room with the given startkey,
@@ -268,6 +286,4 @@ map.init(filename, function() {
     var room = map.getRoom(startKey);
     graph.addNode(room);
 });
-
-
 

@@ -4,7 +4,7 @@
 // Explore Zork map interactively with d3
 // --------------------------------------------------------------------------------
 
-// The data structures read in look like this - 
+// The data structures read in look like this -
 // var rooms = [
 //     {"key": "WHOUS", "name": "West of House", "desc": "This is an open field west of a white house...."},
 //     {"key": "ATTIC", "name": "Attic", "desc": "This is the attic. The only exit is stairs that lead down."}];
@@ -31,9 +31,9 @@ var Graph; // graph.js
 // and provides some access functions.
 
 var Map = function (filename, startKey) {
-    
+
     var rooms, exits; // arrays of all rooms and exits
-    
+
     // file i/o is asynchronous, so have to do things in callbacks.
     // this just opens the file, finds the room with the given startkey,
     // and adds it to the graph.
@@ -46,14 +46,14 @@ var Map = function (filename, startKey) {
     });
 
     return {
-        
+
         // find the given room object
         getRoom: function(roomKey) {
             // linear search in lieu of a hash for now
             var room = findObject(rooms, 'key', roomKey);
             return room;
         },
-        
+
         // find all exits from the given room and return in a list.
         // each exit object looks like this -
         //   {source:'whous', target:'shous', dir:'east'}
@@ -101,5 +101,5 @@ var graph = new Graph('#map', {nodeRadius:25});
 // create a Zork map object -
 // read rooms and exits from file, and add initial room.
 // WHOUS is west of house
-var map = new Map('data/json/zork_small.json', 'WHOUS'); 
+var map = new Map('data/json/zork_small.json', 'WHOUS');
 

@@ -4,9 +4,6 @@
 // Explore Zork map interactively with d3
 // --------------------------------------------------------------------------------
 
-// For reference, see
-// http://bl.ocks.org/mbostock/3750558
-
 // The data structures read in look like this - 
 // var rooms = [
 //     {"key": "WHOUS", "name": "West of House", "desc": "This is an open field west of a white house...."},
@@ -15,10 +12,13 @@
 //     {"source": "WHOUS", "dir": "NORTH", "target": "NHOUS"},
 //     {"source": "WHOUS", "dir": "EAST", "target": "The door is locked, and there is evidently no key."}];
 
+// For reference, see
+// http://bl.ocks.org/mbostock/3750558
+
 
 // globals from other files
-var d3;
-var p, pj, Hash, Set, getWindowSize, findObject;
+var d3; // index.html
+var p, pj, Hash, Set, getWindowSize, findObject; // library.js
 
 
 //--------------------------------------------------------------------------------
@@ -27,8 +27,10 @@ var p, pj, Hash, Set, getWindowSize, findObject;
 
 // this makes a generic graph object that encapsulates a d3 force layout object,
 // and provides some access functions.
-// nodes are any javascript object with 'key', 'name', and optional 'desc' properties.
+// nodes can be any javascript object with 'key', 'name', and optional 'desc' properties.
 // links are just pairs of node keys. 
+
+//> usage:
 
 //> make a Graph class, eg
 // graph = Graph('#map', {charge: -5000, gravity: 0.5, distance: 90, nodeRadius: 20});
@@ -36,33 +38,35 @@ var p, pj, Hash, Set, getWindowSize, findObject;
 //> keep in separate graph.js file?
 
 
-var graph = (function () {
+// var graph = (function () {
+var Graph = function (parentElement, options={}) {
     
-    var parentElement = "#map";
+    // set graph options
+    var charge = options.charge || -5000; // attractive/repulsive force
+    var gravity = options.gravity || 0.5; // force drawing nodes to the center
+    var distance = options.distance || 90; // fixed distance between nodes
+    var nodeRadius = options.nodeRadius || 20; // pixels
     
-    var charge = -5000; // attractive/repulsive force
-    var gravity = 0.5; // force drawing nodes to the center
-    var distance = 90; // fixed distance between nodes
-
-    var nodeRadius = 20; // pixels
+    // set label positions
     var labelx = nodeRadius + 4; // pixels
     var labely = nodeRadius / 4; // pixels
 
-    var nodes, links; // arrays of nodes (rooms) and links
+    // arrays of nodes (rooms) and links
+    var nodes, links; 
 
     // need to store a hash of added objects, so can avoid duplicate rooms.
     // could just use a Set, but also need to be able to find the room objects.
-    var nodehash = new Hash();
+    var nodeHash = new Hash();
 
     //> could store a set of link keys to avoid duplicate links also,
     // but we won't be duplicating them very often.
     // var linkkeys = new Set();
 
-    // create svg canvas
+    // create svg canvas as child of parent element
     var svg = d3.select(parentElement).append("svg");
     
     // add a rectangle filling the canvas
-    //> get size of svg, if possible 
+    //> get size of parent element, if possible 
     var size = getWindowSize();
     size[1] -= 100; //> arbitrary
     svg.append("rect").attr("width", size[0]).attr("height", size[1]);
@@ -157,9 +161,9 @@ var graph = (function () {
         // add a node to the graph, update the svg elements, and restart the layout.
         // a node can be any javascript object with a .key property.
         addNode: function (node) {
-            if (node && !nodehash.has(node.key)) {
+            if (node && !nodeHash.has(node.key)) {
                 force.nodes().push(node);
-                nodehash.set(node.key, node);
+                nodeHash.set(node.key, node);
                 updateSvg();
             }
         },
@@ -172,8 +176,8 @@ var graph = (function () {
             // var linkKey = sourceKey + '-' + targetKey;
             // if (! linkKeys.has(linkKey)) {
                 // linkKeys.add(linkKey) etc
-            var sourceNode = nodehash.get(sourceKey);
-            var targetNode = nodehash.get(targetKey);
+            var sourceNode = nodeHash.get(sourceKey);
+            var targetNode = nodeHash.get(targetKey);
             if (sourceNode && targetNode) {
                 // d3 expects links to have 'source' and 'target' properties linking
                 // to the full node objects. dir is extra.
@@ -184,7 +188,9 @@ var graph = (function () {
         }
     };
 
-})();
+// })();
+};
+
 
 
 
@@ -270,8 +276,11 @@ function addRoomExits(room) {
 // * Start
 //--------------------------------------------------------------------------------
 
-//> move into Map object -
-// eg say map = Map('data/json/zork.json', 'WHOUS') ?
+
+var graph = new Graph('#map',{nodeRadius:25});
+
+
+//> move into Map object
 
 
 var startKey = 'WHOUS'; // map starting point - west of the house
@@ -287,3 +296,8 @@ map.init(filename, function() {
     graph.addNode(room);
 });
 
+
+
+// var graph = Graph('#map', {charge: -5000, gravity: 0.5, distance: 90, nodeRadius: 20});
+// var map = Map('data/json/zork.json', 'WHOUS', graph);
+// 

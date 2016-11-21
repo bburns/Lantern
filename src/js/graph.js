@@ -15,8 +15,12 @@
 // var room = {key:'foo', name:'Foo', desc:'A dusty room'};
 // graph.addNode(room);
 
+// For reference, see
+// http://bl.ocks.org/mbostock/3750558
 
-// globals defined elsewhere
+// --------------------------------------------------------------------------------
+
+// globals defined elsewhere - basically 'imported' by index.html
 var d3; // index.html
 var Hash, getWindowSize; // library.js
 

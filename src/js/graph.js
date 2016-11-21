@@ -78,8 +78,8 @@ var Graph = function (parentElement, options={}) {
         // select all svg line elements with class 'link'
         links = svg.selectAll("line.link")
             // assign a link key to each element, eg "whous-shous"
-            // .data(force.links(), function(d) { return d.source.key + "-" + d.target.key; });
-            .data(force.links());
+            .data(force.links(), function(d) { return d.source.key + "-" + d.target.key; });
+            // .data(force.links());
 
         // add new link elements
         links.enter()
@@ -90,14 +90,15 @@ var Graph = function (parentElement, options={}) {
         links.exit()
             .remove();
 
+        // force.start();
 
         // update nodes
         // nodes are svg group objects with circle and text children
 
         // select all svg group elements with class 'node'
         nodes = svg.selectAll("g.node")
-            // .data(force.nodes(), function(d) { return d.key;}); // assign a key to each element
-            .data(force.nodes()); // assign a key to each element
+            .data(force.nodes(), function(d) { return d.key;}); // assign a key to each element
+            // .data(force.nodes()); // assign a key to each element
 
         // add new group elements
         nodes.enter()

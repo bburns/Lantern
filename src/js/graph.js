@@ -25,6 +25,9 @@ var d3; // index.html
 var Hash, getWindowSize; // library.js
 
 
+//> get rid of global 'onClickNode' reference
+
+
 var Graph = function (parentElement, options={}) {
 
     // set graph options
@@ -48,7 +51,7 @@ var Graph = function (parentElement, options={}) {
     // but we won't be duplicating them very often.
     // var linkkeys = new Set();
 
-    // create svg canvas as child of parent element
+    // create svg canvas as child of parent element and return a d3 svg object
     var svg = d3.select(parentElement).append("svg");
 
     // add a rectangle filling the canvas
@@ -65,32 +68,36 @@ var Graph = function (parentElement, options={}) {
         .gravity(gravity)
         .on("tick", tick);
 
-    // this function is called on each time tick to animate the graph.
-    //> why is this needed if it's assigning fns to these attributes?
-    // couldn't you just do that once?
-    function tick() {
-        nodes
-            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-            // .attr("cx", function(d) { return d.x; })
-            // .attr("cy", function(d) { return d.y; });
-        links
-            .attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
-    };
-
-
     // update svg elements for current nodes and links,
     // and restart the d3 force layout object.
     function updateSvg() {
+
+        // update links
+        // links are just lines between nodes
+
+        // select all svg line elements with class 'link'
+        links = svg.selectAll("line.link")
+            // assign a link key to each element, eg "whous-shous"
+            // .data(force.links(), function(d) { return d.source.key + "-" + d.target.key; });
+            .data(force.links());
+
+        // add new link elements
+        links.enter()
+            .append("line")
+            .attr("class", "link");
+
+        // remove old elements
+        links.exit()
+            .remove();
+
 
         // update nodes
         // nodes are svg group objects with circle and text children
 
         // select all svg group elements with class 'node'
         nodes = svg.selectAll("g.node")
-            .data(force.nodes(), function(d) { return d.key;}); // assign a key to each element
+            // .data(force.nodes(), function(d) { return d.key;}); // assign a key to each element
+            .data(force.nodes()); // assign a key to each element
 
         // add new group elements
         nodes.enter()
@@ -119,26 +126,23 @@ var Graph = function (parentElement, options={}) {
             .text(function(d) {return d.name;});
 
 
-        // update links
-        // links are just lines between nodes
-
-        // select all svg line elements with class 'link'
-        links = svg.selectAll("line.link")
-            // assign a link key to each element, eg "whous-shous"
-            .data(force.links(), function(d) { return d.source.key + "-" + d.target.key; });
-
-        // add new link elements
-        links.enter()
-            .append("line")
-            .attr("class", "link");
-
-        // remove old elements
-        links.exit()
-            .remove();
-
-
         // restart the d3 force layout object
         force.start();
+    };
+
+    // this function is called on each time tick to animate the graph.
+    //> why is this needed if it's assigning fns to these attributes?
+    // couldn't you just do that once?
+    function tick() {
+        nodes
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+            // .attr("cx", function(d) { return d.x; })
+            // .attr("cy", function(d) { return d.y; });
+        links
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
     };
 
 

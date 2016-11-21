@@ -26,9 +26,14 @@ var d3; // index.html
 var findObject; // library.js
 
 
-var Map = function (filename, startKey) {
+//> get rid of global 'map' references
+
+var Map = function (filename, startKey, graph) {
 
     var rooms, exits; // arrays of all rooms and exits
+
+    this.graph = graph;
+    var that = this;
 
     // file i/o is asynchronous, so have to do things in callbacks.
     // this just opens the file, finds the room with the given startkey,
@@ -38,7 +43,7 @@ var Map = function (filename, startKey) {
         rooms = json['rooms'];
         exits = json['exits'];
         var room = map.getRoom(startKey);
-        graph.addNode(room);
+        that.graph.addNode(room);
     });
 
     return {
@@ -55,35 +60,28 @@ var Map = function (filename, startKey) {
         //   {source:'whous', target:'shous', dir:'east'}
         getExits: function(roomKey) {
             return exits.filter(function (exit) {return exit.source===roomKey;});
+        },
+
+        // given a room, find all its exits, then add those rooms
+        // and the links to them.
+        addRoomExits: function(room) {
+
+            // find all exits from this room
+            var sourceKey = room.key;
+            var roomExits = map.getExits(sourceKey);
+
+            // for each exit, add the room it points to and a link between them
+            roomExits.map(function (exit) {
+                var dir = exit.dir;
+                var targetKey = exit.target;
+                var targetRoom = map.getRoom(targetKey);
+                if (targetRoom) {
+                    that.graph.addNode(targetRoom);
+                    that.graph.addLink(sourceKey, targetKey, dir);
+                }
+            });
         }
     };
-
 };
-
-
-//> add to map class
-
-// onclick handler for nodes - adds room exits
-function onClickNode(d,i) { addRoomExits(d); }
-
-// given a room, find all its exits, then add those rooms
-// and the links to them.
-function addRoomExits(room) {
-
-    // find all exits from this room
-    var sourceKey = room.key;
-    var roomExits = map.getExits(sourceKey);
-
-    // for each exit, add the room it points to and a link between them
-    roomExits.map(function (exit) {
-        var dir = exit.dir;
-        var targetKey = exit.target;
-        var targetRoom = map.getRoom(targetKey);
-        if (targetRoom) {
-            graph.addNode(targetRoom);
-            graph.addLink(sourceKey, targetKey, dir);
-        }
-    });
-}
 
 

@@ -73,6 +73,26 @@ var Graph = function (parentElementId, options={}) {
     svg.append("g").attr("class","circles");
     svg.append("g").attr("class","labels");
 
+    // add arrow marker definition
+    // see http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
+    svg.append("defs").selectAll("marker")
+        .data(["arrow"]) //>?
+      .enter().append("marker")
+        // .append("marker")
+        // .attr("id", function(d) { return d; })
+        .attr("id", "arrow")
+        .attr("viewBox", "0 -5 10 10") //>?
+        .attr("refX", 20) // how far back from end of the line to start arrow
+        .attr("refY", 0)
+        .attr("markerWidth", 10) //>?
+        .attr("markerHeight", 10)
+        .attr("orient", "auto")
+      .append("path")
+        .attr("d", "M0,-2 L5,0 L0,2 L0,-2")
+        .style("stroke", "#444")
+        .style("fill", "#444");
+        // .style("opacity", "0.6");
+
     // arrays of nodes (rooms) and links
     // var nodes, links;
     var lines, circles, labels;
@@ -86,7 +106,9 @@ var Graph = function (parentElementId, options={}) {
             .data(force.links());
         lines
             .enter().append("line")
-            .attr("class", "link");
+            .attr("class", "link")
+            // .style("marker-end",  "url(#head)");
+            .style("marker-end",  "url(#arrow)");
 
         // add circles
         circles = svg.select("g.circles").selectAll("circle")

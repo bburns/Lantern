@@ -102,7 +102,7 @@ Then we can convert this Lisp to JSON and use [d3][d3] to
 add its neighboring rooms. Note though that you're stuck with a limited number
 of rooms for now.
 
-<img src="images/lantern_800.png" />
+<img src="images/lantern2016-11-22_800.png" />
 
 
 ## A Graphviz Map

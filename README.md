@@ -130,11 +130,11 @@ The code needs to be organized to transform the MDL code to Lisp and then JSON
 and Graphviz step-by-step - it was done a bit interactively so the code is not
 really in place yet.
 
-Things to do for the d3 map:
+Some things to do for the d3 map:
 
+- split screen to show room description on right side
 - handle special doorways (eg a locked door) - need so can explore house, rest of map
 - fix height of svg - currently arbitrarily set to 85% - need to read size of parent element
-- indicate current room with color or outline
 - indicate somehow if a room still has exits - eg color green?
 - color nodes light gray on hover?
 - explain that the forest is a bit of a maze, so can tangle up the map
@@ -146,7 +146,6 @@ Things to do for the d3 map:
 - show exits from current room at bottom
 - dbl click to open exits?
 - add arrows at end of links http://stackoverflow.com/questions/36579339/how-to-draw-line-with-arrow-using-d3-js http://vanseodesign.com/web-design/svg-markers/
-- make links stretchable
 - labels should be clearer - clear a background rectangle first http://stackoverflow.com/questions/15500894/background-color-of-text-in-svg
 - add button to automatically explore the map, depth first, slowly
 - draw white outline around nodes, as here http://jsfiddle.net/4sq4F/

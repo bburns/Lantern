@@ -52,15 +52,13 @@ var Graph = function (parentElement, options={}) {
     // create svg canvas as child of parent element and return a d3 svg object
     var svg = d3.select(parentElement).append("svg");
 
-    // add a rectangle filling the canvas
+    // add a rectangle filling the canvas - only way to color the background of an svg canvas
     //> make a getElementSize() fn
     // var size = getWindowSize();
     var el = document.getElementById(parentElement.slice(1)); // remove leading '#'
     var w = el.clientWidth,
-        h = el.clientHeight; // this is coming out too big...
-    h -= 95; // arbitrary
-    //> what's the point of this rectangle?
-    svg.append("rect").attr("width", w).attr("height", h);
+        h = el.clientHeight;
+    // svg.append("rect").attr("width", w).attr("height", h);
 
     // create a d3 force layout object and set some properties
     var force = d3.layout.force()
@@ -74,7 +72,6 @@ var Graph = function (parentElement, options={}) {
     svg.append("g").attr("class","lines");
     svg.append("g").attr("class","circles");
     svg.append("g").attr("class","labels");
-
 
     // arrays of nodes (rooms) and links
     // var nodes, links;

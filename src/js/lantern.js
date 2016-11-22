@@ -34,9 +34,9 @@ var map = new Map( mapfile, startRoom, graph );
 // click handler for graph
 function onClickNode(d,i) {
     map.addRoomExits(d);
-    var desc = d.desc || '(No description)';
-    var el = document.getElementById('sidebar');
-    el.textContent = desc;
+    // var desc = d.desc || '(No description)';
+    // var el = document.getElementById('sidebar');
+    // el.textContent = desc;
 }
 
 function onMouseOver(d) {

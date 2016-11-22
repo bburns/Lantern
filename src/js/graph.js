@@ -94,12 +94,13 @@ var Graph = function (parentElementId, options={}) {
         circles
             .enter().append("circle")
             .attr("class", "node")
-            .attr("r", nodeRadius)
-            .append("svg:title") // add a tooltip for each circle showing the value of .desc
-            .text(function(d) { return d.desc || "(No description)"; });
+            .attr("r", nodeRadius);
+            // .append("svg:title") // add a tooltip for each circle showing the value of .desc
+            // .text(function(d) { return d.desc || "(No description)"; });
         circles
             .call(force.drag) // make nodes draggable
-            .on("click", onClickNode); // callback fn to handle clicks
+            .on("mouseover", onMouseOver) // callback fn
+            .on("click", onClickNode); // callback fn
             // .on("click", function(d) { alert('clicked'); } );
             // .on("dblclick", onClickNode); // works but then need workaround for single clicks
 

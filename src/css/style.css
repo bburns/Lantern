@@ -43,10 +43,11 @@ body {
 #sidebar {
   /* display: inline; */
   float: left;
-  width: 21%;
+  width: 20%;
   height: 480px;
   background-color: #eee;
   margin: 0 1em;
+  padding: 0.5em;
 }
 
 svg {

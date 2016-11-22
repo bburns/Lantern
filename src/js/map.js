@@ -1,6 +1,6 @@
 
 //--------------------------------------------------------------------------------
-// * Map
+// Map
 //--------------------------------------------------------------------------------
 
 // This makes a map object that encapsulates the room and exit arrays,
@@ -44,7 +44,6 @@ var Map = function (filename, startKey, graph) {
         exits = json['exits'];
         var room = map.getRoom(startKey);
         that.graph.addNode(room);
-        that.graph.update();
     });
 
     return {
@@ -81,7 +80,6 @@ var Map = function (filename, startKey, graph) {
                     that.graph.addLink(sourceKey, targetKey, dir);
                 }
             });
-            that.graph.update();
         }
     };
 };

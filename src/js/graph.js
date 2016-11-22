@@ -29,7 +29,7 @@ var Hash; //, getWindowSize; // library.js
 //> get rid of global 'onClickNode' reference
 
 
-var Graph = function (parentElement, options={}) {
+var Graph = function (parentElementId, options={}) {
 
     // set graph options
     var charge     = options.charge     || -5000; // attractive/repulsive force
@@ -50,12 +50,12 @@ var Graph = function (parentElement, options={}) {
     // var linkkeys = new Set();
 
     // create svg canvas as child of parent element and return a d3 svg object
-    var svg = d3.select(parentElement).append("svg");
+    var svg = d3.select('#'+parentElementId).append("svg");
 
     // add a rectangle filling the canvas - only way to color the background of an svg canvas
     //> make a getElementSize() fn
     // var size = getWindowSize();
-    var el = document.getElementById(parentElement.slice(1)); // remove leading '#'
+    var el = document.getElementById(parentElementId);
     var w = el.clientWidth,
         h = el.clientHeight;
     // svg.append("rect").attr("width", w).attr("height", h);
@@ -100,6 +100,8 @@ var Graph = function (parentElement, options={}) {
         circles
             .call(force.drag) // make nodes draggable
             .on("click", onClickNode); // callback fn to handle clicks
+            // .on("click", function(d) { alert('clicked'); } );
+            // .on("dblclick", onClickNode); // works but then need workaround for single clicks
 
         // add labels
         labels = svg.select("g.labels").selectAll("text")
@@ -109,6 +111,8 @@ var Graph = function (parentElement, options={}) {
             .attr("x", labelx)
             .attr("y", labely)
             .text(function(d) { return d.name; });
+        // labels
+            // .on("click", onClickNode); // nowork
 
         // restart the d3 force layout object
         force.start();

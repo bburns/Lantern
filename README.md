@@ -120,8 +120,8 @@ The overview, using the default Graphviz layout engine:
 
 The full map is located [here](images/zork2200.png).
 
-These are just one of an infinite number of layouts - I haven't experimented
-much with the different settings.
+This is just one of an infinite number of layouts - I haven't experimented much
+with the different settings.
 
 
 ## Issues
@@ -132,23 +132,19 @@ really in place yet.
 
 Some things to do for the d3 map:
 
-- split screen to show room description on right side
 - handle special doorways (eg a locked door) - need so can explore house, rest of map
 - fix height of svg - currently arbitrarily set to 85% - need to read size of parent element
-- indicate somehow if a room still has exits - eg color green?
-- color nodes light gray on hover?
+- indicate if a room is unexplored - eg gray text
 - explain that the forest is a bit of a maze, so can tangle up the map
 - for rooms like 'forest' w/o proper names, wrap in parens, or get proper names somehow, or use key
 - handle page resize event
 - allow zoom in/out - ie catch zoom event, redraw svg etc
-- single click to go to room and show description at bottom of screen?
-- show objects in current room at bottom
-- show exits from current room at bottom
-- dbl click to open exits?
-- add arrows at end of links http://stackoverflow.com/questions/36579339/how-to-draw-line-with-arrow-using-d3-js http://vanseodesign.com/web-design/svg-markers/
+- show objects in current room
+- show exits from current room
 - labels should be clearer - clear a background rectangle first http://stackoverflow.com/questions/15500894/background-color-of-text-in-svg
 - add button to automatically explore the map, depth first, slowly
 - draw white outline around nodes, as here http://jsfiddle.net/4sq4F/
+- and more...
 
 This is a kind of low-priority project that I'll work on from time to time. I've
 been interested in Zork since I was 12 - I hacked into the code but didn't

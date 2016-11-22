@@ -9,6 +9,7 @@
 
 
 // globals defined elsewhere - basically 'imported' by index.html
+var $; // index.html
 var Graph; // graph.js
 var Map; // map.js
 
@@ -17,12 +18,12 @@ var Map; // map.js
 // (function() {
 
 var parentElementId = 'map';
-// var sidebar = 'sidebar';
 var nodeRadius = 20; // pixels
 var mapfile = 'data/json/zork.json';
 
 // var startRoom = 'WHOUS'; // west of house
 var startRoom = 'CELLA'; // cellar
+
 
 // create a new generic d3 graph object
 var graph = new Graph( parentElementId, {nodeRadius:nodeRadius} );
@@ -31,18 +32,15 @@ var graph = new Graph( parentElementId, {nodeRadius:nodeRadius} );
 // read rooms and exits from file, and add initial room.
 var map = new Map( mapfile, startRoom, graph );
 
+
 // click handler for graph
 function onClickNode(d,i) {
     map.addRoomExits(d);
-    // var desc = d.desc || '(No description)';
-    // var el = document.getElementById('sidebar');
-    // el.textContent = desc;
 }
 
 function onMouseOver(d) {
-    var desc = d.desc || '(No description)';
-    var el = document.getElementById('sidebar');
-    el.textContent = desc;
+    $('#room-name').text(d.name);
+    $('#room-description').text(d.desc || '(No description)');
 }
 
 

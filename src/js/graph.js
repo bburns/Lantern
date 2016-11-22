@@ -66,6 +66,7 @@ var Graph = function (parentElementId, options={}) {
         .distance(distance)
         .charge(charge)
         .gravity(gravity)
+        // .linkStrength(0.1) // default 1.0
         .on("tick", tick);
 
     // create some groups where we'll add the elements

@@ -167,7 +167,9 @@ class Env(dict):
         elif self.outer:
             return self.outer.find(var)
         else:
-            raise NameError("unknown symbol %s" % var)
+            # raise NameError("unknown symbol %s" % var)
+            # print "Ignoring unknown symbol %s" % var
+            print "Can't find symbol %s" % var
     
 # Note: it is customary in Scheme for begin to be a special form that takes a
 # sequence of arguments, evaluares each one, and returns the last one
@@ -230,32 +232,61 @@ def eval(x, env=global_env):
         # print x,'is a String'
         return x
     elif isinstance(x, Symbol):      # variable reference
-        return env.find(x)[x]
+        envfound = env.find(x)
+        # return env.find(x)[x]
+        if envfound:
+            return envfound[x]
+        else:
+            # print "Ignoring unknown symbol %s" % x
+            return
     elif not isinstance(x, List):  # constant literal
         return x
-    elif x[0] == 'quote':          # quotation
+
+    key = x[0].lower()
+    if key == 'quote':          # quotation
         (_, exp) = x
         return exp
-    elif x[0] == 'if':             # conditional
+    elif key == 'if':             # if
         (_, test, conseq, alt) = x
         exp = (conseq if eval(test, env) else alt)
         return eval(exp, env)
-    elif x[0] == 'define':         # definition
+    elif key == 'cond':           # conditional
+        # evaluate conditions one by one, eval and exit when find t value
+        # like a giant if else statement
+        conds = x[1:]
+        exp = None
+        for cond in conds:
+            (test, conseq) = cond
+            if eval(test, env):
+                exp = conseq
+                break
+        if exp:
+            return eval(exp, env)
+        else:
+            return None
+        # (_, test, conseq, alt) = x
+        # exp = (conseq if eval(test, env) else alt)
+        # return eval(exp, env)
+    elif key == 'define':         # definition
         (_, var, exp) = x
         env[var] = eval(exp, env)
-    elif x[0] == 'set!':           # assignment
+    elif key == 'set!':           # assignment
         (_, var, exp) = x
         env.find(var)[var] = eval(exp, env)
-    elif x[0] == 'lambda':         # procedure
+    elif key == 'lambda':         # procedure
         (_, parms, body) = x
         return Procedure(parms, body, env)
-    elif x[0] in forms:            # other special forms
-        form = forms[x[0]]
+    elif key in forms:            # other special forms
+        form = forms[key]
         return form(x)
     else:                          # procedure call
-        proc = eval(x[0], env)
-        args = [eval(arg, env) for arg in x[1:]]
-        return proc(*args)
+        proc = eval(key, env)
+        if proc:
+            args = [eval(arg, env) for arg in x[1:]]
+            return proc(*args)
+        # ignore unknown procedures
+        print "Ignoring unknown procedure %s" % key
+        return None
 
 
 # other special forms, keyed on first symbol in form
@@ -280,8 +311,8 @@ def form_exit(x):
     return exits
 
 forms = {
-    'EXIT': form_exit,
-    'ROOM': form_room,
+    'exit': form_exit,
+    'room': form_room,
 }
 
     
@@ -333,8 +364,16 @@ if __name__=='__main__':
     # """
 
     s = """
-    <COND (<G? ,MUDDLE 104>
-           <PSETG MSG-STRING "Muddle 105 Version/Please report strange occurances.">)>
+<COND (<G? ,MUDDLE 104>
+       <PSETG MSG-STRING "Muddle 105 Version/Please report strange occurances.">)>
+"Device definitions for save and restore"
+<COND (<L? ,MUDDLE 100>
+       <PSETG DEVICE-TABLE '["A" "AI" "D" "DM" "C" "ML" "H" "AI" "L" "AI"
+			    "M" "ML" "N" "MC" "P" "ML" "U" "MC" "Z" "ML"]>)>
+; "SUBTITLE POBLIST DEFINITIONS AND PARSER STRUCTURES"
+<MPOBLIST ACTIONS-POBL 17>
+<PSETG ACTIONS-POBL ,ACTIONS-POBL>
+
     
     <ROOM "WHOUS"
     "This is an open field west of a white house, with a boarded front door."
@@ -359,6 +398,8 @@ if __name__=='__main__':
            <+ ,RLANDBIT ,RLIGHTBIT ,RHOUSEBIT ,RSACREDBIT>>
     """
 
+    # s = "<COND ((if 0 1 0) 3) (1 5)>"
+    
     program = "(begin " + s + ")"
     print eval(parse(program))
     

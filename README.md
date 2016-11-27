@@ -87,9 +87,13 @@ but... the full source code has never been released in this form. So, we'll have
 
 ## Goals
 
-- Convert the original Muddle code to Lisp data structures with step-by-step transformations
+- Convert the original Muddle code to Lisp data structures using text transformations
 - Convert the Lisp data to JSON to explore the map interactively with d3
 - Convert the Lisp data to a Graphviz file to make a static map
+
+To handle more complex exits, instead of using text transformations -
+
+- Write a simple Muddle compiler/interpreter in Python to parse room objects
 
 
 ## Lisp Data
@@ -143,6 +147,15 @@ The full map is located [here](images/zork2200.png).
 
 This is just one of an infinite number of layouts - I haven't experimented much
 with the different settings.
+
+
+## Muddle Compiler/Interpreter
+
+We'll follow Peter Norvig's [Lispy interpreter][lispy] to write a Muddle
+interpreter, which will handle conditional exits and doors and output the simple
+Lisp data structures.
+
+lispy: http://norvig.com/lispy.html
 
 
 ## Issues

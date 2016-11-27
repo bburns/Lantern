@@ -292,7 +292,10 @@ def form_room(x, env):
     "ROOM special form handler"
     # python 3 has syntax for this - unpacking optional values
     (_, key, desc, name, exits, objects, unk, bits, bits2) = (x + [None])[:9]
-    exits = eval(exits, env) # parse EXIT special form and its subforms
+    parms = ['ROOM-KEY']
+    args = [key]
+    newenv = Env(parms, args, env)
+    exits = eval(exits, newenv) # parse EXIT special form and its subforms
     s = "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
     print s # treat ROOM as if it were also a print statement
     return s
@@ -302,15 +305,23 @@ def form_exit(x, env):
     # transform the special exits and return as an unconditional exit list
     exits = []
     tokens = x[1:]
+    envfound = env.find('ROOM-KEY')
+    if envfound:
+        roomkey = envfound['ROOM-KEY']
+    else:
+        roomkey = None
+    print 'roomkey', roomkey
     while tokens:
         token = tokens.pop(0) # pop from start of list
         if isinstance(token, List):
             if token[0] == 'CEXIT': # handle conditional exit form
-                token = token[2]
+                token = token[2] # replace CEXIT struct with a room key
             elif token[0] == 'DOOR': # handle door exit form
                 # this will be 2 or 3 - want the one other than the current room
-                # token = token[2]
-                token = token[3]
+                if token[2] == roomkey:
+                    token = token[3] # replace DOOR struct with a room key
+                else:
+                    token = token[2]
         elif token == '#NEXIT': # no exit
             # remove following token, which is a no-exit string
             tokens.pop(0)

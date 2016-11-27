@@ -2,7 +2,7 @@
 # Lantern
 
 Lantern is an exploration of **[Zork: The Great Underground Empire][zork]**, or
-at least as it existed in 1978 in the original Muddle code.
+at least as it existed in the original Muddle code from 1979.
 
 
 ## The Game
@@ -37,8 +37,8 @@ without one!"
 
 ## Muddle Source Code
 
-It was written in [MDL (aka Muddle)](muddle), a dialect of Lisp from the 1970's. The code
-looks like this -
+It was written in [MDL (aka Muddle)](muddle), a dialect of Lisp from the 1970's.
+The original code looks like this -
 
 ```lisp
 <DEFINE CLEARING ("AUX" (GRATE <SFIND-OBJ "GRATE">) (LEAVES <SFIND-OBJ "LEAVE">))
@@ -64,9 +64,30 @@ and south.">
 ```
 
 
+## ZIL Source Code
+
+Later the MDL was rewritten in ZIL (Zork Implementation Language), a domain-specific language within MDL, with a much cleaner syntax -
+
+```lisp
+<ROOM LIVING-ROOM
+    (LOC ROOMS)
+    (DESC "Living Room")
+    (EAST TO KITCHEN)
+    (WEST TO STRANGE-PASSAGE IF CYCLOPS-FLED ELSE
+        "The wooden door is nailed shut.")
+    (DOWN PER TRAP-DOOR-EXIT)
+    (ACTION LIVING ROOM-F)
+    (FLAGS RLANDBIT ONBIT SACREDBIT)
+    (GLOBAL STAIRS)
+    (THINGS <> NAILS NAILS-PSEUDO)>
+```
+
+but... the full source code has never been released in this form. So, we'll have to make do with the MDL code.
+
+
 ## Goals
 
-- Convert the original Muddle code to Lisp data structures
+- Convert the original Muddle code to Lisp data structures with step-by-step transformations
 - Convert the Lisp data to JSON to explore the map interactively with d3
 - Convert the Lisp data to a Graphviz file to make a static map
 

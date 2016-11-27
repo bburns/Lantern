@@ -161,7 +161,13 @@ class Env(dict):
     def find(self, var):
         "Find the innermost Env where var appears."
         print 'find',var
-        return self if (var in self) else self.outer.find(var)
+        # return self if (var in self) else self.outer.find(var)
+        if var in self:
+            return self
+        elif self.outer:
+            return self.outer.find(var)
+        else:
+            raise NameError("unknown symbol %s" % var)
     
 # Note: it is customary in Scheme for begin to be a special form that takes a
 # sequence of arguments, evaluares each one, and returns the last one
@@ -278,18 +284,15 @@ forms = {
     'ROOM': form_room,
 }
 
-
-
-
     
 # We now have a language with procedures, variables, conditionals (if), and
-# sequential execution (the begin procedure). If you are familiar with other
-# languages, you might think that a while or for loop would be needed, but
-# Scheme manages to do without these just fine. The Scheme report says "Scheme
-# demonstrates that a very small number of rules for forming expressions, with
-# no restrictions on how they are composed, suffice to form a practical and
-# efficient programming language." In Scheme you iterate by defining recursive
-# functions.
+# sequential execution (the begin procedure).
+# If you are familiar with other languages, you might think that a while or for
+# loop would be needed, but Scheme manages to do without these just fine. The
+# Scheme report says "Scheme demonstrates that a very small number of rules for
+# forming expressions, with no restrictions on how they are composed, suffice to
+# form a practical and efficient programming language." In Scheme you iterate by
+# defining recursive functions.
 
 # Lispy is not very complete compared to the Scheme standard. Some major
 # shortcomings:
@@ -330,6 +333,9 @@ if __name__=='__main__':
     # """
 
     s = """
+    <COND (<G? ,MUDDLE 104>
+           <PSETG MSG-STRING "Muddle 105 Version/Please report strange occurances.">)>
+    
     <ROOM "WHOUS"
     "This is an open field west of a white house, with a boarded front door."
            "West of House"

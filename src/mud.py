@@ -1,6 +1,6 @@
 
 """
-MDL.py
+mud.py
 MDL (Muddle) compiler/interpreter, following Peter Norvig's Lispy [1].
 
 [1]: http://norvig.com/lispy.html
@@ -13,13 +13,42 @@ MDL (Muddle) compiler/interpreter, following Peter Norvig's Lispy [1].
 # syntactic analysis, in which the tokens are assembled into an abstract syntax
 # tree. The Lispy tokens are parentheses, symbols, and numbers. We'll use split
 # for a tokenizer.
-def tokenize(s):
+def tokenize(chars):
     "Convert a string of characters into a list of tokens."
+    # s = s.replace('<','(').replace('>',')')
     # return s.replace('(', ' ( ').replace(')', ' ) ').split()
     brackets = list("()<>")
-    for bracket in brackets:
-        s = s.replace(bracket, ' '+bracket+' ')
-    return s.split()
+    whitespace = list(" \n\l\r\t")
+    tokens = []
+    token = ''
+    s = ''
+    for char in chars:
+        if '"' == char:
+            if s:
+                s += char
+                tokens.append(s)
+                s = ''
+            else:
+                s += char
+        elif s:
+            s += char
+        elif char in brackets:
+            if token:
+                tokens.append(token)
+                token = ''
+            tokens.append(char)
+        elif char in whitespace:
+            if token:
+                tokens.append(token)
+                token = ''
+        else:
+            token += char
+    if token:
+        tokens.append(token)
+    return tokens
+
+# print tokenize('a (b c) "cat dog"')
+# stop
 
 # Parser
 # Our function parse will take a string representation of a program as input,
@@ -138,7 +167,7 @@ def eval(x, env=global_env):
 
 
 # REPL: Read-Eval-Print Loop
-def repl(prompt='lis.py> '):
+def repl(prompt='mud.py> '):
     "A prompt-read-eval-print loop."
     while True:
         val = eval(parse(raw_input(prompt)))
@@ -251,16 +280,39 @@ def eval(x, env=global_env):
 
 # ----------------------------------------
 
+# Strings
+# add handling to lexer
+
+
+
+
+
+
+# ----------------------------------------
+
 # program = "<begin (define r 10) (* pi (* r r))>"
 # program = "(begin (define r 10) (* pi (* r r)))"
-program = "(begin (define circle-area (lambda (r) (* pi (* r r)))) (circle-area 10))"
+# program = "(begin (define circle-area (lambda (r) (* pi (* r r)))) (circle-area 10))"
 
 # print tokenize(program)
 # print parse(program)
-print eval(parse(program))
+# print eval(parse(program))
 
 # repl()
 
 
+s = """
+<ROOM "WHOUS"
+"This is an open field west of a white house, with a boarded front door."
+       "West of House"
+       <EXIT "NORTH" "NHOUS" "SOUTH" "SHOUS" "WEST" "FORE1"
+	      "EAST" #NEXIT "The door is locked, and there is evidently no key.">
+       (<GET-OBJ "FDOOR"> <GET-OBJ "MAILB"> <GET-OBJ "MAT">)
+       <>
+       <+ ,RLANDBIT ,RLIGHTBIT ,RNWALLBIT ,RSACREDBIT>
+       (RGLOBAL ,HOUSEBIT)>
+"""
+# print parse(s)
+print tokenize(s)
 
 

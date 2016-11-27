@@ -216,6 +216,7 @@ global_env = standard_env()
 # and set it to a new value. With lambda, we create a new procedure object with
 # the given parameter list, body, and environment.
 #> make this extensible, add ROOM at end
+
 def eval(x, env=global_env):
     "Evaluate an expression in an environment."
     # print x
@@ -239,28 +240,48 @@ def eval(x, env=global_env):
     elif x[0] == 'set!':           # assignment
         (_, var, exp) = x
         env.find(var)[var] = eval(exp, env)
-    elif x[0] == 'EXIT':           # exits
-        exits = []
-        for token in x[1:]:
-            if isinstance(token, List):
-                if token[0] == 'CEXIT':
-                    token = token[2]
-            exits.append(token)
-        return exits
-    elif x[0] == 'ROOM':           # room
-        # bits2 is optional
-        # python 3 has syntax for this - http://stackoverflow.com/a/749340/243392
-        (_, key, desc, name, exits, objects, unk, bits, bits2) = (x + [None])[:9]
-        exits = eval(exits) # parse exits
-        print "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
     elif x[0] == 'lambda':         # procedure
         (_, parms, body) = x
         return Procedure(parms, body, env)
+    elif x[0] in forms:            # other special forms
+        form = forms[x[0]]
+        return form(x)
     else:                          # procedure call
         proc = eval(x[0], env)
         args = [eval(arg, env) for arg in x[1:]]
         return proc(*args)
 
+
+# other special forms, keyed on first symbol in form
+
+def form_room(x):
+    "ROOM special form handler"
+    # python 3 has syntax for this - unpacking optional values
+    (_, key, desc, name, exits, objects, unk, bits, bits2) = (x + [None])[:9]
+    exits = eval(exits) # parse exits
+    s = "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
+    print s
+    return s
+
+def form_exit(x):
+    "EXIT special form handler"
+    exits = []
+    for token in x[1:]:
+        if isinstance(token, List):
+            if token[0] == 'CEXIT': # handle CEXIT form
+                token = token[2]
+        exits.append(token)
+    return exits
+
+forms = {
+    'EXIT': form_exit,
+    'ROOM': form_room,
+}
+
+
+
+
+    
 # We now have a language with procedures, variables, conditionals (if), and
 # sequential execution (the begin procedure). If you are familiar with other
 # languages, you might think that a while or for loop would be needed, but
@@ -285,59 +306,53 @@ def eval(x, env=global_env):
 #     Error recovery: Lispy does not attempt to detect, reasonably report, or
 #         recover from errors. Lispy expects the programmer to be perfect.
 
-# ----------------------------------------
-
-# Strings
-# add handling to lexer
+# --------------------------------------------------------------------------------
 
 
 
-# ----------------------------------------
+if __name__=='__main__':
 
-# program = "<begin (define r 10) (* pi (* r r))>"
-# program = "(begin (define r 10) (* pi (* r r)))"
-# program = "(begin (define circle-area (lambda (r) (* pi (* r r)))) (circle-area 10))"
-# print tokenize(program)
-# print parse(program)
-# print eval(parse(program))
-
-# ----------------------------------------
-
-# repl()
-
-# ----------------------------------------
-
-# ROOM should be a special form - a macro - don't evaluate its subexpressions
-# lib = """
-# (define ROOM (lambda (key desc name exits objects unk bits unk2) name))
-# (define EXIT (lambda (pairs) pairs))
-# """
-
-s = """
-<ROOM "WHOUS"
-"This is an open field west of a white house, with a boarded front door."
-       "West of House"
-       <EXIT "NORTH" "NHOUS" "SOUTH" "SHOUS" "WEST" "FORE1"
-	      "EAST" #NEXIT "The door is locked, and there is evidently no key.">
-       (<GET-OBJ "FDOOR"> <GET-OBJ "MAILB"> <GET-OBJ "MAT">)
-       <>
-       <+ ,RLANDBIT ,RLIGHTBIT ,RNWALLBIT ,RSACREDBIT>
-       (RGLOBAL ,HOUSEBIT)>
-
-<ROOM "LROOM"
-       ""
-       "Living Room"
-       <EXIT "EAST" "KITCH"
-	      "WEST" <CEXIT "MAGIC-FLAG" "BLROO" "The door is nailed shut.">
-	      "DOWN" <DOOR "DOOR" "LROOM" "CELLA">>
-       (<GET-OBJ "WDOOR"> <GET-OBJ "DOOR"> <GET-OBJ "TCASE"> 
-	<GET-OBJ "LAMP"> <GET-OBJ "RUG"> <GET-OBJ "PAPER">
-	<GET-OBJ "SWORD">)
-       LIVING-ROOM
-       <+ ,RLANDBIT ,RLIGHTBIT ,RHOUSEBIT ,RSACREDBIT>>
-"""
-
-program = "(begin " + s + ")"
-print eval(parse(program))
+    # program = "<begin (define r 10) (* pi (* r r))>"
+    # program = "(begin (define r 10) (* pi (* r r)))"
+    # program = "(begin (define circle-area (lambda (r) (* pi (* r r)))) (circle-area 10))"
+    # print tokenize(program)
+    # print parse(program)
+    # print eval(parse(program))
 
 
+    # repl()
+
+
+    # ROOM should be a special form - a macro - don't evaluate its subexpressions
+    # lib = """
+    # (define ROOM (lambda (key desc name exits objects unk bits unk2) name))
+    # (define EXIT (lambda (pairs) pairs))
+    # """
+
+    s = """
+    <ROOM "WHOUS"
+    "This is an open field west of a white house, with a boarded front door."
+           "West of House"
+           <EXIT "NORTH" "NHOUS" "SOUTH" "SHOUS" "WEST" "FORE1"
+                  "EAST" #NEXIT "The door is locked, and there is evidently no key.">
+           (<GET-OBJ "FDOOR"> <GET-OBJ "MAILB"> <GET-OBJ "MAT">)
+           <>
+           <+ ,RLANDBIT ,RLIGHTBIT ,RNWALLBIT ,RSACREDBIT>
+           (RGLOBAL ,HOUSEBIT)>
+
+    <ROOM "LROOM"
+           ""
+           "Living Room"
+           <EXIT "EAST" "KITCH"
+                  "WEST" <CEXIT "MAGIC-FLAG" "BLROO" "The door is nailed shut.">
+                  "DOWN" <DOOR "DOOR" "LROOM" "CELLA">>
+           (<GET-OBJ "WDOOR"> <GET-OBJ "DOOR"> <GET-OBJ "TCASE"> 
+            <GET-OBJ "LAMP"> <GET-OBJ "RUG"> <GET-OBJ "PAPER">
+            <GET-OBJ "SWORD">)
+           LIVING-ROOM
+           <+ ,RLANDBIT ,RLIGHTBIT ,RHOUSEBIT ,RSACREDBIT>>
+    """
+
+    program = "(begin " + s + ")"
+    print eval(parse(program))
+    

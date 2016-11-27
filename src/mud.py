@@ -295,7 +295,7 @@ def form_room(x):
     "ROOM special form handler"
     # python 3 has syntax for this - unpacking optional values
     (_, key, desc, name, exits, objects, unk, bits, bits2) = (x + [None])[:9]
-    exits = eval(exits) # parse exits
+    exits = eval(exits) # parse EXIT form
     s = "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
     print s
     return s
@@ -303,10 +303,23 @@ def form_room(x):
 def form_exit(x):
     "EXIT special form handler"
     exits = []
-    for token in x[1:]:
+    tokens = x[1:]
+    # for token in x[1:]:
+    #     if isinstance(token, List):
+    #         if token[0] == 'CEXIT': # handle CEXIT form
+    #             token = token[2]
+    #     elif token == '#NEXIT':
+    #         pass
+    #     else:
+    #         exits.append(token)
+    while tokens:
+        token = tokens.pop(0) # pop from start of list
         if isinstance(token, List):
-            if token[0] == 'CEXIT': # handle CEXIT form
+            if token[0] == 'CEXIT': # handle conditional exit form
                 token = token[2]
+        elif token == '#NEXIT': # no exit
+            # remove following token, which is a no-exit string
+            tokens.pop(0)
         exits.append(token)
     return exits
 

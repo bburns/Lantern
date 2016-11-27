@@ -15,7 +15,7 @@ compile = False
 # Parsing is traditionally separated into two parts: lexical analysis, in which
 # the input character string is broken up into a sequence of tokens, and
 # syntactic analysis, in which the tokens are assembled into an abstract syntax
-# tree. The Mudpy tokens are parentheses, brackets, symbols, strings, and numbers. 
+# tree. The Mudpy tokens are parentheses, brackets, symbols, strings, and numbers.
 def tokenize(chars):
     "Convert a string of characters into a list of tokens."
     # s = s.replace('<','(').replace('>',')')
@@ -300,7 +300,7 @@ def form_room(x, env):
     args = [key]
     newenv = Env(parms, args, env)
     # parse EXIT special form and its subforms
-    exits = eval(exits, newenv) 
+    exits = eval(exits, newenv)
     # create the compiler output
     # s = "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
     s = """(room %s
@@ -308,7 +308,7 @@ def form_room(x, env):
     (desc %s)
     (exit %s))""" % (key, name, desc, exits)
     if compile: # print the compiler output
-        print s 
+        print s
         print
     return s
 
@@ -371,7 +371,6 @@ forms = {
 #         recover from errors. Lispy expects the programmer to be perfect.
 
 # --------------------------------------------------------------------------------
-
 
 
 if __name__=='__main__':

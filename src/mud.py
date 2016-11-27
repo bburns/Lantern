@@ -1,18 +1,21 @@
 
 """
 mud.py
-MDL (Muddle) compiler/interpreter, following Peter Norvig's Lispy [1].
+MDL (Muddle) compiler/interpreter, extended from Peter Norvig's Lispy [1].
 
 [1]: http://norvig.com/lispy.html
 """
+
+
+debug = False
+compile = False
 
 
 # Lexer
 # Parsing is traditionally separated into two parts: lexical analysis, in which
 # the input character string is broken up into a sequence of tokens, and
 # syntactic analysis, in which the tokens are assembled into an abstract syntax
-# tree. The Lispy tokens are parentheses, symbols, and numbers. We'll use split
-# for a tokenizer.
+# tree. The Mudpy tokens are parentheses, brackets, symbols, strings, and numbers. 
 def tokenize(chars):
     "Convert a string of characters into a list of tokens."
     # s = s.replace('<','(').replace('>',')')
@@ -91,7 +94,7 @@ def isstr(token):
         return False
 
 def atom(token):
-    "Numbers become numbers; every other token is a symbol."
+    "Numbers become numbers; every other token is a symbol or string."
     try: return int(token)
     except ValueError:
         try: return float(token)
@@ -104,7 +107,7 @@ def atom(token):
 List = list
 
 # REPL: Read-Eval-Print Loop
-def repl(prompt='mud.py> '):
+def repl(prompt='mudpy> '):
     "A prompt-read-eval-print loop."
     while True:
         val = eval(parse(raw_input(prompt)))
@@ -160,7 +163,7 @@ class Env(dict):
         self.outer = outer
     def find(self, var):
         "Find the innermost Env where var appears."
-        print 'find',var
+        if debug: print 'find',var
         # return self if (var in self) else self.outer.find(var)
         if var in self:
             return self
@@ -169,10 +172,10 @@ class Env(dict):
         else:
             # raise NameError("unknown symbol %s" % var)
             # print "Ignoring unknown symbol %s" % var
-            print "Can't find symbol %s" % var
+            if not compile: print "Can't find symbol %s" % var
 
 # Note: it is customary in Scheme for begin to be a special form that takes a
-# sequence of arguments, evaluares each one, and returns the last one
+# sequence of arguments, evaluates each one, and returns the last one
 # (discarding the other values, and using them only for their side effects, such
 # as printing something). To make things easier for now, we implement begin as a
 # function, not a special form.
@@ -282,7 +285,7 @@ def eval(x, env=global_env):
             args = [eval(arg, env) for arg in x[1:]]
             return proc(*args)
         # ignore unknown procedures
-        print "Ignoring unknown procedure %s" % key
+        if not compile: print "Ignoring unknown procedure %s" % key
         return None
 
 
@@ -292,12 +295,21 @@ def form_room(x, env):
     "ROOM special form handler"
     # python 3 has syntax for this - unpacking optional values
     (_, key, desc, name, exits, objects, unk, bits, bits2) = (x + [None])[:9]
+    # create a new environment with ROOM-KEY, to pass to the EXIT special form
     parms = ['ROOM-KEY']
     args = [key]
     newenv = Env(parms, args, env)
-    exits = eval(exits, newenv) # parse EXIT special form and its subforms
-    s = "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
-    print s # treat ROOM as if it were also a print statement
+    # parse EXIT special form and its subforms
+    exits = eval(exits, newenv) 
+    # create the compiler output
+    # s = "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
+    s = """(room %s
+    (name %s)
+    (desc %s)
+    (exit %s))""" % (key, name, desc, exits)
+    if compile: # print the compiler output
+        print s 
+        print
     return s
 
 def form_exit(x, env):
@@ -310,7 +322,7 @@ def form_exit(x, env):
         roomkey = envfound['ROOM-KEY']
     else:
         roomkey = None
-    print 'roomkey', roomkey
+    if debug: print 'roomkey', roomkey
     while tokens:
         token = tokens.pop(0) # pop from start of list
         if isinstance(token, List):
@@ -392,7 +404,6 @@ if __name__=='__main__':
 <MPOBLIST ACTIONS-POBL 17>
 <PSETG ACTIONS-POBL ,ACTIONS-POBL>
 
-
     <ROOM "WHOUS"
     "This is an open field west of a white house, with a boarded front door."
            "West of House"
@@ -418,6 +429,8 @@ if __name__=='__main__':
 
     # s = "<COND ((if 0 1 0) 3) (1 5)>"
 
+    debug = False
+    compile = True
     program = "(begin " + s + ")"
-    print eval(parse(program))
+    eval(parse(program))
 

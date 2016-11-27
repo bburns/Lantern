@@ -170,7 +170,7 @@ class Env(dict):
             # raise NameError("unknown symbol %s" % var)
             # print "Ignoring unknown symbol %s" % var
             print "Can't find symbol %s" % var
-    
+
 # Note: it is customary in Scheme for begin to be a special form that takes a
 # sequence of arguments, evaluares each one, and returns the last one
 # (discarding the other values, and using them only for their side effects, such
@@ -264,9 +264,6 @@ def eval(x, env=global_env):
             return eval(exp, env)
         else:
             return None
-        # (_, test, conseq, alt) = x
-        # exp = (conseq if eval(test, env) else alt)
-        # return eval(exp, env)
     elif key == 'define':         # definition
         (_, var, exp) = x
         env[var] = eval(exp, env)
@@ -278,7 +275,7 @@ def eval(x, env=global_env):
         return Procedure(parms, body, env)
     elif key in forms:            # other special forms
         form = forms[key]
-        return form(x)
+        return form(x, env)
     else:                          # procedure call
         proc = eval(key, env)
         if proc:
@@ -291,32 +288,29 @@ def eval(x, env=global_env):
 
 # other special forms, keyed on first symbol in form
 
-def form_room(x):
+def form_room(x, env):
     "ROOM special form handler"
     # python 3 has syntax for this - unpacking optional values
     (_, key, desc, name, exits, objects, unk, bits, bits2) = (x + [None])[:9]
-    exits = eval(exits) # parse EXIT form
+    exits = eval(exits, env) # parse EXIT special form and its subforms
     s = "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
-    print s
+    print s # treat ROOM as if it were also a print statement
     return s
 
-def form_exit(x):
+def form_exit(x, env):
     "EXIT special form handler"
+    # transform the special exits and return as an unconditional exit list
     exits = []
     tokens = x[1:]
-    # for token in x[1:]:
-    #     if isinstance(token, List):
-    #         if token[0] == 'CEXIT': # handle CEXIT form
-    #             token = token[2]
-    #     elif token == '#NEXIT':
-    #         pass
-    #     else:
-    #         exits.append(token)
     while tokens:
         token = tokens.pop(0) # pop from start of list
         if isinstance(token, List):
             if token[0] == 'CEXIT': # handle conditional exit form
                 token = token[2]
+            elif token[0] == 'DOOR': # handle door exit form
+                # this will be 2 or 3 - want the one other than the current room
+                # token = token[2]
+                token = token[3]
         elif token == '#NEXIT': # no exit
             # remove following token, which is a no-exit string
             tokens.pop(0)
@@ -328,7 +322,7 @@ forms = {
     'room': form_room,
 }
 
-    
+
 # We now have a language with procedures, variables, conditionals (if), and
 # sequential execution (the begin procedure).
 # If you are familiar with other languages, you might think that a while or for
@@ -387,7 +381,7 @@ if __name__=='__main__':
 <MPOBLIST ACTIONS-POBL 17>
 <PSETG ACTIONS-POBL ,ACTIONS-POBL>
 
-    
+
     <ROOM "WHOUS"
     "This is an open field west of a white house, with a boarded front door."
            "West of House"
@@ -404,7 +398,7 @@ if __name__=='__main__':
            <EXIT "EAST" "KITCH"
                   "WEST" <CEXIT "MAGIC-FLAG" "BLROO" "The door is nailed shut.">
                   "DOWN" <DOOR "DOOR" "LROOM" "CELLA">>
-           (<GET-OBJ "WDOOR"> <GET-OBJ "DOOR"> <GET-OBJ "TCASE"> 
+           (<GET-OBJ "WDOOR"> <GET-OBJ "DOOR"> <GET-OBJ "TCASE">
             <GET-OBJ "LAMP"> <GET-OBJ "RUG"> <GET-OBJ "PAPER">
             <GET-OBJ "SWORD">)
            LIVING-ROOM
@@ -412,7 +406,7 @@ if __name__=='__main__':
     """
 
     # s = "<COND ((if 0 1 0) 3) (1 5)>"
-    
+
     program = "(begin " + s + ")"
     print eval(parse(program))
-    
+

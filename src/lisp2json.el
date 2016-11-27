@@ -16,8 +16,8 @@
 ; (require 'modern-lib) ; for ? 
 
 (setq zork-filename nil) ; for small infile dataset
-; (setq zork-filename "zork_rooms.mud")
-; (setq zork-filename "zork_rooms_small.mud")
+; (setq zork-filename "zork.lisp")
+; (setq zork-filename "zork_small.lisp")
 
 
 ;;; library

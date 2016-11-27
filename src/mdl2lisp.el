@@ -3,6 +3,7 @@
 ; --------------------------------------------------------------------------------
 ; convert muddle code to more readable lisp
 
+
 ; in a mdl/mud file, do
 ; (mdl-convert)
 ; (emacs-lisp-mode)
@@ -31,7 +32,6 @@
 (defun find-not-after (str char)
   "Find the next occurrence of STR, if not preceeded by CHAR."
   (setq done nil)
-  ; (while (not done)
   (while (and (< (point) (point-max)) (not done))
     (find-string str nil :end)
     (if (/= (char-at (- (point) 2)) char)

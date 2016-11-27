@@ -155,7 +155,7 @@ We'll follow Peter Norvig's [Lispy interpreter][lispy] to write a Muddle
 interpreter, which will handle conditional exits and doors and output the simple
 Lisp data structures.
 
-lispy: http://norvig.com/lispy.html
+[lispy]: http://norvig.com/lispy.html
 
 
 ## Issues

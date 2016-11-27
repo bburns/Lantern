@@ -18,7 +18,7 @@ def tokenize(chars):
     # s = s.replace('<','(').replace('>',')')
     # return s.replace('(', ' ( ').replace(')', ' ) ').split()
     brackets = list("()<>")
-    whitespace = list(" \n\l\r\t")
+    whitespace = list(" \n\r\t\f") # \f is ^L?
     tokens = []
     token = ''
     s = ''
@@ -33,6 +33,7 @@ def tokenize(chars):
         elif s:
             s += char
         elif char in brackets:
+            char = char.replace('<','(').replace('>',')')
             if token:
                 tokens.append(token)
                 token = ''
@@ -44,10 +45,10 @@ def tokenize(chars):
         else:
             token += char
     if token:
-        tokens.append(token)
+        tokens.append(token) # add leftover token
     return tokens
 
-# print tokenize('a (b c) "cat dog"')
+# print tokenize('(a (lambda b c) "cat dog")')
 # stop
 
 # Parser
@@ -80,6 +81,14 @@ def read_from_tokens(tokens):
         return atom(token)
 
 Symbol = str
+String = str
+
+def isstr(token):
+    "Is the given token a constant string?"
+    if isinstance(token, String):
+        return token.startswith('"') and token.endswith('"')
+    else:
+        return False
 
 def atom(token):
     "Numbers become numbers; every other token is a symbol."
@@ -87,84 +96,12 @@ def atom(token):
     except ValueError:
         try: return float(token)
         except ValueError:
-            return Symbol(token)
+            if isstr(token):
+                return String(token)
+            else:
+                return Symbol(token)
 
-
-# Environments
-# The function eval takes two arguments: an expression, x, that we want to
-# evaluate, and an environment, env, in which to evaluate it. An environment is
-# a mapping from variable names to their values. By default, eval will use a
-# global environent that includes the names for a bunch of standard functions
-# (like sqrt and max, and also operators like *). This environment can be
-# augmented with user-defined variables, using the expression (define variable
-# value). For now, we can implement an environment as a Python dict of
-# {variable: value} pairs.
-# Note: it is customary in Scheme for begin to be a special form that takes a
-# sequence of arguments, evaluares each one, and returns the last one
-# (discarding the other values, and using them only for their side effects, such
-# as printing something). To make things easier for now, we implement begin as a
-# function, not a special form.
-import math
-import operator as op
-
-Env = dict          # An environment is a mapping of {variable: value}
-
-def standard_env():
-    "An environment with some Scheme standard procedures."
-    env = Env()
-    env.update(vars(math)) # sin, cos, sqrt, pi, ...
-    env.update({
-        '+':op.add, '-':op.sub, '*':op.mul, '/':op.div,
-        '>':op.gt, '<':op.lt, '>=':op.ge, '<=':op.le, '=':op.eq,
-        'abs':     abs,
-        'append':  op.add,
-        'apply':   apply,
-        'begin':   lambda *x: x[-1],
-        'car':     lambda x: x[0],
-        'cdr':     lambda x: x[1:],
-        'cons':    lambda x,y: [x] + y,
-        'eq?':     op.is_,
-        'equal?':  op.eq,
-        'length':  len,
-        'list':    lambda *x: list(x),
-        'list?':   lambda x: isinstance(x,list),
-        'map':     map,
-        'max':     max,
-        'min':     min,
-        'not':     op.not_,
-        'null?':   lambda x: x == [],
-        'number?': lambda x: isinstance(x, Number),
-        'procedure?': callable,
-        'round':   round,
-        'symbol?': lambda x: isinstance(x, Symbol),
-    })
-    return env
-
-global_env = standard_env()
-
-
-# Evaluation: eval
-# We are now ready for the implementation of eval.
 List = list
-
-def eval(x, env=global_env):
-    "Evaluate an expression in an environment."
-    if isinstance(x, Symbol):      # variable reference
-        return env[x]
-    elif not isinstance(x, List):  # constant literal
-        return x
-    elif x[0] == 'if':             # conditional
-        (_, test, conseq, alt) = x
-        exp = (conseq if eval(test, env) else alt)
-        return eval(exp, env)
-    elif x[0] == 'define':         # definition
-        (_, var, exp) = x
-        env[var] = eval(exp, env)
-    else:                          # procedure call
-        proc = eval(x[0], env)
-        args = [eval(arg, env) for arg in x[1:]]
-        return proc(*args)
-
 
 # REPL: Read-Eval-Print Loop
 def repl(prompt='mud.py> '):
@@ -200,6 +137,15 @@ class Procedure(object):
     def __call__(self, *args):
         return eval(self.body, Env(self.parms, args, self.env))
 
+# Environments
+# The function eval takes two arguments: an expression, x, that we want to
+# evaluate, and an environment, env, in which to evaluate it. An environment is
+# a mapping from variable names to their values. By default, eval will use a
+# global environent that includes the names for a bunch of standard functions
+# (like sqrt and max, and also operators like *). This environment can be
+# augmented with user-defined variables, using the expression (define variable
+# value). For now, we can implement an environment as a Python dict of
+# {variable: value} pairs.
 # An environment is a subclass of dict, so it has all the methods that dict has.
 # In addition there are two methods: the constructor __init__ builds a new
 # environment by taking a list of parameter names and a corresponding list of
@@ -214,7 +160,49 @@ class Env(dict):
         self.outer = outer
     def find(self, var):
         "Find the innermost Env where var appears."
+        print 'find',var
         return self if (var in self) else self.outer.find(var)
+    
+# Note: it is customary in Scheme for begin to be a special form that takes a
+# sequence of arguments, evaluares each one, and returns the last one
+# (discarding the other values, and using them only for their side effects, such
+# as printing something). To make things easier for now, we implement begin as a
+# function, not a special form.
+import math
+import operator as op
+
+
+def standard_env():
+    "An environment with some Scheme standard procedures."
+    env = Env()
+    env.update(vars(math)) # sin, cos, sqrt, pi, ...
+    env.update({
+        '+':op.add, '-':op.sub, '*':op.mul, '/':op.div,
+        # '>':op.gt, '<':op.lt,
+        '>=':op.ge, '<=':op.le, '=':op.eq,
+        'abs':     abs,
+        'append':  op.add,
+        'apply':   apply,
+        'begin':   lambda *x: x[-1],
+        'car':     lambda x: x[0],
+        'cdr':     lambda x: x[1:],
+        'cons':    lambda x,y: [x] + y,
+        'eq?':     op.is_,
+        'equal?':  op.eq,
+        'length':  len,
+        'list':    lambda *x: list(x),
+        'list?':   lambda x: isinstance(x,list),
+        'map':     map,
+        'max':     max,
+        'min':     min,
+        'not':     op.not_,
+        'null?':   lambda x: x == [],
+        'number?': lambda x: isinstance(x, Number),
+        'procedure?': callable,
+        'round':   round,
+        'symbol?': lambda x: isinstance(x, Symbol),
+    })
+    return env
 
 global_env = standard_env()
 
@@ -227,9 +215,14 @@ global_env = standard_env()
 # new clauses: for set!, we find the environment level where the variable exists
 # and set it to a new value. With lambda, we create a new procedure object with
 # the given parameter list, body, and environment.
+#> make this extensible, add ROOM at end
 def eval(x, env=global_env):
     "Evaluate an expression in an environment."
-    if isinstance(x, Symbol):      # variable reference
+    # print x
+    if isstr(x):                   # constant string
+        # print x,'is a String'
+        return x
+    elif isinstance(x, Symbol):      # variable reference
         return env.find(x)[x]
     elif not isinstance(x, List):  # constant literal
         return x
@@ -246,6 +239,20 @@ def eval(x, env=global_env):
     elif x[0] == 'set!':           # assignment
         (_, var, exp) = x
         env.find(var)[var] = eval(exp, env)
+    elif x[0] == 'EXIT':           # exits
+        exits = []
+        for token in x[1:]:
+            if isinstance(token, List):
+                if token[0] == 'CEXIT':
+                    token = token[2]
+            exits.append(token)
+        return exits
+    elif x[0] == 'ROOM':           # room
+        # bits2 is optional
+        # python 3 has syntax for this - http://stackoverflow.com/a/749340/243392
+        (_, key, desc, name, exits, objects, unk, bits, bits2) = (x + [None])[:9]
+        exits = eval(exits) # parse exits
+        print "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
     elif x[0] == 'lambda':         # procedure
         (_, parms, body) = x
         return Procedure(parms, body, env)
@@ -285,21 +292,26 @@ def eval(x, env=global_env):
 
 
 
-
-
-
 # ----------------------------------------
 
 # program = "<begin (define r 10) (* pi (* r r))>"
 # program = "(begin (define r 10) (* pi (* r r)))"
 # program = "(begin (define circle-area (lambda (r) (* pi (* r r)))) (circle-area 10))"
-
 # print tokenize(program)
 # print parse(program)
 # print eval(parse(program))
 
+# ----------------------------------------
+
 # repl()
 
+# ----------------------------------------
+
+# ROOM should be a special form - a macro - don't evaluate its subexpressions
+# lib = """
+# (define ROOM (lambda (key desc name exits objects unk bits unk2) name))
+# (define EXIT (lambda (pairs) pairs))
+# """
 
 s = """
 <ROOM "WHOUS"
@@ -311,8 +323,21 @@ s = """
        <>
        <+ ,RLANDBIT ,RLIGHTBIT ,RNWALLBIT ,RSACREDBIT>
        (RGLOBAL ,HOUSEBIT)>
+
+<ROOM "LROOM"
+       ""
+       "Living Room"
+       <EXIT "EAST" "KITCH"
+	      "WEST" <CEXIT "MAGIC-FLAG" "BLROO" "The door is nailed shut.">
+	      "DOWN" <DOOR "DOOR" "LROOM" "CELLA">>
+       (<GET-OBJ "WDOOR"> <GET-OBJ "DOOR"> <GET-OBJ "TCASE"> 
+	<GET-OBJ "LAMP"> <GET-OBJ "RUG"> <GET-OBJ "PAPER">
+	<GET-OBJ "SWORD">)
+       LIVING-ROOM
+       <+ ,RLANDBIT ,RLIGHTBIT ,RHOUSEBIT ,RSACREDBIT>>
 """
-# print parse(s)
-print tokenize(s)
+
+program = "(begin " + s + ")"
+print eval(parse(program))
 
 

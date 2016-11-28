@@ -4,6 +4,8 @@ Lantern
 Parse and convert Zork Muddle source code to different data structures.
 """
 
+from collections import OrderedDict
+
 import mud
 
 
@@ -32,10 +34,13 @@ def form_room(x, env):
     (name %s)
     (desc %s)
     (exit %s))""" % (key, name, desc, ' '.join(exits))
-    if mud.compile: # print the compiler output
-        print s
-        print
-    return s
+    # if mud.compile: # print the compiler output
+        # print s
+        # print
+    # room = {'key': key, 'name': name, 'desc': desc, 'exits': exits}
+    room = (('key', key), ('name', name), ('desc', desc), ('exits', exits))
+    room = OrderedDict(room)
+    return room
 
 
 def form_exit(x, env):
@@ -194,10 +199,23 @@ particularly large tree with some low branches stands here.">
     s = f.read()
     f.close()
 
-    program = "(begin " + s + ")"
-    # program = "(list " + s + ")"
-    rooms = mud.eval(mud.parse(program))
+    # program = "(begin " + s + ")"
+    program = "(list " + s + ")"
+    objs = mud.eval(mud.parse(program))
+    rooms = [obj for obj in objs if isinstance(obj, OrderedDict)]
     # print rooms
+
+    for room in rooms:
+        key = room['key']
+        name = room['name']
+        desc = room['desc']
+        exits = ' '.join(room['exits'])
+        s = """(room %s
+    (name %s)
+    (desc %s)
+    (exit %s))""" % (key, name, desc, exits)
+        print s
+        print
 
 
 

@@ -255,7 +255,7 @@ def eval(x, env=global_env):
     key = x[0]
     if isinstance(key, String):
         key = key.lower()
-        
+
     if key == 'quote':          # quotation
         (_, exp) = x
         return exp

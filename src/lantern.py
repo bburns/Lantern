@@ -69,6 +69,9 @@ def form_exit(x, env):
             elif token[0] == 'SETG':
                 token = mud.eval(token) # replace SETG form with room key
         elif token == '#NEXIT': # no exit
+            # handle bug with room BKBOX - #NEXIT listed twice - pop it also
+            if tokens[0] == '#NEXIT':
+                tokens.pop(0)
             # remove following token, which is a no-exit string
             tokens.pop(0)
         elif token.startswith(','): #> eval should handle these
@@ -205,17 +208,49 @@ particularly large tree with some low branches stands here.">
     rooms = [obj for obj in objs if isinstance(obj, OrderedDict)]
     # print rooms
 
+    roomlist = []
+    exitlist = []
+
     for room in rooms:
+
         key = room['key']
         name = room['name']
         desc = room['desc']
-        exits = ' '.join(room['exits'])
-        s = """(room %s
-    (name %s)
-    (desc %s)
-    (exit %s))""" % (key, name, desc, exits)
-        print s
-        print
+        exits = room['exits']
+
+        # output lisp structure
+        # exits = ' '.join(room['exits'])
+    #     s = """(room %s
+    # (name %s)
+    # (desc %s)
+    # (exit %s))""" % (key, name, desc, exits)
+    #     print s
+    #     print
+
+
+        # handle json structures
+        tostr = lambda s: s[1:-1]
+
+        key = tostr(key)
+        name = tostr(name)
+        desc = tostr(desc)
+
+        o = {'key': key, 'name': name, 'desc': desc}
+        roomlist.append(o)
+
+        while exits:
+            dir = exits.pop(0)
+            target = exits.pop(0)
+            dir = tostr(dir)
+            target = tostr(target)
+            o = {'source': key, 'dir': dir, 'target': target}
+            exitlist.append(o)
+
+    # output json structure
+    objs = {'rooms': roomlist, 'exits': exitlist}
+    import json
+    print json.dumps(objs)
+
 
 
 

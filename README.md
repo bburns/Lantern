@@ -4,6 +4,7 @@
 Lantern is an exploration of **[Zork: The Great Underground Empire][zork]**, or
 at least as it existed in the original Muddle code from 1979.
 
+[zork]: http://en.wikipedia.org/wiki/Zork/
 
 ## The Game
 
@@ -37,7 +38,7 @@ without one!"
 
 ## Muddle Source Code
 
-It was written in [MDL (MIT Design Language)](muddle) (aka Muddle), a dialect of
+It was written in [MDL (MIT Design Language) (aka Muddle)][muddle], a dialect of
 Lisp from the 1970's. The original code looks like this -
 
 ```lisp
@@ -74,6 +75,8 @@ and south.">
        LIVING-ROOM
        <+ ,RLANDBIT ,RLIGHTBIT ,RHOUSEBIT ,RSACREDBIT>>
 ```
+
+[muddle]: http://en.wikipedia.org/wiki/MDL_programming_language
 
 
 ## ZIL Source Code
@@ -144,6 +147,8 @@ of rooms for now.
 
 <img src="images/lantern2016-11-22_800.png" />
 
+[d3]: https://d3js.org/
+
 
 ## A Graphviz Map
 
@@ -163,6 +168,8 @@ The full map is located [here](images/zork2200.png).
 This is just one of an infinite number of layouts - I haven't experimented much
 with the different settings.
 
+[graphviz]: http://www.graphviz.org/
+
 
 ## Muddle Compiler/Interpreter
 
@@ -181,8 +188,6 @@ structures, like so -
     (desc "")
     (exit "EAST" "KITCH" "WEST" "BLROO" "DOWN" "CELLA"))
 ```
-
-
 
 [lispy]: http://norvig.com/lispy.html
 
@@ -226,17 +231,10 @@ Want to work on this project? Feel free to pitch in on any part you find interes
 The original Muddle Zork source code is available at an archive of old programs,
 located [here][source].
 
+[source]: http://simh.trailing-edge.com/software.html
+
 
 ## License
 
 GPL
-
-
-
-[zork]: http://en.wikipedia.org/wiki/Zork/
-[muddle]: http://en.wikipedia.org/wiki/MDL_programming_language
-[graphviz]: http://www.graphviz.org/
-[d3]: https://d3js.org/
-[source]: http://simh.trailing-edge.com/software.html
-
 

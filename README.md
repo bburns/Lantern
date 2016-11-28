@@ -61,12 +61,25 @@ and south.">
        <>
        <+ ,RLANDBIT ,RLIGHTBIT ,RNWALLBIT ,RSACREDBIT>
        (RGLOBAL ,HOUSEBIT)>
+
+<ROOM "LROOM"
+       ""
+       "Living Room"
+       <EXIT "EAST" "KITCH"
+	      "WEST" <CEXIT "MAGIC-FLAG" "BLROO" "The door is nailed shut.">
+	      "DOWN" <DOOR "DOOR" "LROOM" "CELLA">>
+       (<GET-OBJ "WDOOR"> <GET-OBJ "DOOR"> <GET-OBJ "TCASE">
+	<GET-OBJ "LAMP"> <GET-OBJ "RUG"> <GET-OBJ "PAPER">
+	<GET-OBJ "SWORD">)
+       LIVING-ROOM
+       <+ ,RLANDBIT ,RLIGHTBIT ,RHOUSEBIT ,RSACREDBIT>>
 ```
 
 
 ## ZIL Source Code
 
-Later the MDL was rewritten in ZIL (Zork Implementation Language), a domain-specific language within MDL, with a much cleaner syntax -
+Later the MDL was rewritten in ZIL (Zork Implementation Language), a
+domain-specific language in MDL, with cleaner syntax -
 
 ```lisp
 <ROOM LIVING-ROOM
@@ -82,7 +95,8 @@ Later the MDL was rewritten in ZIL (Zork Implementation Language), a domain-spec
     (THINGS <> NAILS NAILS-PSEUDO)>
 ```
 
-but... the full source code has never been released in this form. So, we'll have to make do with the MDL code.
+but the full source code has never been released in this form. So, we'll have to
+make do with the MDL code.
 
 
 ## Goals
@@ -99,7 +113,8 @@ To handle more complex exits, instead of using text transformations -
 ## Lisp Data
 
 With a little text manipulation the original Muddle code can be converted to a
-more parsable Lisp - I'm using Emacs Lisp to do this at the moment.
+more parsable Lisp - I'm using Emacs Lisp to do this at the moment, but see
+below for a Muddle compiler.
 
 There are some constructs like `#NEXIT` and the `#DECL` type
 declarations which would need special handling, but we can filter them out for
@@ -151,9 +166,22 @@ with the different settings.
 
 ## Muddle Compiler/Interpreter
 
-We'll follow Peter Norvig's [Lispy interpreter][lispy] to write a simple Muddle
-interpreter, which will handle conditional exits and doors and output the Lisp
-data structures.
+A Muddle compiler, extending Peter Norvig's [Lispy interpreter][lispy], parses
+the `dung.mud` file to handle conditional exits and doors to obtain the Lisp data
+structures, like so -
+
+```lisp
+(room "WHOUS"
+    (name "West of House")
+    (desc "This is an open field west of a white house, with a boarded front door.")
+    (exit "NORTH" "NHOUS" "SOUTH" "SHOUS" "WEST" "FORE1" "EAST" #NEXIT))
+
+(room "LROOM"
+    (name "Living Room")
+    (desc "")
+    (exit "EAST" "KITCH" "WEST" "BLROO" "DOWN" "CELLA"))
+```
+
 
 
 [lispy]: http://norvig.com/lispy.html

@@ -9,6 +9,7 @@ import mud
 
 
 # add global variables
+
 mud.global_env[',NULEXIT'] = []
 
 
@@ -43,9 +44,7 @@ mud.forms['room'] = form_room
 def form_exit(x, env):
     "EXIT special form handler"
     # transform the special exits and return as an unconditional exit list
-    # print 'exit',x
-    # if isinstance(x, mud.String) and x == ',NULEXIT':
-        # return []
+    if mud.debug: print 'exit',x
     exits = []
     tokens = x[1:]
     envfound = env.find('ROOM-KEY')

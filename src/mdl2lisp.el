@@ -1,7 +1,9 @@
 
 ; mdl2lisp
 ; --------------------------------------------------------------------------------
-; convert muddle code to more readable lisp
+; convert muddle code to more readable lisp.
+; this is just text transformations - some were done manually.
+; this is obsolete and will be deleted.
 
 
 ; in a mdl/mud file, do

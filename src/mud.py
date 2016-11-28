@@ -6,6 +6,9 @@ MDL (Muddle) compiler/interpreter, extended from Peter Norvig's Lispy [1].
 [1]: http://norvig.com/lispy.html
 """
 
+#> split up into modules, eg mud.py and zork.py which adds ROOM, EXIT, CEXIT, DOOR handlers
+
+
 
 debug = False
 compile = False
@@ -306,7 +309,7 @@ def form_room(x, env):
     s = """(room %s
     (name %s)
     (desc %s)
-    (exit %s))""" % (key, name, desc, exits)
+    (exit %s))""" % (key, name, desc, ' '.join(exits))
     if compile: # print the compiler output
         print s
         print

@@ -20,8 +20,8 @@ def tokenize(chars):
     "Convert a string of characters into a list of tokens."
     # chars = chars.replace('<','(').replace('>',')')
     # return chars.replace('(', ' ( ').replace(')', ' ) ').split()
-    chars = chars.replace('![','(').replace('!]',')')
-    chars = chars.replace('[','(').replace(']',')')
+    chars = chars.replace('![','(list ').replace('!]',')')
+    chars = chars.replace('[','(list ').replace(']',')')
     chars = chars.replace("\\\"","'")
     brackets = list("()<>")
     whitespace = list(" \n\r\t\f") # \f is ^L?

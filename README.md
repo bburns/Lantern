@@ -37,8 +37,8 @@ without one!"
 
 ## Muddle Source Code
 
-It was written in [MDL (aka Muddle)](muddle), a dialect of Lisp from the 1970's.
-The original code looks like this -
+It was written in [MDL (MIT Design Language)](muddle) (aka Muddle), a dialect of
+Lisp from the 1970's. The original code looks like this -
 
 ```lisp
 <DEFINE CLEARING ("AUX" (GRATE <SFIND-OBJ "GRATE">) (LEAVES <SFIND-OBJ "LEAVE">))

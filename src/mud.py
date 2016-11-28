@@ -18,8 +18,11 @@ compile = False
 # tree. The Mudpy tokens are parentheses, brackets, symbols, strings, and numbers.
 def tokenize(chars):
     "Convert a string of characters into a list of tokens."
-    # s = s.replace('<','(').replace('>',')')
-    # return s.replace('(', ' ( ').replace(')', ' ) ').split()
+    # chars = chars.replace('<','(').replace('>',')')
+    # return chars.replace('(', ' ( ').replace(')', ' ) ').split()
+    chars = chars.replace('![','(').replace('!]',')')
+    chars = chars.replace('[','(').replace(']',')')
+    chars = chars.replace("\\\"","'")
     brackets = list("()<>")
     whitespace = list(" \n\r\t\f") # \f is ^L?
     tokens = []
@@ -245,7 +248,14 @@ def eval(x, env=global_env):
     elif not isinstance(x, List):  # constant literal
         return x
 
-    key = x[0].lower()
+    if len(x) == 0: # empty list
+        return False
+
+    # get first symbol or form in list
+    key = x[0]
+    if isinstance(key, String):
+        key = key.lower()
+        
     if key == 'quote':          # quotation
         (_, exp) = x
         return exp
@@ -276,7 +286,7 @@ def eval(x, env=global_env):
     elif key == 'lambda':         # procedure
         (_, parms, body) = x
         return Procedure(parms, body, env)
-    elif key in forms:            # other special forms
+    elif isinstance(key, String) and key in forms: # other special forms
         form = forms[key]
         return form(x, env)
     else:                          # procedure call

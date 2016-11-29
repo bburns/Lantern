@@ -16,7 +16,7 @@
 // graph.addNode(room);
 
 // For reference, see
-// https://bl.ocks.org/mbostock/3750558
+// https://bl.ocks.org/mbostock/3750558 - force layout
 // https://bl.ocks.org/mbostock/6123708 - pan and zoom
 // http://stackoverflow.com/questions/9539294/adding-new-nodes-to-force-directed-layout
 
@@ -53,13 +53,10 @@ var Graph = function (parentElementId, options={}) {
     // create svg canvas as child of parent element and return a d3 svg object
     var svg = d3.select('#'+parentElementId).append("svg");
 
-    // add a rectangle filling the canvas - only way to color the background of an svg canvas
     //> make a getElementSize() fn
-    // var size = getWindowSize();
     var el = document.getElementById(parentElementId);
-    var w = el.clientWidth,
-        h = el.clientHeight;
-    // svg.append("rect").attr("width", w).attr("height", h);
+    var width = el.clientWidth,
+        height = el.clientHeight;
 
     // handle zoom with mouse wheel
     var zoom = d3.behavior.zoom()
@@ -68,15 +65,9 @@ var Graph = function (parentElementId, options={}) {
     svg.call(zoom);
     svg = svg.append("g");
 
-    var drag = d3.behavior.drag()
-        .origin(function(d) { return d; })
-        .on("dragstart", dragstarted)
-        .on("drag", dragged)
-        .on("dragend", dragended);
-
     // create a d3 force layout object and set some properties
     var force = d3.layout.force()
-        .size([w,h])
+        .size([width, height])
         .distance(distance)
         .charge(charge)
         .gravity(gravity)
@@ -93,8 +84,6 @@ var Graph = function (parentElementId, options={}) {
     svg.append("defs").selectAll("marker")
         .data(["arrow"]) //>?
       .enter().append("marker")
-        // .append("marker")
-        // .attr("id", function(d) { return d; })
         .attr("id", "arrow")
         .attr("viewBox", "0 -5 10 10") //>?
         .attr("refX", 20) // how far back from end of the line to start arrow
@@ -108,8 +97,7 @@ var Graph = function (parentElementId, options={}) {
         .style("fill", "#444");
         // .style("opacity", "0.6");
 
-    // arrays of nodes (rooms) and links
-    // var nodes, links;
+    // arrays of objects
     var lines, circles, labels;
 
     // update svg elements for current nodes and links,
@@ -122,7 +110,6 @@ var Graph = function (parentElementId, options={}) {
         lines
             .enter().append("line")
             .attr("class", "link")
-            // .style("marker-end",  "url(#head)");
             .style("marker-end",  "url(#arrow)");
 
         // add circles
@@ -132,14 +119,10 @@ var Graph = function (parentElementId, options={}) {
             .enter().append("circle")
             .attr("class", "node")
             .attr("r", nodeRadius);
-            // .append("svg:title") // add a tooltip for each circle showing the value of .desc
-            // .text(function(d) { return d.desc || "(No description)"; });
         circles
             .call(force.drag) // make nodes draggable
             .on("mouseover", onMouseOver) // callback fn
             .on("click", onClickNode); // callback fn
-            // .on("click", function(d) { alert('clicked'); } );
-            // .on("dblclick", onClickNode); // works but then need workaround for single clicks
 
         // add labels
         labels = svg.select("g.labels").selectAll("text")
@@ -149,8 +132,6 @@ var Graph = function (parentElementId, options={}) {
             .attr("x", labelx)
             .attr("y", labely)
             .text(function(d) { return d.name; });
-        // labels
-            // .on("click", onClickNode); // nowork
 
         // restart the d3 force layout object
         force.start();

@@ -107,6 +107,8 @@ text {
 .link {
   fill: none;
   stroke: #999;
+  /* why 1.5px? set to 1px and arrows disappear - why? */
   stroke-width: 1.5px;
 }
+
 

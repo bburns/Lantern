@@ -1,5 +1,5 @@
 
-This is the (semi)transformed MDL code - it was done interactively so it's not a complete transformation.
+This is the simplified Lisp output from compiling the rooms in dung.mud.
 
 
 

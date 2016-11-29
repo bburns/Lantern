@@ -335,7 +335,9 @@ if __name__=='__main__':
 
     if dosave:
         outfile = outfiles[output]
-        print >>outfile, s
+        f = open(outfile, 'w')
+        print >>f, s
+        f.close()
     else:
         print s
 

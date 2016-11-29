@@ -7,17 +7,6 @@ at least as it existed in the original Muddle code from 1979.
 [zork]: http://en.wikipedia.org/wiki/Zork/
 
 
-## Exploring the Map
-
-We can use [d3][d3] to
-[visualize and wander around the map](http://bburns.github.io/Lantern) - click
-on a room to add its neighboring rooms.
-
-<a href="http://bburns.github.io/Lantern"><img src="images/lantern2016-11-22_800.png" /></a>
-
-[d3]: https://d3js.org/
-
-
 ## The Game
 
 Here's the game intro from 1983 -
@@ -49,9 +38,20 @@ without one!"
 ----
 
 
+## Exploring the Map
+
+We can parse the original source code to JSON and use [d3][d3] to
+[visualize and wander around the map](http://bburns.github.io/Lantern) - click
+on a room to add its neighboring rooms, and zoom in/out with the mouse wheel.
+
+<a href="http://bburns.github.io/Lantern"><img src="images/lantern2016-11-22_800.png" /></a>
+
+[d3]: https://d3js.org/
+
+
 ## Muddle Source Code
 
-It was written in [MDL (MIT Design Language) (aka Muddle)][muddle], a dialect of
+Zork was written in [MDL (MIT Design Language) (aka Muddle)][muddle], a dialect of
 Lisp from the 1970's. The original code looks like this -
 
 ```lisp
@@ -126,16 +126,14 @@ released in the [ZIL manual][zil]. So, we'll have to make do with the MDL code.
 
 The goals for Lantern are:
 
-- Explore the map interactively
-- Make a static Graphviz map
-- View the room structures in a cleaner Lisp syntax
+- Explore the map interactively with d3
+- Make a static map with Graphviz
+- View the room structures with a cleaner Lisp syntax
 
 so the main tasks are:
 
 - Make a Muddle compiler/interpreter in Python to parse the ROOM objects
-- Output the ROOM objects as simpler Lisp structures
-- Output the ROOM objects as a Graphviz dot file
-- Output the ROOM objects as JSON data
+- Parse the original source code to output JSON, Lisp, Graphviz
 - Make a web page to interact with the JSON data using JavaScript and d3
 
 

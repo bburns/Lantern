@@ -4,42 +4,39 @@ Lantern
 Parse and convert Zork Muddle source code to different data structures.
 """
 
-from collections import OrderedDict
 
-import mud
+# input file
+mudfile = 'data/mdl/dung.mud'
+
+# output files
+lispfile = 'data/lisp/zork.lisp'
+jsonfile = 'data/json/zork.json'
+graphvizfile = 'data/graphviz/zork.gv'
 
 
-# add global variables
-
-# mud.global_env[',FOO'] = 321
+import mud # the MDL parser/compiler
 
 
-# add special forms to parser, keyed on first symbol in form
+# can add global variables here, though might be overwritten by
+# setg and psetg commands in dung.mud.
+# mud.global_env[',FOO'] = 42
+
+
+# define special form functions, which will be added to the mudpy parser.
+# in lisp these would be defined as macros.
 
 def form_room(x, env):
     "ROOM special form handler"
-    # python 3 has syntax for this - unpacking optional values
-    (_, key, desc, name, exits, objects, unk, bits, bits2) = (x + [None,None,None,None])[:9]
+    key, desc, name, exits = x[1:5] # unpack arguments
     # create a new environment with ROOM-KEY, to pass to the EXIT special form
     parms = ['ROOM-KEY']
     args = [key]
     newenv = mud.Env(parms, args, env)
     # evaluate values
-    name = mud.eval(name, newenv)
-    desc = mud.eval(desc, newenv)
+    name = mud.eval(name, newenv) # need this in case name is a global variable reference
+    desc = mud.eval(desc, newenv) # ditto
     exits = mud.eval(exits, newenv) # parse EXIT special form
-    # create the compiler output
-    # s = "(room (key %s) (name %s) (desc %s) (exits %s))" % (key, name, desc, exits)
-    s = """(room %s
-    (name %s)
-    (desc %s)
-    (exit %s))""" % (key, name, desc, ' '.join(exits))
-    # if mud.compile: # print the compiler output
-        # print s
-        # print
-    # room = {'key': key, 'name': name, 'desc': desc, 'exits': exits}
-    room = (('key', key), ('name', name), ('desc', desc), ('exits', exits))
-    room = OrderedDict(room)
+    room = {'key': key, 'name': name, 'desc': desc, 'exits': exits}
     return room
 
 
@@ -49,19 +46,16 @@ def form_exit(x, env):
     if mud.debug: print 'exit',x
     exits = []
     tokens = x[1:]
-    envfound = env.find('ROOM-KEY')
-    if envfound:
-        roomkey = envfound['ROOM-KEY']
-    else:
-        roomkey = None
-    if mud.debug: print 'roomkey', roomkey
     while tokens:
         token = tokens.pop(0) # pop from start of list
         if isinstance(token, mud.List):
+            #> these should all be mud.eval calls
             if token[0] == 'CEXIT': # handle conditional exit form
                 token = mud.eval(token) # replace CEXIT struct with a room key
             elif token[0] == 'DOOR': # handle door exit form
                 # this will be token 2 or 3 - want the one other than the current room
+                roomkey = env.findvalue('ROOM-KEY') # passed down from ROOM special form
+                if mud.debug: print 'roomkey', roomkey
                 if token[2] == roomkey:
                     token = token[3] # replace DOOR struct with a room key
                 else:
@@ -69,6 +63,7 @@ def form_exit(x, env):
             elif token[0] == 'SETG':
                 token = mud.eval(token) # replace SETG form with room key
         elif token == '#NEXIT': # no exit
+            #> this should be handled at lexical level? ie #something wraps following form?
             # handle bug with room BKBOX - #NEXIT listed twice - pop it also
             if tokens[0] == '#NEXIT':
                 tokens.pop(0)
@@ -118,7 +113,7 @@ def form_setg(x, env):
     mud.global_env[',' + var] = value # set global variable value
     return value
 
-
+# assign the special form functions to a dictionary in mudpy
 mud.forms['room'] = form_room
 mud.forms['exit'] = form_exit
 mud.forms['cexit'] = form_cexit
@@ -198,15 +193,14 @@ particularly large tree with some low branches stands here.">
     mud.compile = True
 
 
-    f = open('data/mdl/dung.mud')
+    f = open(mudfile)
     s = f.read()
     f.close()
 
     # program = "(begin " + s + ")"
     program = "(list " + s + ")"
     objs = mud.eval(mud.parse(program))
-    rooms = [obj for obj in objs if isinstance(obj, OrderedDict)]
-    # print rooms
+    rooms = [obj for obj in objs if isinstance(obj, dict)]
 
     roomlist = []
     exitlist = []
@@ -249,7 +243,7 @@ particularly large tree with some low branches stands here.">
     # output json structure
     objs = {'rooms': roomlist, 'exits': exitlist}
     import json
-    print json.dumps(objs)
+    print json.dumps(objs, indent=2)
 
 
 

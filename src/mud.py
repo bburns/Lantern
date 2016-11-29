@@ -57,6 +57,7 @@ def tokenize(chars):
 # print tokenize('(a (lambda b c) "cat dog")')
 # stop
 
+
 # Parser
 # Our function parse will take a string representation of a program as input,
 # call tokenize to get a list of tokens, and then call read_from_tokens to
@@ -86,6 +87,9 @@ def read_from_tokens(tokens):
     else:
         return atom(token)
 
+# symbols are just stored as strings.
+# strings are stored as strings also but have leading and trailing double quotes.
+
 Symbol = str
 String = str
 
@@ -110,7 +114,7 @@ def atom(token):
 List = list
 
 # REPL: Read-Eval-Print Loop
-def repl(prompt='mudpy> '):
+def repl(prompt='mud> '):
     "A prompt-read-eval-print loop."
     while True:
         val = eval(parse(raw_input(prompt)))
@@ -136,6 +140,7 @@ def schemestr(exp):
 # We see that every procedure has three components: a list of parameter names, a
 # body expression, and an environment that tells us what non-local variables are
 # accessible from the body.
+
 class Procedure(object):
     "A user-defined Scheme procedure."
     def __init__(self, parms, body, env):
@@ -159,6 +164,7 @@ class Procedure(object):
 # value} pairs as the inner part, and also refers to the given outer environment.
 # The method find is used to find the right environment for a variable:
 # either the inner one or an outer one.
+
 class Env(dict):
     "An environment: a dict of {'var':val} pairs, with an outer Env."
     def __init__(self, parms=(), args=(), outer=None):
@@ -174,8 +180,16 @@ class Env(dict):
             return self.outer.find(var)
         else:
             # raise NameError("unknown symbol %s" % var)
-            # print "Ignoring unknown symbol %s" % var
             if not compile: print "Can't find symbol %s" % var
+            return None
+    def findvalue(self, var):
+        "Find the innermost value of the given variable."
+        env = self.find(var)
+        if not env is None:
+            value = env[var]
+        else:
+            value = None
+        return value
 
 # Note: it is customary in Scheme for begin to be a special form that takes a
 # sequence of arguments, evaluates each one, and returns the last one

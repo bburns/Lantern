@@ -4,6 +4,8 @@
 ; parse zork muddle code, get list of rooms and connections.
 ; save as json graph and/or graphviz file. 
 
+; this file will be deleted!
+
 
 ; run this file to parse a room mdl/lisp file, then go to the end
 ; and run a fn to output to json or graphviz. 
@@ -39,7 +41,7 @@
   ;. better way? eg (setq zork-rooms (readfile foo))?
   (load zork-filename)
 
-  ; a small test set
+  ; else a small test set
   (setq zork-rooms '(
               
     (room "WHOUS" "This is an open field west of a white house, with a boarded front door."

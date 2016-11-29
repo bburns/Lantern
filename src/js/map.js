@@ -24,9 +24,9 @@
 // globals defined elsewhere - basically 'imported' in index.html
 var d3; // index.html
 var findObject; // library.js
-
-
+// var map; // map.js
 //> get rid of global 'map' references
+
 
 var Map = function (filename, startKey, graph) {
 

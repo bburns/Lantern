@@ -16,7 +16,8 @@
 // graph.addNode(room);
 
 // For reference, see
-// http://bl.ocks.org/mbostock/3750558
+// https://bl.ocks.org/mbostock/3750558
+// https://bl.ocks.org/mbostock/6123708 - pan and zoom
 // http://stackoverflow.com/questions/9539294/adding-new-nodes-to-force-directed-layout
 
 // --------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ var d3; // index.html
 var Hash; //, getWindowSize; // library.js
 
 
-//> get rid of global 'onClickNode' reference
+//> get rid of global 'onClickNode' and 'onMouseOver' references
 
 
 var Graph = function (parentElementId, options={}) {
@@ -59,6 +60,19 @@ var Graph = function (parentElementId, options={}) {
     var w = el.clientWidth,
         h = el.clientHeight;
     // svg.append("rect").attr("width", w).attr("height", h);
+
+    // handle zoom with mouse wheel
+    var zoom = d3.behavior.zoom()
+        .scaleExtent([0.1, 10])
+        .on("zoom", zoomed);
+    svg.call(zoom);
+    svg = svg.append("g");
+
+    var drag = d3.behavior.drag()
+        .origin(function(d) { return d; })
+        .on("dragstart", dragstarted)
+        .on("drag", dragged)
+        .on("dragend", dragended);
 
     // create a d3 force layout object and set some properties
     var force = d3.layout.force()
@@ -157,6 +171,24 @@ var Graph = function (parentElementId, options={}) {
             .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     };
 
+    function zoomed() {
+        // container.attr("transform", "translate(" + d3.event.translate +
+        svg.attr("transform", "translate(" + d3.event.translate +
+                       ") scale(" + d3.event.scale + ")");
+    }
+
+    function dragstarted(d) {
+        d3.event.sourceEvent.stopPropagation();
+        d3.select(this).classed("dragging", true);
+    }
+
+    function dragged(d) {
+        d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+    }
+
+    function dragended(d) {
+        d3.select(this).classed("dragging", false);
+    }
 
     // return access functions
     return {

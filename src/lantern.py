@@ -20,40 +20,51 @@ import mud # the MDL parser/compiler
 
 # can add global variables here, though might be overwritten by
 # setg and psetg commands in dung.mud.
-# mud.global_env[',FOO'] = 42
+# mud.global_env[',FOO'] = 123
 
 
 # define special form functions, which will be added to the mudpy parser.
 # in lisp these would be defined as macros.
-
-#> can we make these all fns instead?
+# there might be a better way to define these as functions, but this works for now.
 
 def form_room(x, env):
-    "ROOM special form handler"
+    """
+    ROOM special form handler.
+    This is a special form so can pass current room key down to EXIT.
+    """
     key, desc, name, exits = x[1:5] # unpack arguments
+    # evaluate values
+    name = mud.eval(name, env) # need this in case name is a global variable reference
+    desc = mud.eval(desc, env) # ditto
     # create a new environment with ROOM-KEY, to pass to the EXIT special form
     parms = ['ROOM-KEY']
     args = [key]
     newenv = mud.Env(parms, args, env)
-    # evaluate values
-    name = mud.eval(name, newenv) # need this in case name is a global variable reference
-    desc = mud.eval(desc, newenv) # ditto
     exits = mud.eval(exits, newenv) # parse EXIT special form
+    # return a simple room object
     room = {'key': key, 'name': name, 'desc': desc, 'exits': exits}
     return room
 
 
 def form_exit(x, env):
-    "EXIT special form handler"
-    # transform the special exits and return as an unconditional exit list
-    #> want to handle all of these with a fn instead
+    """
+    EXIT special form handler.
+    Transform any special exit forms and return as an unconditional exit list,
+    e.g.
+    <EXIT "N" "NHOUSE" "W" (CEXIT ,WH "WHOUS" <>)> => ["N","NHOUS","W","WHOUS"].
+    """
     if mud.debug: print 'exit',x
     exits = []
     tokens = x[1:]
     while tokens:
         token = tokens.pop(0) # pop from start of list
+        if isinstance(token, str) and token.startswith(','):
+            val = mud.eval(token)
+            if val is None:
+                if mud.debug: print 'unknown/unparsed gvar',token
+                val = token # leave the value as the plain comma-prefixed token
+            token = val
         if isinstance(token, mud.List):
-            #> these should all be mud.eval calls
             if token[0] == 'CEXIT': # handle conditional exit form
                 token = mud.eval(token) # replace CEXIT struct with a room key
             elif token[0] == 'DOOR': # handle door exit form
@@ -66,22 +77,18 @@ def form_exit(x, env):
                     token = token[2]
             elif token[0] == 'SETG':
                 token = mud.eval(token) # replace SETG form with room key
-        elif token.startswith(','): #> eval should handle these
-            val = mud.eval(token)
-            if val is None:
-                if mud.debug: print 'unknown/unparsed gvar',token
-                val = token
-            token = val
         exits.append(token)
     return exits
 
 
 def form_cexit(x, env):
-    "CEXIT special form handler"
+    """
+    CEXIT special form handler.
+    <CEXIT cond tform fform unk fn> => (eval tform)
+    """
     if mud.debug: print 'cexit',x
     # (_, cond, tform, fform, unk, fn) = x
     # we just want to eval the tform
-    #> can't we just do this as a fn?
     tform = x[2]
     value = mud.eval(tform, env)
     return value
@@ -100,13 +107,14 @@ def form_cexit(x, env):
 
 
 def form_setg(x, env):
-    "SETG special form handler"
-    # set a global variable value to an evaluated form value and return that value.
-    # can skip the setting part and just return the value for now.
-    # note that this is different from the set! special form,
-    # which sets a local variable.
+    """
+    SETG special form handler.
+    Set a global variable value to an evaluated form value and return that value.
+    eg <SETG foo 32>
+    Note that this is different from the set! special form, which sets a
+    local variable.
+    """
     if mud.debug: print 'setg',x
-    # (_, var, form) = x  # crashes if form is '#NEXIT'
     var = x[1]
     form = x[2]
     value = mud.eval(form, env)
@@ -121,19 +129,12 @@ mud.forms['setg'] = form_setg
 mud.forms['psetg'] = form_setg # psetg calls setg and adds to a 'pure' list - not needed
 
 
-
-
 def get_rooms(muddle):
     "Parse the given Muddle code and return a list of ROOM objects."
     program = "(list " + muddle + ")"
     objs = mud.eval(mud.parse(program)) # parse the program and get objects
     rooms = [obj for obj in objs if isinstance(obj, dict)] # filter down to room objects
     return rooms
-
-
-
-
-from io import StringIO
 
 
 def get_lisp(rooms):
@@ -202,12 +203,9 @@ def get_json(rooms):
 
 def get_graphviz(rooms):
     "Convert the given list of ROOMs to GraphViz"
-
     graph = get_graph(rooms)
-
     roomlist = graph['rooms']
     exitlist = graph['exits']
-
     lines = []
     lines.append("digraph zork {")
     for room in roomlist:
@@ -302,7 +300,6 @@ if __name__=='__main__':
 
     #> see http://stackoverflow.com/questions/1009860/command-line-arguments-in-python
 
-
     # set flags
     mud.debug = False
     # mud.debug = True
@@ -320,9 +317,5 @@ if __name__=='__main__':
     # s = get_json(rooms)
     # s = get_graphviz(rooms)
     print s
-
-
-
-
 
 

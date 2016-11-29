@@ -76,12 +76,16 @@ and south.">
        <+ ,RLANDBIT ,RLIGHTBIT ,RHOUSEBIT ,RSACREDBIT>>
 ```
 
+The room definitions are stored in the `dung.mud` file starting at line 1582 -
+you can browse through them [here][rooms].
+
 [muddle]: http://en.wikipedia.org/wiki/MDL_programming_language
+[rooms]: https://github.com/bburns/Lantern/blob/master/data/mdl/dung.mud#L1582
 
 
 ## ZIL Source Code
 
-Later the MDL was rewritten in ZIL (Zork Implementation Language), a
+Later the MDL code was rewritten in ZIL (Zork Implementation Language), a
 domain-specific language in MDL, with cleaner syntax -
 
 ```lisp
@@ -98,8 +102,9 @@ domain-specific language in MDL, with cleaner syntax -
     (THINGS <> NAILS NAILS-PSEUDO)>
 ```
 
-but the full source code has never been released in this form. So, we'll have to
-make do with the MDL code.
+I'd love to see the cleaned up and organized ZIL code, but Activision holds the
+rights, and the full source code has never been released. So, we'll have to make
+do with the MDL code.
 
 
 ## Goals

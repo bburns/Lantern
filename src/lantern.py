@@ -221,8 +221,15 @@ def get_graphviz(rooms):
     return s
 
 
-if __name__=='__main__':
+def get_muddle(filename):
+    "Return contents of given Muddle file"
+    f = open(filename)
+    muddle = f.read()
+    f.close()
+    return muddle
 
+
+def get_muddle_test():
     muddle = """
     <ROOM "WHOUS"
     "This is an open field west of a white house, with a boarded front door."
@@ -288,16 +295,22 @@ particularly large tree with some low branches stands here.">
     # """
     # print mud.parse(s)
 
+    return muddle
+
+
+
+if __name__=='__main__':
+
+    # set flags
     mud.debug = False
     # mud.debug = True
     mud.compile = True
 
-    # read dung.mud file
-    f = open(mudfile)
-    muddle = f.read()
-    f.close()
+    # get muddle code
+    muddle = get_muddle(mudfile)
+    # muddle = get_muddle_test()
 
-    # get ROOM objects
+    # get room objects
     rooms = get_rooms(muddle)
 
     # convert to different forms

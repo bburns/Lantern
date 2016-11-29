@@ -18,6 +18,7 @@ compile = False
 # tree. The Mudpy tokens are parentheses, brackets, symbols, strings, and numbers.
 def tokenize(chars):
     "Convert a string of characters into a list of tokens."
+    # extended from lispy's simple split fn to handle strings
     # chars = chars.replace('<','(').replace('>',')')
     # return chars.replace('(', ' ( ').replace(')', ' ) ').split()
     chars = chars.replace('![','(list ').replace('!]',')')
@@ -95,6 +96,7 @@ String = str
 
 def isstr(token):
     "Is the given token a constant string?"
+    # added to lispy
     if isinstance(token, String):
         return token.startswith('"') and token.endswith('"')
     else:
@@ -206,7 +208,7 @@ def standard_env():
     env.update(vars(math)) # sin, cos, sqrt, pi, ...
     env.update({
         '+':op.add, '-':op.sub, '*':op.mul, '/':op.div,
-        # '>':op.gt, '<':op.lt,
+        # '>':op.gt, '<':op.lt, #> brackets would need special handling in tokenizer
         '>=':op.ge, '<=':op.le, '=':op.eq,
         'abs':     abs,
         'append':  op.add,
@@ -243,22 +245,18 @@ global_env = standard_env()
 # new clauses: for set!, we find the environment level where the variable exists
 # and set it to a new value. With lambda, we create a new procedure object with
 # the given parameter list, body, and environment.
-#> make this extensible, add ROOM at end
 
 def eval(x, env=global_env):
     "Evaluate an expression in an environment."
-    # print x
     if isstr(x):                   # constant string
-        # print x,'is a String'
         return x
     elif isinstance(x, Symbol):      # variable reference
         envfound = env.find(x)
-        # return env.find(x)[x]
         if envfound:
             return envfound[x]
         else:
-            # print "Ignoring unknown symbol %s" % x
-            return
+            if debug: print "eval ignoring unknown symbol %s" % x
+            return None
     elif not isinstance(x, List):  # constant literal
         return x
 
@@ -300,9 +298,12 @@ def eval(x, env=global_env):
     elif key == 'lambda':         # procedure
         (_, parms, body) = x
         return Procedure(parms, body, env)
-    elif isinstance(key, String) and key in forms: # other special forms
+
+    # handle any other special forms
+    elif isinstance(key, String) and key in forms:
         form = forms[key]
         return form(x, env)
+
     else:                          # procedure call
         proc = eval(key, env)
         if proc:

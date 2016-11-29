@@ -26,6 +26,8 @@ import mud # the MDL parser/compiler
 # define special form functions, which will be added to the mudpy parser.
 # in lisp these would be defined as macros.
 
+#> can we make these all fns instead?
+
 def form_room(x, env):
     "ROOM special form handler"
     key, desc, name, exits = x[1:5] # unpack arguments
@@ -44,6 +46,7 @@ def form_room(x, env):
 def form_exit(x, env):
     "EXIT special form handler"
     # transform the special exits and return as an unconditional exit list
+    #> want to handle all of these with a fn instead
     if mud.debug: print 'exit',x
     exits = []
     tokens = x[1:]
@@ -84,7 +87,8 @@ def form_cexit(x, env):
     "CEXIT special form handler"
     if mud.debug: print 'cexit',x
     # (_, cond, tform, fform, unk, fn) = x
-    # we just want the tform
+    # we just want to eval the tform
+    #> can't we just do this as a fn?
     tform = x[2]
     value = mud.eval(tform, env)
     return value
@@ -106,6 +110,8 @@ def form_setg(x, env):
     "SETG special form handler"
     # set a global variable value to an evaluated form value and return that value.
     # can skip the setting part and just return the value for now.
+    # note that this is different from the set! special form,
+    # which sets a local variable.
     if mud.debug: print 'setg',x
     # (_, var, form) = x  # crashes if form is '#NEXIT'
     var = x[1]
@@ -318,8 +324,8 @@ if __name__=='__main__':
 
     # convert to different forms
     # s = get_lisp(rooms)
-    # s = get_json(rooms)
-    s = get_graphviz(rooms)
+    s = get_json(rooms)
+    # s = get_graphviz(rooms)
     print s
 
 

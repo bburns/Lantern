@@ -1,24 +1,26 @@
 
 //--------------------------------------------------------------------------------
 // Map
+// Encapsulate the room and exit arrays.
 //--------------------------------------------------------------------------------
-
-// This makes a map object that encapsulates the room and exit arrays,
-// and provides some access functions.
-
+//
 // The data structures read in look like this -
 // var rooms = [
-//     {"key": "WHOUS", "name": "West of House", "desc": "This is an open field west of a white house...."},
-//     {"key": "ATTIC", "name": "Attic", "desc": "This is the attic. The only exit is stairs that lead down."}];
+//     {"key": "WHOUS", "name": "West of House", "desc": "This is an open..."},
+//     {"key": "ATTIC", "name": "Attic", "desc": "This is the attic. The only..."}];
 // var exits = [
 //     {"source": "WHOUS", "dir": "NORTH", "target": "NHOUS"},
-//     {"source": "WHOUS", "dir": "EAST", "target": "The door is locked, and there is evidently no key."}];
-
+//     {"source": "WHOUS", "dir": "EAST", "target": "The door is locked, and..."}];
+//
 // Usage:
 // var graph = new Graph('#map');
 // var map = new Map('map.json', 'ROOM1', graph);
-
+//
 // --------------------------------------------------------------------------------
+
+//> why pass graph in at all?
+// shouldn't this be a standalone module encapsulating the rooms and exits?
+
 
 
 // globals defined elsewhere - basically 'imported' in index.html

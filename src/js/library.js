@@ -57,3 +57,4 @@ function getWindowSize() {
     var size = [width,height];
     return size;
 }
+

@@ -3,28 +3,28 @@
 // Graph
 // Define a generic d3 graph object.
 // --------------------------------------------------------------------------------
-
-// This makes a generic graph object that encapsulates a d3 force layout object,
+//
+// This makes an object that encapsulates a d3 force layout object,
 // and provides some access functions.
-
+//
 // Nodes can be any javascript object with 'key', 'name', and optional 'desc' properties.
-// Links are just pairs of node keys.
-
+// Links are just pairs of node 'key's.
+//
 // Usage:
-// var graph = new Graph('#map', {charge: -5000, gravity: 0.5, distance: 90, nodeRadius: 20});
+// var graph = new Graph('#map');
 // var room = {key:'foo', name:'Foo', desc:'A dusty room'};
 // graph.addNode(room);
-
+//
 // For reference, see
 // https://bl.ocks.org/mbostock/3750558 - force layout
 // https://bl.ocks.org/mbostock/6123708 - pan and zoom
 // http://stackoverflow.com/questions/9539294/adding-new-nodes-to-force-directed-layout
-
+//
 // --------------------------------------------------------------------------------
 
 // globals defined elsewhere - basically 'imported' by index.html
 var d3; // index.html
-var Hash; //, getWindowSize; // library.js
+var Hash; // library.js
 
 
 //> get rid of global 'onClickNode' and 'onMouseOver' references
@@ -46,8 +46,7 @@ var Graph = function (parentElementId, options={}) {
     // could just use a Set, but also need to be able to find the room objects.
     var nodeHash = new Hash();
 
-    //> could store a set of link keys to avoid duplicate links also,
-    // but we won't be duplicating them very often.
+    //> store a set of link keys to avoid duplicate links also
     // var linkkeys = new Set();
 
     // create svg canvas as child of parent element and return a d3 svg object
@@ -203,9 +202,6 @@ var Graph = function (parentElementId, options={}) {
             }
         },
 
-        update: function() {
-            // updateSvg();
-        }
     };
 };
 

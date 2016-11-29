@@ -125,11 +125,100 @@ mud.forms['psetg'] = form_setg # psetg calls setg and adds to a 'pure' list - no
 
 
 def get_rooms(muddle):
-    "Parse the given Muddle code and return a list of ROOM objects"
+    "Parse the given Muddle code and return a list of ROOM objects."
     program = "(list " + muddle + ")"
     objs = mud.eval(mud.parse(program)) # parse the program and get objects
     rooms = [obj for obj in objs if isinstance(obj, dict)] # filter down to room objects
     return rooms
+
+
+
+
+from io import StringIO
+
+
+def get_lisp(rooms):
+    "Convert the given list of ROOMs to simpler Lisp objects"
+    lines = []
+    for room in rooms:
+        key = room['key']
+        name = room['name']
+        desc = room['desc']
+        exits = room['exits']
+        exits = ' '.join(room['exits'])
+        s = """(room %s
+    (name %s)
+    (desc %s)
+    (exit %s))""" % (key, name, desc, exits)
+        # print s
+        # print
+        lines.append(s)
+    s = '\n\n'.join(lines)
+    return s
+
+
+def get_graph(rooms):
+    "Convert the given list of ROOMs to a graph structure of rooms and exits"
+
+    roomlist = []
+    exitlist = []
+
+    for room in rooms:
+
+        key = room['key']
+        name = room['name']
+        desc = room['desc']
+        exits = room['exits']
+
+        # remove surrounding double quotes
+        tostr = lambda s: s[1:-1]
+        key = tostr(key)
+        name = tostr(name)
+        desc = tostr(desc)
+
+        # add room
+        obj = {'key': key, 'name': name, 'desc': desc}
+        roomlist.append(obj)
+
+        # add exits
+        while exits:
+            dir = exits.pop(0)
+            target = exits.pop(0)
+            dir = tostr(dir)
+            target = tostr(target)
+            obj = {'source': key, 'dir': dir, 'target': target}
+            exitlist.append(obj)
+
+    graph = {'rooms': roomlist, 'exits': exitlist}
+    return graph
+
+
+def get_json(rooms):
+    "Convert the given list of ROOMs to JSON data"
+    graph = get_graph(rooms)
+    import json
+    s = json.dumps(graph, indent=2)
+    return s
+
+
+def get_graphviz(rooms):
+    "Convert the given list of ROOMs to GraphViz"
+
+    graph = get_graph(rooms)
+
+    roomlist = graph['rooms']
+    exitlist = graph['exits']
+
+    lines = []
+    lines.append("digraph zork {")
+    for room in roomlist:
+        lines.append("%s [label=\"%s\"];" % (room['key'], room['name']))
+    for exit in exitlist:
+        if exit['target'] != 'NEXI':
+            lines.append("\"%s\" -> \"%s\";" % (exit['source'], exit['target']))
+    lines.append("}")
+    s = '\n'.join(lines)
+    return s
 
 
 if __name__=='__main__':
@@ -203,7 +292,6 @@ particularly large tree with some low branches stands here.">
     # mud.debug = True
     mud.compile = True
 
-
     # read dung.mud file
     f = open(mudfile)
     muddle = f.read()
@@ -212,48 +300,11 @@ particularly large tree with some low branches stands here.">
     # get ROOM objects
     rooms = get_rooms(muddle)
 
-    roomlist = []
-    exitlist = []
-
-    for room in rooms:
-
-        key = room['key']
-        name = room['name']
-        desc = room['desc']
-        exits = room['exits']
-
-        # output lisp structure
-        # exits = ' '.join(room['exits'])
-    #     s = """(room %s
-    # (name %s)
-    # (desc %s)
-    # (exit %s))""" % (key, name, desc, exits)
-    #     print s
-    #     print
-
-
-        # handle json structures
-        tostr = lambda s: s[1:-1]
-
-        key = tostr(key)
-        name = tostr(name)
-        desc = tostr(desc)
-
-        o = {'key': key, 'name': name, 'desc': desc}
-        roomlist.append(o)
-
-        while exits:
-            dir = exits.pop(0)
-            target = exits.pop(0)
-            dir = tostr(dir)
-            target = tostr(target)
-            o = {'source': key, 'dir': dir, 'target': target}
-            exitlist.append(o)
-
-    # output json structure
-    objs = {'rooms': roomlist, 'exits': exitlist}
-    import json
-    print json.dumps(objs, indent=2)
+    # convert to different forms
+    # s = get_lisp(rooms)
+    # s = get_json(rooms)
+    s = get_graphviz(rooms)
+    print s
 
 
 

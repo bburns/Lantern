@@ -66,13 +66,6 @@ def form_exit(x, env):
                     token = token[2]
             elif token[0] == 'SETG':
                 token = mud.eval(token) # replace SETG form with room key
-        elif token == '#NEXIT': # no exit
-            #> this should be handled at lexical level? ie #something wraps following form?
-            # handle bug with room BKBOX - #NEXIT listed twice - pop it also
-            if tokens[0] == '#NEXIT':
-                tokens.pop(0)
-            # remove following token, which is a no-exit string
-            tokens.pop(0)
         elif token.startswith(','): #> eval should handle these
             val = mud.eval(token)
             if val is None:
@@ -117,7 +110,7 @@ def form_setg(x, env):
     var = x[1]
     form = x[2]
     value = mud.eval(form, env)
-    mud.global_env[',' + var] = value # set global variable value
+    mud.global_env[',' + var] = value # set global variable value (adding comma is a cheat)
     return value
 
 # assign the special form functions to a dictionary in mudpy
@@ -323,8 +316,8 @@ if __name__=='__main__':
     rooms = get_rooms(muddle)
 
     # convert to different forms
-    # s = get_lisp(rooms)
-    s = get_json(rooms)
+    s = get_lisp(rooms)
+    # s = get_json(rooms)
     # s = get_graphviz(rooms)
     print s
 

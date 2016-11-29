@@ -8,7 +8,7 @@ MDL (Muddle) compiler/interpreter, extended from Peter Norvig's Lispy [1].
 
 
 debug = False
-compile = False
+compile = False #> remove this
 
 
 # Lexer
@@ -53,6 +53,13 @@ def tokenize(chars):
             token += char
     if token:
         tokens.append(token) # add leftover token
+    #> this is a bit of a cheat, to remove #NEXITs that are defined in the zork source,
+    # which seem to be lexical-level additions, as with #DECL - seems to imply
+    # a wrapping around the token and the following token, ie
+    # #NEXIT "foo" -> (NEXIT "foo"). is it just a syntax shortcut?
+    # implement that here, by testing for leading #?
+    # or maybe at parser level, since need to modify the syntax tree
+    tokens = [token for token in tokens if token!='#NEXIT']
     return tokens
 
 # print tokenize('(a (lambda b c) "cat dog")')

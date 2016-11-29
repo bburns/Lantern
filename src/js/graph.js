@@ -12,8 +12,9 @@
 //
 // Usage:
 // var graph = new Graph('#map');
-// var room = {key:'foo', name:'Foo', desc:'A dusty room'};
-// graph.addNode(room);
+// graph.addNode({key:'foo', name:'Foo'});
+// graph.addNode({key:'bar', name:'Bar'});
+// graph.addLink('foo', 'bar');
 //
 // For reference, see
 // https://bl.ocks.org/mbostock/3750558 - force layout
@@ -31,6 +32,7 @@ var Hash; // library.js
 
 
 var Graph = function (parentElementId, options={}) {
+// var Graph = function (parentElementId, onClickNode, onMouseOver, options={}) {
 
     // set graph options
     var charge     = options.charge     || -5000; // attractive/repulsive force
@@ -152,9 +154,8 @@ var Graph = function (parentElementId, options={}) {
     };
 
     function zoomed() {
-        // container.attr("transform", "translate(" + d3.event.translate +
-        svg.attr("transform", "translate(" + d3.event.translate +
-                       ") scale(" + d3.event.scale + ")");
+        svg.attr("transform", "translate(" + d3.event.translate + ") " +
+                              "scale(" + d3.event.scale + ")");
     }
 
     function dragstarted(d) {

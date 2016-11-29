@@ -301,6 +301,9 @@ particularly large tree with some low branches stands here.">
 
 if __name__=='__main__':
 
+    #> see http://stackoverflow.com/questions/1009860/command-line-arguments-in-python
+
+
     # set flags
     mud.debug = False
     # mud.debug = True

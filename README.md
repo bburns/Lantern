@@ -103,8 +103,11 @@ domain-specific language in MDL, with cleaner syntax -
 ```
 
 I'd love to see the cleaned up and organized ZIL code, but Activision holds the
-rights, and the full source code has never been released. So, we'll have to make
-do with the MDL code.
+rights, and the full source code has never been released - this and other
+snippets were released in the [ZIL manual][zil]. So, we'll have to make do with
+the MDL code.
+
+[zil]: http://www.xlisp.org/zil.pdf
 
 
 ## Goals

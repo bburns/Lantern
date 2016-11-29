@@ -7,6 +7,17 @@ at least as it existed in the original Muddle code from 1979.
 [zork]: http://en.wikipedia.org/wiki/Zork/
 
 
+## Exploring the Map
+
+We can use [d3][d3] to
+[visualize and wander around the map](http://bburns.github.io/Lantern) - click
+on a room to add its neighboring rooms.
+
+<a href="http://bburns.github.io/Lantern"><img src="images/lantern2016-11-22_800.png" /></a>
+
+[d3]: https://d3js.org/
+
+
 ## The Game
 
 Here's the game intro from 1983 -
@@ -171,7 +182,7 @@ It can also output JSON data structures, like so -
       "key": "WHOUS",
       "desc": "This is an open field west of a white house, with a boarded front door."
     },
-...
+
   ],
   "exits": [
     {
@@ -206,17 +217,6 @@ SHOUS [label="South of House"];
 ```
 
 
-## Exploring the Map
-
-We can use [d3][d3] to
-[visualize and wander around the map](http://bburns.github.io/Lantern) - click
-on a room to add its neighboring rooms.
-
-<a href="http://bburns.github.io/Lantern"><img src="images/lantern2016-11-22_800.png" /></a>
-
-[d3]: https://d3js.org/
-
-
 ## A Graphviz Map
 
 We can use [Graphviz][graphviz] to get a look at the whole thing - there are 149
@@ -225,7 +225,7 @@ actual exit directions.
 
 <img src="images/zork3000_crop560.png" />
 
-The overview, using the default Graphviz layout engine:
+The overview, using the default Graphviz dot layout engine:
 
 <img src="images/zork2200_scale700.png" />
 
@@ -236,7 +236,7 @@ The full map is located [here](images/zork2200.png).
 
 ## Status
 
-This is a kind of low-priority project that I'll work on from time to time.
+This is a low-priority project that I'll work on from time to time.
 
 I've been interested in Zork since I was 12 - I read through the assembly code
 but didn't understand that what I was looking at was a byte-code interpreter and

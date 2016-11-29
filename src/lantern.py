@@ -2,6 +2,7 @@
 """
 Lantern
 Parse and convert Zork Muddle source code to different data structures.
+Uses mud.py, the Muddle parser/compiler.
 """
 
 
@@ -121,9 +122,19 @@ mud.forms['setg'] = form_setg
 mud.forms['psetg'] = form_setg # psetg calls setg and adds to a 'pure' list - not needed
 
 
+
+
+def get_rooms(muddle):
+    "Parse the given Muddle code and return a list of ROOM objects"
+    program = "(list " + muddle + ")"
+    objs = mud.eval(mud.parse(program)) # parse the program and get objects
+    rooms = [obj for obj in objs if isinstance(obj, dict)] # filter down to room objects
+    return rooms
+
+
 if __name__=='__main__':
 
-    s = """
+    muddle = """
     <ROOM "WHOUS"
     "This is an open field west of a white house, with a boarded front door."
            "West of House"
@@ -175,14 +186,14 @@ particularly large tree with some low branches stands here.">
            (RGLOBAL <+ ,TREEBIT ,BIRDBIT ,HOUSEBIT>)>
     """
 
-    # s = "<COND ((if 0 1 0) 3) (1 5)>"
+    # muddle = "<COND ((if 0 1 0) 3) (1 5)>"
 
-    # s = """
+    # muddle = """
     # <PSETG FOO "pokpok">
     # ,FOO
     # """
 
-    # s = """
+    # muddle = """
     # <PSETG FOO ["pokpok"]>
     # ,FOO
     # """
@@ -193,14 +204,13 @@ particularly large tree with some low branches stands here.">
     mud.compile = True
 
 
+    # read dung.mud file
     f = open(mudfile)
-    s = f.read()
+    muddle = f.read()
     f.close()
 
-    # program = "(begin " + s + ")"
-    program = "(list " + s + ")"
-    objs = mud.eval(mud.parse(program))
-    rooms = [obj for obj in objs if isinstance(obj, dict)]
+    # get ROOM objects
+    rooms = get_rooms(muddle)
 
     roomlist = []
     exitlist = []

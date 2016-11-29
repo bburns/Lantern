@@ -299,6 +299,14 @@ particularly large tree with some low branches stands here.">
 if __name__=='__main__':
 
     #> see http://stackoverflow.com/questions/1009860/command-line-arguments-in-python
+    import sys
+    args = sys.argv[1:]
+    dotest = '-test' in args
+    output = 'lisp'
+    if '-json' in args:
+        output = 'json'
+    if '-graphviz' in args:
+        output = 'graphviz'
 
     # set flags
     mud.debug = False
@@ -306,16 +314,20 @@ if __name__=='__main__':
     mud.compile = True
 
     # get muddle code
-    muddle = get_muddle(mudfile)
-    # muddle = get_muddle_test()
+    if dotest:
+        muddle = get_muddle_test()
+    else:
+        muddle = get_muddle(mudfile)
 
     # get room objects
     rooms = get_rooms(muddle)
 
     # convert to different forms
-    s = get_lisp(rooms)
-    # s = get_json(rooms)
-    # s = get_graphviz(rooms)
-    print s
+    if output=='lisp':
+        print get_lisp(rooms)
+    elif output=='json':
+        print get_json(rooms)
+    elif output=='graphviz':
+        print get_graphviz(rooms)
 
 

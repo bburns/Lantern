@@ -133,7 +133,16 @@ so the main tasks are:
 A Muddle compiler, extending Peter Norvig's simple [Lispy interpreter][lispy],
 parses the `dung.mud` file and handles conditional exits and doors.
 
+The Muddle compiler is in [mud.py][mudpy] - the lexer breaks the text into
+tokens, and is extended from lispy to handle strings - the parser assembles the
+tokens into an abstract syntax tree, and the `eval` function evalutes the tree
+and returns Lisp objects.
+
+<!-- Handling special forms like ROOM, CEXIT, DOOR requires -->
+
 [lispy]: http://norvig.com/lispy.html
+[mudpy]: src/mud.py
+[lanternpy]: src/lantern.py
 
 
 ## Compiler Output

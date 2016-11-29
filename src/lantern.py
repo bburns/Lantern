@@ -10,10 +10,11 @@ Uses mud.py, the Muddle parser/compiler.
 mudfile = 'data/mdl/dung.mud'
 
 # output files
-lispfile = 'data/lisp/zork.lisp'
-jsonfile = 'data/json/zork.json'
-graphvizfile = 'data/graphviz/zork.gv'
-
+outfiles = {
+    'lisp': 'data/lisp/zork.lisp',
+    'json': 'data/json/zork.json',
+    'graphviz': 'data/graphviz/zork.gv',
+    }
 
 import mud # the MDL parser/compiler
 
@@ -298,10 +299,13 @@ particularly large tree with some low branches stands here.">
 
 if __name__=='__main__':
 
-    #> see http://stackoverflow.com/questions/1009860/command-line-arguments-in-python
     import sys
+
+    # check cmdline arguments
     args = sys.argv[1:]
     dotest = '-test' in args
+    dosave = '-save' in args
+    debug = '-debug' in args
     output = 'lisp'
     if '-json' in args:
         output = 'json'
@@ -309,8 +313,7 @@ if __name__=='__main__':
         output = 'graphviz'
 
     # set flags
-    mud.debug = False
-    # mud.debug = True
+    mud.debug = debug
     mud.compile = True
 
     # get muddle code
@@ -324,10 +327,15 @@ if __name__=='__main__':
 
     # convert to different forms
     if output=='lisp':
-        print get_lisp(rooms)
+        s = get_lisp(rooms)
     elif output=='json':
-        print get_json(rooms)
+        s = get_json(rooms)
     elif output=='graphviz':
-        print get_graphviz(rooms)
+        s = get_graphviz(rooms)
 
+    if dosave:
+        outfile = outfiles[output]
+        print >>outfile, s
+    else:
+        print s
 

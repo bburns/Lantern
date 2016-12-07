@@ -38,8 +38,8 @@ without one!"
 ----
 
 The parser was fairly sophisticated - you could say things like `drop all but
-the lantern`, and it would ask for clarification where needed - e.g. `take pill`
--> `Which pill do you mean, the red one or the blue one?`.
+lantern and sword`, and it would ask for clarification where needed - e.g. `take
+pill` -> `Which pill do you mean, the red one or the blue one?`.
 
 
 ## Exploring the Map
@@ -234,6 +234,16 @@ The overview, using the default Graphviz dot layout engine:
 The full map is located [here](images/zork2200.png).
 
 [graphviz]: http://www.graphviz.org/
+
+
+## Original Map
+
+Here are my original maps for the above ground section and the maze for Zork I
+(the original game was expanded and cut up into a trilogy) -
+
+<img src="images/zorki_above_800.jpg" />
+
+<img src="images/zorki_maze_800.jpg" />
 
 
 ## Status

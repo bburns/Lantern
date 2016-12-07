@@ -9,15 +9,15 @@ at least as it existed in the original Muddle code from 1979.
 
 ## The Game
 
-Here's the game intro from 1983 -
+Here's the game intro -
 
 ----
 
 ```
 ZORK I: The Great Underground Empire
-Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.
+Copyright (c) 1980 Infocom, Inc. All rights reserved.
 ZORK is a registered trademark of Infocom, Inc.
-Revision 88 / Serial number 840726
+Revision 15 / Serial number 40726
 
 West of House
 You are standing in an open field west of a white house, with a boarded front door.
@@ -36,6 +36,10 @@ without one!"
 ```
 
 ----
+
+The parser was fairly sophisticated - you could say things like `drop all but
+the lantern`, and it would ask for clarification where needed - e.g. `take pill`
+-> `Which pill do you mean, the red one or the blue one?`.
 
 
 ## Exploring the Map

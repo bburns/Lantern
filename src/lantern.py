@@ -1,8 +1,21 @@
 
 """
 Lantern
-Parse and convert Zork Muddle source code to different data structures.
-Uses mud.py, the Muddle parser/compiler.
+Parse and convert Zork MDL (Muddle) source code.
+
+Uses mud.py, the Muddle parser/compiler to parse ROOM data structures
+and output them in different formats - Lisp, JSON, or Graphviz.
+
+Options
+
+-lisp      output Lisp structures (default)
+-json      output JSON structures
+-graphviz  output Graphviz structures
+
+-save      save output to pre-specified file instead of output to console
+-test      use test data instead of full dung.mud source
+-debug     show debug messages
+
 """
 
 
@@ -306,7 +319,8 @@ if __name__=='__main__':
     dotest = '-test' in args
     dosave = '-save' in args
     debug = '-debug' in args
-    output = 'lisp'
+
+    output = 'lisp' # default
     if '-json' in args:
         output = 'json'
     if '-graphviz' in args:

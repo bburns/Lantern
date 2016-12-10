@@ -115,6 +115,16 @@ def form_cexit(x, env):
     return value
 
 
+def form_nexit(x, env):
+    """
+    NEXIT special form handler.
+    <NEXIT foo> => 'NoExit
+    """
+    if mud.debug: print 'nexit',x
+    value = 'NoExit'
+    return value
+
+
 def form_door(x, env):
     "DOOR special form handler"
     if mud.debug: print 'door',x
@@ -153,8 +163,8 @@ def form_setg(x, env):
 mud.forms['room'] = form_room
 mud.forms['exit'] = form_exit
 mud.forms['cexit'] = form_cexit
+mud.forms['nexit'] = form_nexit
 mud.forms['door'] = form_door
-#> add nexit
 mud.forms['setg'] = form_setg
 mud.forms['psetg'] = form_setg # psetg calls setg and adds to a 'pure' list - not needed
 

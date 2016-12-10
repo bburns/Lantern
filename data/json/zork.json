@@ -999,7 +999,7 @@
     }, 
     {
       "source": "WHOUS", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "EAST"
     }, 
     {
@@ -1019,7 +1019,7 @@
     }, 
     {
       "source": "NHOUS", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "SOUTH"
     }, 
     {
@@ -1039,7 +1039,7 @@
     }, 
     {
       "source": "SHOUS", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "NORTH"
     }, 
     {
@@ -1059,17 +1059,17 @@
     }, 
     {
       "source": "EHOUS", 
-      "target": "KITCHEN-WINDO", 
+      "target": "KITCH", 
       "dir": "WEST"
     }, 
     {
       "source": "EHOUS", 
-      "target": "KITCHEN-WINDO", 
+      "target": "KITCH", 
       "dir": "ENTER"
     }, 
     {
       "source": "KITCH", 
-      "target": "KITCHEN-WINDO", 
+      "target": "EHOUS", 
       "dir": "EAST"
     }, 
     {
@@ -1079,7 +1079,7 @@
     }, 
     {
       "source": "KITCH", 
-      "target": "KITCHEN-WINDO", 
+      "target": "EHOUS", 
       "dir": "EXIT"
     }, 
     {
@@ -1089,7 +1089,7 @@
     }, 
     {
       "source": "KITCH", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -1114,7 +1114,7 @@
     }, 
     {
       "source": "FORE1", 
-      "target": "NOTRE", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -1139,7 +1139,7 @@
     }, 
     {
       "source": "FORE2", 
-      "target": "NOTRE", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -1194,12 +1194,12 @@
     }, 
     {
       "source": "TREE", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
       "source": "FORE4", 
-      "target": "NOTRE", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -1224,7 +1224,7 @@
     }, 
     {
       "source": "FORE5", 
-      "target": "NOTRE", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -1299,7 +1299,7 @@
     }, 
     {
       "source": "CELLA", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "WEST"
     }, 
     {
@@ -1784,12 +1784,12 @@
     }, 
     {
       "source": "RESER", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
       "source": "RESER", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "LAND"
     }, 
     {
@@ -1829,7 +1829,7 @@
     }, 
     {
       "source": "INSTR", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2024,7 +2024,7 @@
     }, 
     {
       "source": "PASS4", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "NORTH"
     }, 
     {
@@ -2054,7 +2054,7 @@
     }, 
     {
       "source": "TSHAF", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -2154,7 +2154,7 @@
     }, 
     {
       "source": "BSHAF", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2314,7 +2314,7 @@
     }, 
     {
       "source": "MTORC", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2344,7 +2344,7 @@
     }, 
     {
       "source": "CRAW4", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2364,7 +2364,7 @@
     }, 
     {
       "source": "CHAS2", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -2459,7 +2459,7 @@
     }, 
     {
       "source": "CHAS1", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -2474,7 +2474,7 @@
     }, 
     {
       "source": "CAVE3", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "WEST"
     }, 
     {
@@ -2659,7 +2659,7 @@
     }, 
     {
       "source": "RIVR1", 
-      "target": "CURREN", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2679,12 +2679,12 @@
     }, 
     {
       "source": "RIVR1", 
-      "target": "CLIFF", 
+      "target": "NoExit", 
       "dir": "EAST"
     }, 
     {
       "source": "RIVR2", 
-      "target": "CURREN", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2694,12 +2694,12 @@
     }, 
     {
       "source": "RIVR2", 
-      "target": "CLIFF", 
+      "target": "NoExit", 
       "dir": "EAST"
     }, 
     {
       "source": "RIVR3", 
-      "target": "CURREN", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2719,7 +2719,7 @@
     }, 
     {
       "source": "RIVR3", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "LAND"
     }, 
     {
@@ -2744,7 +2744,7 @@
     }, 
     {
       "source": "RIVR4", 
-      "target": "CURREN", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2764,12 +2764,12 @@
     }, 
     {
       "source": "RIVR4", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "LAND"
     }, 
     {
       "source": "RIVR5", 
-      "target": "CURREN", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
@@ -2784,7 +2784,7 @@
     }, 
     {
       "source": "FCHMP", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "NORTH"
     }, 
     {
@@ -2839,7 +2839,7 @@
     }, 
     {
       "source": "FALLS", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -2884,7 +2884,7 @@
     }, 
     {
       "source": "POG", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "LAUNC"
     }, 
     {
@@ -2954,7 +2954,7 @@
     }, 
     {
       "source": "LEDG2", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -2984,12 +2984,12 @@
     }, 
     {
       "source": "LEDG3", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
       "source": "LEDG3", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "CROSS"
     }, 
     {
@@ -2999,7 +2999,7 @@
     }, 
     {
       "source": "LEDG4", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -3094,7 +3094,7 @@
     }, 
     {
       "source": "CAGED", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "NORTH"
     }, 
     {
@@ -3104,7 +3104,7 @@
     }, 
     {
       "source": "TWELL", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -3114,12 +3114,12 @@
     }, 
     {
       "source": "BWELL", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "UP"
     }, 
     {
       "source": "ALICE", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "EAST"
     }, 
     {
@@ -3134,7 +3134,7 @@
     }, 
     {
       "source": "ALISM", 
-      "target": "SMDRO", 
+      "target": "NoExit", 
       "dir": "NW"
     }, 
     {
@@ -3144,12 +3144,12 @@
     }, 
     {
       "source": "ALISM", 
-      "target": "SMDRO", 
+      "target": "NoExit", 
       "dir": "WEST"
     }, 
     {
       "source": "ALISM", 
-      "target": "SMDRO", 
+      "target": "NoExit", 
       "dir": "DOWN"
     }, 
     {
@@ -3219,7 +3219,7 @@
     }, 
     {
       "source": "BKBOX", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "NORTH"
     }, 
     {
@@ -3314,32 +3314,32 @@
     }, 
     {
       "source": "PALAN", 
-      "target": "PALANDOO", 
+      "target": "PRM", 
       "dir": "SOUTH"
     }, 
     {
       "source": "PALAN", 
-      "target": "PALANDOO", 
+      "target": "PRM", 
       "dir": "EXIT"
     }, 
     {
       "source": "PALAN", 
-      "target": "PALANWIN", 
+      "target": "PRM", 
       "dir": "#!#!#"
     }, 
     {
       "source": "PRM", 
-      "target": "PALANDOO", 
+      "target": "PALAN", 
       "dir": "NORTH"
     }, 
     {
       "source": "PRM", 
-      "target": "PALANDOO", 
+      "target": "PALAN", 
       "dir": "ENTER"
     }, 
     {
       "source": "PRM", 
-      "target": "PALANWIN", 
+      "target": "PALAN", 
       "dir": "#!#!#"
     }, 
     {
@@ -3759,22 +3759,22 @@
     }, 
     {
       "source": "TOMB", 
-      "target": "C", 
+      "target": "CRYPT", 
       "dir": "NORTH"
     }, 
     {
       "source": "TOMB", 
-      "target": "C", 
+      "target": "CRYPT", 
       "dir": "ENTER"
     }, 
     {
       "source": "CRYPT", 
-      "target": "C", 
+      "target": "TOMB", 
       "dir": "SOUTH"
     }, 
     {
       "source": "CRYPT", 
-      "target": "C", 
+      "target": "TOMB", 
       "dir": "LEAVE"
     }, 
     {
@@ -3789,7 +3789,7 @@
     }, 
     {
       "source": "TSTRS", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "SOUTH"
     }, 
     {
@@ -3824,7 +3824,7 @@
     }, 
     {
       "source": "SCORR", 
-      "target": "O", 
+      "target": "CELL", 
       "dir": "NORTH"
     }, 
     {
@@ -3839,17 +3839,17 @@
     }, 
     {
       "source": "BDOOR", 
-      "target": "W", 
+      "target": "FDOOR", 
       "dir": "SOUTH"
     }, 
     {
       "source": "FDOOR", 
-      "target": "W", 
+      "target": "BDOOR", 
       "dir": "NORTH"
     }, 
     {
       "source": "FDOOR", 
-      "target": "W", 
+      "target": "BDOOR", 
       "dir": "ENTER"
     }, 
     {
@@ -3884,12 +3884,12 @@
     }, 
     {
       "source": "NCORR", 
-      "target": "C", 
+      "target": "CELL", 
       "dir": "SOUTH"
     }, 
     {
       "source": "NCORR", 
-      "target": "C", 
+      "target": "CELL", 
       "dir": "ENTER"
     }, 
     {
@@ -3899,42 +3899,42 @@
     }, 
     {
       "source": "PARAP", 
-      "target": "NEXI", 
+      "target": "NoExit", 
       "dir": "NORTH"
     }, 
     {
       "source": "CELL", 
-      "target": "C", 
+      "target": "NCORR", 
       "dir": "EXIT"
     }, 
     {
       "source": "CELL", 
-      "target": "C", 
+      "target": "NCORR", 
       "dir": "NORTH"
     }, 
     {
       "source": "CELL", 
-      "target": "O", 
+      "target": "SCORR", 
       "dir": "SOUTH"
     }, 
     {
       "source": "PCELL", 
-      "target": "FOU", 
+      "target": "NoExit", 
       "dir": "EXIT"
     }, 
     {
       "source": "NCELL", 
-      "target": "FOU", 
+      "target": "NoExit", 
       "dir": "SOUTH"
     }, 
     {
       "source": "NCELL", 
-      "target": "N", 
+      "target": "NIRVA", 
       "dir": "EXIT"
     }, 
     {
       "source": "NCELL", 
-      "target": "N", 
+      "target": "NIRVA", 
       "dir": "NORTH"
     }
   ]

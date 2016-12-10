@@ -22,8 +22,8 @@ var parentElementId = 'map';
 var nodeRadius = 20; // pixels
 var mapfile = 'data/json/zork.json';
 
-// var startRoom = 'WHOUS'; // west of house
-var startRoom = 'KITCH'; // kitchen
+var startRoom = 'WHOUS'; // west of house
+// var startRoom = 'KITCH'; // kitchen
 // var startRoom = 'CELLA'; // cellar
 
 

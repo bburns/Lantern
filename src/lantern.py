@@ -82,22 +82,8 @@ def form_exit(x, env):
                 if mud.debug: print 'unknown/unparsed gvar',token
                 val = token # leave the value as the plain comma-prefixed token
             token = val
-        #> want to be able to just call eval on this list
         if isinstance(token, mud.List):
-            if token[0] == 'CEXIT': # handle conditional exit form
-                token = mud.eval(token) # replace CEXIT struct with a room key
-            elif token[0] == 'DOOR': # handle door exit form
-                # this will be token 2 or 3 - want the one other than the current room
-                roomkey = env.findvalue('ROOM-KEY') # passed down from ROOM special form
-                if mud.debug: print 'roomkey', roomkey
-                if token[2] == roomkey:
-                    token = token[3] # replace DOOR struct with a room key
-                else:
-                    token = token[2]
-            elif token[0] == 'SETG':
-                token = mud.eval(token) # replace SETG form with room key
-            elif token[0] == 'NEXIT': # parser has replaced #NEXIT foo with (NEXIT foo)
-                token = 'NoExit'
+            token = mud.eval(token, env) # evaluate CEXIT, NEXIT, DOOR, SETG
         exits.append(token)
     return exits
 
@@ -132,11 +118,10 @@ def form_door(x, env):
     if roomkey:
         if mud.debug: print 'roomkey', roomkey
         # this will be token 2 or 3 - want the one other than the current room
-        if token[2] == roomkey:
-            token = token[3] # replace DOOR struct with a room key
+        if x[2] == roomkey:
+            value = x[3] # replace DOOR struct with a room key
         else:
-            token = token[2]
-        value = mud.eval(tform, env)
+            value = x[2]
     else:
         # if no roomkey is defined, we're not within a ROOM definition,
         # so just return DOOR list as itself - will be evaluated within the ROOM.

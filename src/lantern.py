@@ -182,6 +182,13 @@ def get_lisp(rooms):
     return s
 
 
+def tostr(s):
+    "Remove double quotes around a string"
+    if s[0]=='"':
+        s = s[1:-1]
+    return s
+
+
 def get_graph(rooms):
     "Convert the given list of ROOMs to a graph structure of rooms and exits"
 
@@ -196,7 +203,6 @@ def get_graph(rooms):
         exits = room['exits']
 
         # remove surrounding double quotes
-        tostr = lambda s: s[1:-1]
         key = tostr(key)
         name = tostr(name)
         desc = tostr(desc)

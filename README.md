@@ -247,6 +247,22 @@ Here are my original maps for the above ground section and the maze for Zork I
 <img src="images/zorki_maze_800.jpg" />
 
 
+## Usage
+
+To see the ROOM structures in Lisp form, run the `lantern.bat` file, which runs `python src\lantern.py` - this parses the `dung.mud` file which contains the ROOM structures:
+
+    $ lantern
+    (room "WHOUS"
+        (name "West of House")
+        (desc "This is an open field west of a white house, with a boarded front door.")
+        (exit "NORTH" "NHOUS" "SOUTH" "SHOUS" "WEST" "FORE1" "EAST" NoExit))
+
+To see the JSON and Graphviz files, pass `-json` or `-graphviz`, and to have the output saved to the appropriate data files, add the `-save` parameter:
+
+    $ lantern -json -save
+    $ lantern -graphviz -save
+
+
 ## Status
 
 This is a low-priority project that I'll work on from time to time.

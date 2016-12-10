@@ -1,9 +1,18 @@
 
 """
 mud.py
-MDL (Muddle) compiler/interpreter, extended from Peter Norvig's Lispy [1].
+MDL (Muddle) compiler/interpreter, extended from Peter Norvig's Lispy.
+See http://norvig.com/lispy.html.
 
-[1]: http://norvig.com/lispy.html
+Usage
+$ python mud.py
+mud> <+ 2 2>
+4
+
+or in Python,
+>>> import mud
+>>> mud.parse("<+ 2 2>")
+4
 """
 
 
@@ -59,7 +68,7 @@ def tokenize(chars):
     # #NEXIT "foo" -> (NEXIT "foo"). is it just a syntax shortcut?
     # implement that here, by testing for leading #?
     # or maybe at parser level, since need to modify the syntax tree
-    tokens = [token for token in tokens if token!='#NEXIT']
+    # tokens = [token for token in tokens if token!='#NEXIT']
     return tokens
 
 # print tokenize('(a (lambda b c) "cat dog")')
@@ -89,6 +98,11 @@ def read_from_tokens(tokens):
         while tokens[0] != ')':
             L.append(read_from_tokens(tokens))
         tokens.pop(0) # pop off ')'
+        return L
+    # handle special forms like #NEXIT, which seem to wrap the following form.
+    # eg this does #NEXIT foo -> (NEXIT foo)
+    elif token.startswith('#'):
+        L = [token[1:], read_from_tokens(tokens)]
         return L
     elif ')' == token:
         raise SyntaxError('unexpected )')

@@ -6,6 +6,10 @@ Parse and convert Zork MDL (Muddle) source code.
 Uses mud.py, the Muddle parser/compiler to parse ROOM data structures
 and output them in different formats - Lisp, JSON, or Graphviz.
 
+Usage
+
+$ python lantern.py
+
 Options
 
 -lisp      output Lisp structures (default)
@@ -91,6 +95,8 @@ def form_exit(x, env):
                     token = token[2]
             elif token[0] == 'SETG':
                 token = mud.eval(token) # replace SETG form with room key
+            elif token[0] == 'NEXIT': # parser has replaced #NEXIT foo with (NEXIT foo)
+                token = 'NoExit'
         exits.append(token)
     return exits
 
@@ -122,7 +128,7 @@ def form_cexit(x, env):
 
 def form_setg(x, env):
     """
-    SETG special form handler.
+    SETG/PSETG special form handler.
     Set a global variable value to an evaluated form value and return that value.
     eg <SETG foo 32>
     Note that this is different from the set! special form, which sets a
@@ -319,8 +325,7 @@ if __name__=='__main__':
     dotest = '-test' in args
     dosave = '-save' in args
     debug = '-debug' in args
-
-    output = 'lisp' # default
+    output = 'lisp' # default output format
     if '-json' in args:
         output = 'json'
     if '-graphviz' in args:
@@ -336,7 +341,7 @@ if __name__=='__main__':
     else:
         muddle = get_muddle(mudfile)
 
-    # get room objects
+    # get room objects by parsing the muddle code
     rooms = get_rooms(muddle)
 
     # convert to different forms
@@ -347,6 +352,7 @@ if __name__=='__main__':
     elif output=='graphviz':
         s = get_graphviz(rooms)
 
+    # save to predefined filename or print to stdout
     if dosave:
         outfile = outfiles[output]
         f = open(outfile, 'w')

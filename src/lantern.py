@@ -82,6 +82,7 @@ def form_exit(x, env):
                 if mud.debug: print 'unknown/unparsed gvar',token
                 val = token # leave the value as the plain comma-prefixed token
             token = val
+        #> want to be able to just call eval on this list
         if isinstance(token, mud.List):
             if token[0] == 'CEXIT': # handle conditional exit form
                 token = mud.eval(token) # replace CEXIT struct with a room key
@@ -114,16 +115,23 @@ def form_cexit(x, env):
     return value
 
 
-# def form_door(x, env):
-#     "DOOR special form handler"
-#     if mud.debug: print 'door',x
-#     # this will be token 2 or 3 - want the one other than the current room
-#     if token[2] == roomkey:
-#         token = token[3] # replace DOOR struct with a room key
-#     else:
-#         token = token[2]
-#     value = mud.eval(tform, env)
-#     return value
+def form_door(x, env):
+    "DOOR special form handler"
+    if mud.debug: print 'door',x
+    roomkey = env.findvalue('ROOM-KEY') # passed down from ROOM special form
+    if roomkey:
+        if mud.debug: print 'roomkey', roomkey
+        # this will be token 2 or 3 - want the one other than the current room
+        if token[2] == roomkey:
+            token = token[3] # replace DOOR struct with a room key
+        else:
+            token = token[2]
+        value = mud.eval(tform, env)
+    else:
+        # if no roomkey is defined, we're not within a ROOM definition,
+        # so just return DOOR list as itself - will be evaluated within the ROOM.
+        value = x
+    return value
 
 
 def form_setg(x, env):
@@ -145,6 +153,8 @@ def form_setg(x, env):
 mud.forms['room'] = form_room
 mud.forms['exit'] = form_exit
 mud.forms['cexit'] = form_cexit
+mud.forms['door'] = form_door
+#> add nexit
 mud.forms['setg'] = form_setg
 mud.forms['psetg'] = form_setg # psetg calls setg and adds to a 'pure' list - not needed
 

@@ -38,8 +38,9 @@ without one!"
 ----
 
 The parser was fairly sophisticated - you could say things like `drop all but
-lantern and sword`, and it would ask for clarification where needed - e.g. `take
-pill` -> `Which pill do you mean, the red one or the blue one?`.
+lantern and sword`, `put all but lamp in boat`, and it would ask for
+clarification where needed - e.g. `take pill` -> `Which pill do you mean, the
+red one or the blue one?`.
 
 
 ## Exploring the Map
